@@ -5,41 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skuffle Test - Health Tracker</title>
     <style>
+      /* Main Container Styling */
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
+            max-width: 800px; /* Increased width for better visibility */
+            margin: 50px auto; /*Center content on page*/
             padding: 20px;
         }
+        /*Player card styling*/
         .player {
             border: 1px solid #ccc;
             padding: 15px;
             margin: 10px 0;
             border-radius: 5px;
         }
+        /*Container for health +HP Value-*/
         .health-control {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-top: 10px;
         }
+        /*Styling for + and -*/
         button {
             width: 40px;
             height: 40px;
             font-size: 20px;
-            cursor: pointer;
+            cursor: pointer; /*show pointer cursor on hover*/
         }
+        /*health number display*/
         .health-value {
             font-size: 24px;
             font-weight: bold;
             min-width: 50px;
             text-align: center;
         }
+        /*The Add Player button*/
         #add-player {
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
         }
+        /*Text input for player name*/
         input {
             padding: 5px;
             font-size: 16px;
@@ -48,22 +55,25 @@
 </head>
 <body>
     <h1>Health Tracker - Skuffle Test</h1>
-    
+
+    <h2>CLick <a href="https://test-z1j9bw6z1nk8ap.needle.run/">here</a> to see AR!</h2>
+<!-- input selection for adding new players -->
     <div>
         <input type="text" id="player-name" placeholder="Player name">
         <button id="add-player">Add Player</button>
     </div>
-
+<!-- container where all player cards are displayed -->
     <div id="players"></div>
 
     <script type="module">
-        // Import Firebase
+      //firebase setup
+        // Import Firebase from CDN
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js';
         import { getDatabase, ref, onValue, set, update } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js';
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
 
-
-        // TODO: Replace with your Firebase config
+      // Firebase configuration
+      //this connects to your firebase project
         const firebaseConfig = {
             apiKey: "AIzaSyAXUdeglgszb0WflC5o8VuXBuO1V3OzHWQ",
             authDomain: "skuffletest.firebaseapp.com",
@@ -75,28 +85,39 @@
             measurementId: "G-N5XBTS2ZW6"
         };
 
+        //initialise firebase with your config
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const database = getDatabase(app);
-        const playersRef = ref(database, 'players');
+        const analytics = getAnalytics(app);//analytics setup
+        const database = getDatabase(app);//realtime database setup
+        const playersRef = ref(database, 'players');//reference to players node in database
 
+        //realtime listener for players data
         // Listen for changes
+        // This fires whenever:
+        // - A new player is added
+        // - A player's health changes
+        // - A player is removed
+        // This is how everyone sees updates in real-time!
         onValue(playersRef, (snapshot) => {
-            const data = snapshot.val();
-            displayPlayers(data);
+            const data = snapshot.val();// snapshot.val() gets the current data at the 'players' location
+            displayPlayers(data);// Update the display with the new data
         });
-
-        function displayPlayers(players) {
-            const container = document.getElementById('players');
-            container.innerHTML = '';
+//display players on the page
+        function displayPlayers(players) { //get the container div where we'll show players
+            const container = document.getElementById('players'); //clear existing content
+            container.innerHTML = '';//if no players, exit
 
             if (!players) return;
-
+            // Loop through each player in the database
+            // 'id' is the unique key (timestamp when player was added)
+            // 'players[id]' is the player object with name and health
             for (let id in players) {
-                const player = players[id];
-                const playerDiv = document.createElement('div');
+                const player = players[id]; //create a new div for this player
+                const playerDiv = document.createElement('div'); //apply the .player css styling
                 playerDiv.className = 'player';
                 
+                //build the html for this player card
+                //use template literals (backticks) to easily insert variables
                 playerDiv.innerHTML = `
                     <div>${player.name}</div>
                     <div class="health-control">
@@ -105,7 +126,8 @@
                         <button onclick="changeHealth('${id}', 1)">+</button>
                     </div>
                 `;
-                
+
+                // Add this player card to the container
                 container.appendChild(playerDiv);
             }
         }
