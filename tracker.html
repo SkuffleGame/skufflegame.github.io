@@ -17,7 +17,10 @@
 <!-- input selection for adding new players -->
     <div>
         <input type="text" id="player-name" placeholder="Player name">
+        <div class="button-group">
         <button id="add-player">Add Player</button>
+        <button id="clear-all">Clear All Players</button>
+        </div>
     </div>
 <!-- container where all player cards are displayed -->
     <div id="players"></div>
@@ -26,7 +29,7 @@
       //firebase setup
         // Import Firebase from CDN
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js';
-        import { getDatabase, ref, onValue, set, update } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js';
+        import { getDatabase, ref, onValue, set, update, remove } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js';
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
 
       // Firebase configuration
@@ -114,6 +117,19 @@
                     health: 20
                 });
                 nameInput.value = '';
+            }
+        });
+        //clear all players function
+        document.getElementByID('clear-all').addEventListener('click', () => {
+            //ask for confirmation before deleting everything
+            if (confirm('Are you sure you want to clear all players? This cannot be undone.')) {
+                remove(playersRef)
+                .then(() => {
+                    console.log('All players cleared successfully');
+                })
+                .catch((error) => {
+                    console.error('Error clearing players:', error);
+                });
             }
         });
     </script>
