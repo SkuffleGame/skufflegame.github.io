@@ -34,7 +34,6 @@
         }
         /*The Add Player button*/
         #add-player {
-            margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
         }
@@ -43,13 +42,31 @@
             padding: 5px;
             font-size: 16px;
         }
+        #clear-all {
+          margin-top: 20px;
+          margin-left: 10px;
+          padding: 10px 20px;
+          font-size: 16px;
+          background-color: #dc3545;
+          color: white;
+          border: none;
+          cursor: pointer;
+          border-radius: 4px;
+        }
+        #clear-all:hover {
+          background-color: #c82333;
+        }
+        .button-group {
+          margin-top: 20px;
+        }
 
-        .ibm-plex-serif-thin {
+/* font styles for IBM Plex Serif font */
+.ibm-plex-serif-thin {
   font-family: "IBM Plex Serif", serif;
   font-weight: 100;
   font-style: normal;
 }
-/* font styles for IBM Plex Serif */
+
 .ibm-plex-serif-extralight {
   font-family: "IBM Plex Serif", serif;
   font-weight: 200;
