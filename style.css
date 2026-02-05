@@ -1,0 +1,47 @@
+
+      /* Main Container Styling */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px; /* Increased width for better visibility */
+            margin: 50px auto; /*Center content on page*/
+            padding: 20px;
+        }
+        /*Player card styling*/
+        .player {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        /*Container for health +HP Value-*/
+        .health-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        /*Styling for + and -*/
+        button {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer; /*show pointer cursor on hover*/
+        }
+        /*health number display*/
+        .health-value {
+            font-size: 24px;
+            font-weight: bold;
+            min-width: 50px;
+            text-align: center;
+        }
+        /*The Add Player button*/
+        #add-player {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        /*Text input for player name*/
+        input {
+            padding: 5px;
+            font-size: 16px;
+        }
