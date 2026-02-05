@@ -120,7 +120,7 @@
             }
         });
         //clear all players function
-        document.getElementByID('clear-all').addEventListener('click', () => {
+        document.getElementById('clear-all').addEventListener('click', () => {
             //ask for confirmation before deleting everything
             if (confirm('Are you sure you want to clear all players? This cannot be undone.')) {
                 remove(playersRef)
