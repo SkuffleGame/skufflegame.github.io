@@ -2,7 +2,7 @@
       /* Main Container Styling */
         body {
             font-family: "IBM Plex Serif", serif;
-            max-width: 800px; /* Increased width for better visibility */
+            max-width: 100%; /* Increased width for better visibility */
         }
         /*Player card styling*/
         .player {
