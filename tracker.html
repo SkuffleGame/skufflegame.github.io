@@ -10,13 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Health Tracker</h1>
+    <h1 style="text-align: center; text-decoration: underline;">Health Tracker</h1>
 
     <h2>Click <a href="https://test-z1j9bw6z1hfc9x-z1hfc9x.needle.run/">here</a> to see AR!</h2>
     <h2>Click <a href="index.html">here</a> to go to the main page</h2>
 <!-- input selection for adding new players -->
     <div>
         <input type="text" id="player-name" placeholder="Player name">
+        <div class="dropdown">
+            <button class="dropbtn" id="character-chosen">Choose Character</button>
+            <div class="dropdown-content" id="character-dropdown">
+                <a href="#" class="character-option" data-character="Cowboy">Cowboy</a>
+                <a href="#" class="character-option" data-character="Were-Lobster">Were-Lobster</a>
+                <a href="#" class="character-option" data-character="Goe Bling">Goe Bling</a>
+            </div>
+        </div>
         <div class="button-group">
         <button id="add-player">Add Player</button>
         <button id="clear-all">Clear All Players</button>

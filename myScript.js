@@ -1,13 +1,16 @@
-//firebase setup
-        // Import Firebase from CDN
+/** Comments here are both for my own understand and for anyone else who looks at the code later. I'm learning JavasScript as I do this so this code might not be the most efficient - Aaron */
+
+// --- GOOGLE FIREBASE SETUP --- \\
+        // Import Firebase SDK (Software Development Kit) modules directly from Google's CDN
+        //This gives us functions to connect to our Firebase project and talk to the Realtime Database for the health tracker
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js';
         import { getDatabase, ref, onValue, set, update, remove } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js';
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
 
-      // Firebase configuration
-      //this connects to your firebase project
+      // Confirguration object for our specific Firebase project
+      // These values come from the Firebase console and identity which project we want to connect to
         const firebaseConfig = {
-            apiKey: "AIzaSyAXUdeglgszb0WflC5o8VuXBuO1V3OzHWQ",
+            apiKey: "AIzaSyAXUdeglgszb0WflC5o8VuXBuO1V3OzHWQ", // This is a public api key, it's not a secret and is safe to include. Ignore Githubs warning about this.
             authDomain: "skuffletest.firebaseapp.com",
             databaseURL: "https://skuffletest-default-rtdb.europe-west1.firebasedatabase.app",
             projectId: "skuffletest",
@@ -17,68 +20,122 @@
             measurementId: "G-E5H5Q8STFE"
         };
 
-        //initialise firebase with your config
+        // Creates a Firebase app instance using the config from above
+        // From this, we can get analytics and a connection to our Realtime Database
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);//analytics setup
-        const database = getDatabase(app);//realtime database setup
-        const playersRef = ref(database, 'players');//reference to players node in database
+        const analytics = getAnalytics(app);//analytics setup (optional)
+        const database = getDatabase(app);// Main handle to interact with the Realtime Database
 
+        // Create a reference to the "players" node in our database
+        // All player data will be stored under this path: /players
+        const playersRef = ref(database, 'players');
 
-        const increaseSound = new Audio('audio/increase.mp3');//preloads sound effects
+// --- SOUND EFFECTS SETUP --- \\
+
+        // Preloads the audio effects for health increase and decrease so they can play instantly when triggered
+        const increaseSound = new Audio('audio/increase.mp3');
         const decreaseSound = new Audio('audio/decrease.mp3');
 
+        // Expose a function on window (browser window) to play the "increase health" sound effect
+        // Reset currentTime to 0 so the sound starts from the beginning each time
         window.playIncreaseSound = function() {
-        increaseSound.currentTime = 0; // Reset to start 
-        increaseSound.play();
-        }
-
+            increaseSound.currentTime = 0; 
+            increaseSound.play();
+        };
+        // Same as above but for the "decrease health" sound effect
         window.playDecreaseSound = function() {
-        decreaseSound.currentTime = 0; // Reset to start
+        decreaseSound.currentTime = 0;
         decreaseSound.play();
         }
 
+// --- HEALTH CHANGE LOGIC --- \\
+
+        // Change a player's health by a certain amount (positive or negative)
+        // playerId is the database key for that player, change is usually +1 or -1
          window.changeHealth = function(playerId, change) {
+            // Get a reference to the specific player in the database using their unique ID: /players/<playerId>
             const playerRef = ref(database, 'players/' + playerId);
             
+            // Read the current player data once from the database
             onValue(playerRef, (snapshot) => {
                 const player = snapshot.val();
+
+                // Calculate the new health by adding the change
                 let newHealth = player.health + change;
                 
-                // Cap at 0 minimum and 20 maximum
+                // Constrain the health so it can't go below 0 or above 20
                 newHealth = Math.max(0, Math.min(20, newHealth));
                 
+                // Write the updated health value back to the database
                 update(playerRef, { health: newHealth });
-            }, { onlyOnce: true });
+            }, { onlyOnce: true }); // onlyOnce: true means this listener will run once and then stop
         };
-        //realtime listener for players data
-        // Listen for changes
-        // This fires whenever:
-        // - A new player is added
-        // - A player's health changes
-        // - A player is removed
-        // This is how everyone sees updates in real-time!
+
+
+// --- CHARACTER SELECTION STATE --- \\
+
+        // This variable stores which character the user has currently picked in the dropdown
+        // It is used when creating a new player
+        let selectedCharacter = null;
+
+        //Attach click event listeners to all links in the character dropdown
+        // When a link is clicked, we remember the chosen character and update the button text
+        document.querySelectorAll('.character-option').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault(); // Stop the link from navigating anywhere since it's just a dropdown option
+
+                // Read the character name from the element's data-character attribute
+                const char = a.dataset.character;
+
+                //Save the selected character in our variable
+                selectedCharacter = char;
+
+                // Update the button label so the user sees which character they've chosen
+                document.getElementById('character-chosen').textContent = char;
+            });
+        });
+
+// --- REAL-TIME DATABASE LISTENER --- \\
+        // Listen for any change under /players in the database
+        // This runs whenever players are added, updated (health/character), or removed
         onValue(playersRef, (snapshot) => {
             const data = snapshot.val();// snapshot.val() gets the current data at the 'players' location
             displayPlayers(data);// Update the display with the new data
         });
-        //display players on the page
-        function displayPlayers(players) { //get the container div where we'll show players
-            const container = document.getElementById('players'); //clear existing content
-            container.innerHTML = '';//if no players, exit
 
+// --- RENDER PLAYERS ON THE PAGE --- \\
+        // Display all the players on the page inside the #players container div
+        function displayPlayers(players) {
+            const container = document.getElementById('players');
+
+            // Clear any previous player cards so we can re-render from scratch
+            container.innerHTML = '';
+
+            // If there are no players in the database yet, just stop here
             if (!players) return;
-            // Loop through each player in the database
-            // 'id' is the unique key (timestamp when player was added)
-            // 'players[id]' is the player object with name and health
+
+            // 1) Build a set of characters that are already in use
+            // This will allow us to disbale those characters in the dropdown
+            const takenCharacters = new Set();
+            for (let id in players) {
+                const p = players[id];
+                if (p.character) takenCharacters.add(p.character);
+            }
+            
+            // 2) Loop over each player and create a visual card for them
+            // "id" is the unique Firebase key (timestap when the player was added)
             for (let id in players) {
                 const player = players[id]; //create a new div for this player
-                const playerDiv = document.createElement('div'); //apply the .player css styling
-                playerDiv.className = 'player';
+
+                // Create a container element for this player's card
+                const playerDiv = document.createElement('div');
+                playerDiv.className = 'player'; // Use CSS class .player for styling
                 
-                //build the html for this player card
-                //use template literals (backticks) to easily insert variables
+                // Build the inner html for this player card:
+                // - Show player's name and their character (if they have one)
+                // - Show buttons and current health value
                 playerDiv.innerHTML = `
-                    <div>${player.name}</div>
+                    <div>${player.name} ${player.character ? '(' + player.character + ')' : ''}</div>
                     <div class="health-control">
                         <button onclick="changeHealth('${id}', -1); playDecreaseSound()">-</button>
                         <div class="health-value">${player.health}</div>
@@ -86,45 +143,93 @@
                     </div>
                 `;
 
-                // Add this player card to the container
+                // Add the finished card into the main players container
                 container.appendChild(playerDiv);
             }
+
+
+            // 3) Disable any characters in the dropdown that are already taken
+            // Visually fade them and prevent clicking so two players cannot pick the same character
+            document.querySelectorAll('.character-option').forEach(a => {
+                const char = a.dataset.character;
+
+                // If the character is in the takenCharacters set, disable it
+                a.style.pointerEvents = takenCharacters.has(char) ? 'none' : 'auto'; // Stops clicks if taken
+                a.style.opacity = takenCharacters.has(char) ? '0.4' : '1'; // Make taken options look faded
+            });
         }
 
+
+// --- ADDING NEW PLAYERS --- \\
+        // When the "Add player" button is clicked, create a new player in the database
         document.getElementById('add-player').addEventListener('click', () => {
             const nameInput = document.getElementById('player-name');
-            const name = nameInput.value.trim();
+            const name = nameInput.value.trim(); // Remove any extra spaces from start/end of name
             
-            if (name) {
-                //check how many players exist currently
+            // Do not add is the name field is empty, and show an alert
+            if (!name) {
+                alert('Please enter a name.');
+                return;
+            }
+            // Enforce that a character must be chosen before adding a player
+            if (!selectedCharacter) {
+                alert('Please select a character first.');
+                return;
+            }
+
+                // Read the current list of players once so we can:
+                // - check how many players exsist
+                // - ensure the selected character is not already taken
                 onValue(playersRef, (snapshot) => {
                     const players = snapshot.val();
 
-                    //count number of players
-                    //if players is null (no players), then playerCount is 0
-                    //Otherwise, count how many exist
+                    // Count how many players we currently have
+                    // If players is null, ther are 0 players; otherwise count the keys
                     const playerCount = players ? Object.keys(players).length : 0;
 
-                    //check if we've hit the limit of 6
+                    // Enforce a maximum of 6 players in total
                     if (playerCount >= 6) {
-                        //show alert we've hit max, change this to a nicer ui message in future
                         alert('Maximum of 6 players has been reached! Please remove players before adding any more')
-                        return; //stops it here and doesn't add the new player
+                        return; // Stops it here and doesn't add the new player
                     }
 
-                    //if we get here then we have less than 6 players
+                    // If there are existing players, ensure the chosen character is still free
+                    if (players) {
+                        for (let id in players) {
+                            if (players[id].character === selectedCharacter) {
+                                alert ('This character is already taken! Please select a different character.');
+                            return; // Stop if someone has already picked the character
+                            }
+                        }   
+                    }
+
+                    // If we reach this point:
+                        // - There are less than 6 players
+                        // - The selected character is not taken
+                        // Now we create a new player entry in the database
+
+                    // Use Date.now() as a simple unique ID for the player node
                     const newPlayerRef = ref(database, 'players/' + Date.now());
+
+                    // Save the new player object with name, starting health, and chosen character
                     set(newPlayerRef, {
                         name: name,
-                        health: 20
+                        health: 20,
+                        character: selectedCharacter
                     });
-                nameInput.value = '';
-            }, { onlyOnce: true}); //only checks once, don't keep listening for changes
-            }
+
+                    // Clear the name input and reset the character selection in the UI
+                    nameInput.value = '';
+                    selectedCharacter = null;
+                    document.getElementById('character-chosen').textContent = 'Choose Character';
+            }, { onlyOnce: true}); // We only need to check this data once, not a continuous listener
         });
-        //clear all players function
+
+
+// --- CLEAR ALL PLAYERS --- \\
+        // When the "Clear All Players" is clicked, remove every player from the database
         document.getElementById('clear-all').addEventListener('click', () => {
-            //ask for confirmation before deleting everything
+            // Ask for confirmation before deleting everything
             if (confirm('Are you sure you want to clear all players? This cannot be undone and will permanently delete all player data.')) {
                 remove(playersRef)
                 .then(() => {
@@ -135,12 +240,3 @@
                 });
             }
         });
-
-        console.log('Testing audio files...');
-increaseSound.play().then(() => {
-    console.log('Increase sound works!');
-    increaseSound.pause();
-    increaseSound.currentTime = 0;
-}).catch(err => {
-    console.error('Increase sound failed:', err);
-});
