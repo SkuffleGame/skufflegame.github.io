@@ -66,9 +66,9 @@
                 playerDiv.innerHTML = `
                     <div>${player.name}</div>
                     <div class="health-control">
-                        <button onclick="changeHealth('${id}', -1); playSound('decrease')">-</button>
+                        <button onclick="changeHealth('${id}', -1); playDecreaseSound()">-</button>
                         <div class="health-value">${player.health}</div>
-                        <button onclick="changeHealth('${id}', 1); playSound('increase')">+</button>
+                        <button onclick="changeHealth('${id}', 1); playIncreaseSound()">+</button>
                     </div>
                 `;
 
