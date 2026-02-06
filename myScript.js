@@ -27,12 +27,12 @@
         const increaseSound = new Audio('audio/increase.mp3');//preloads sound effects
         const decreaseSound = new Audio('audio/decrease.mp3');
 
-        function playIncreaseSound() {
+        window.playIncreaseSound = function() {
         increaseSound.currentTime = 0; // Reset to start 
         increaseSound.play();
         }
 
-        function playDecreaseSound() {
+        window.playDecreaseSound = function() {
         decreaseSound.currentTime = 0; // Reset to start
         decreaseSound.play();
         }
