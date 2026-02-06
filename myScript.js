@@ -23,6 +23,19 @@
         const database = getDatabase(app);//realtime database setup
         const playersRef = ref(database, 'players');//reference to players node in database
 
+
+        const increaseSound = new Audio('audio/increase.mp3');//preloads sound effects
+        const decreaseSound = new Audio('audio/decrease.mp3');
+
+        function playIncreaseSound() {
+        increaseSound.currentTime = 0; // Reset to start 
+        increaseSound.play();
+        }
+
+        function playDecreaseSound() {
+        decreaseSound.currentTime = 0; // Reset to start
+        decreaseSound.play();
+        }
         //realtime listener for players data
         // Listen for changes
         // This fires whenever:
@@ -53,9 +66,9 @@
                 playerDiv.innerHTML = `
                     <div>${player.name}</div>
                     <div class="health-control">
-                        <button onclick="changeHealth('${id}', -1)">-</button>
+                        <button onclick="changeHealth('${id}', -1); playSound('decrease')">-</button>
                         <div class="health-value">${player.health}</div>
-                        <button onclick="changeHealth('${id}', 1)">+</button>
+                        <button onclick="changeHealth('${id}', 1); playSound('increase')">+</button>
                     </div>
                 `;
 
