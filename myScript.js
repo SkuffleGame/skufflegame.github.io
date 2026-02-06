@@ -36,6 +36,20 @@
         decreaseSound.currentTime = 0; // Reset to start
         decreaseSound.play();
         }
+
+         window.changeHealth = function(playerId, change) {
+            const playerRef = ref(database, 'players/' + playerId);
+            
+            onValue(playerRef, (snapshot) => {
+                const player = snapshot.val();
+                let newHealth = player.health + change;
+                
+                // Cap at 0 minimum and 20 maximum
+                newHealth = Math.max(0, Math.min(20, newHealth));
+                
+                update(playerRef, { health: newHealth });
+            }, { onlyOnce: true });
+        };
         //realtime listener for players data
         // Listen for changes
         // This fires whenever:
@@ -76,20 +90,6 @@
                 container.appendChild(playerDiv);
             }
         }
-
-        window.changeHealth = function(playerId, change) {
-            const playerRef = ref(database, 'players/' + playerId);
-            
-            onValue(playerRef, (snapshot) => {
-                const player = snapshot.val();
-                let newHealth = player.health + change;
-                
-                // Cap at 0 minimum and 20 maximum
-                newHealth = Math.max(0, Math.min(20, newHealth));
-                
-                update(playerRef, { health: newHealth });
-            }, { onlyOnce: true });
-        };
 
         document.getElementById('add-player').addEventListener('click', () => {
             const nameInput = document.getElementById('player-name');
@@ -135,3 +135,12 @@
                 });
             }
         });
+
+        console.log('Testing audio files...');
+increaseSound.play().then(() => {
+    console.log('Increase sound works!');
+    increaseSound.pause();
+    increaseSound.currentTime = 0;
+}).catch(err => {
+    console.error('Increase sound failed:', err);
+});
