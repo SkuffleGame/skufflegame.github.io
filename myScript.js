@@ -83,18 +83,36 @@
             const name = nameInput.value.trim();
             
             if (name) {
-                const newPlayerRef = ref(database, 'players/' + Date.now());
-                set(newPlayerRef, {
-                    name: name,
-                    health: 20
-                });
+                //check how many players exist currently
+                onValue(playersRef, (snapshot) => {
+                    const players = snapshot.val();
+
+                    //count number of players
+                    //if players is null (no players), then playerCount is 0
+                    //Otherwise, count how many exist
+                    const playerCount = players ? Object.keys(players).length : 0;
+
+                    //check if we've hit the limit of 6
+                    if (playerCount >= 6) {
+                        //show alert we've hit max, change this to a nicer ui message in future
+                        alert('Maximum of 6 players has been reached! Please remove players before adding any more')
+                        return; //stops it here and doesn't add the new player
+                    }
+
+                    //if we get here then we have less than 6 players
+                    const newPlayerRef = ref(database, 'players/' + Date.now());
+                    set(newPlayerRef, {
+                        name: name,
+                        health: 20
+                    });
                 nameInput.value = '';
+            }, { onlyOnce: true}); //only checks once, don't keep listening for changes
             }
         });
         //clear all players function
         document.getElementById('clear-all').addEventListener('click', () => {
             //ask for confirmation before deleting everything
-            if (confirm('Are you sure you want to clear all players? This cannot be undone.')) {
+            if (confirm('Are you sure you want to clear all players? This cannot be undone and will permanently delete all player data.')) {
                 remove(playersRef)
                 .then(() => {
                     console.log('All players cleared successfully');
