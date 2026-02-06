@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Health Tracker</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <h1>Health Tracker</h1>
-
-    <h2>CLick <a href="https://test-z1j9bw6z1nk8ap.needle.run/">here</a> to see AR!</h2>
-    <h2>Click <a href="index.html">here</a> to go to the main page</h2>
-<!-- input selection for adding new players -->
-    <div>
-        <input type="text" id="player-name" placeholder="Player name">
-        <div class="button-group">
-        <button id="add-player">Add Player</button>
-        <button id="clear-all">Clear All Players</button>
-        </div>
-    </div>
-<!-- container where all player cards are displayed -->
-    <div id="players"></div>
-
-    <!-- <script type="module">
-      //firebase setup
+//firebase setup
         // Import Firebase from CDN
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js';
         import { getDatabase, ref, onValue, set, update, remove } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js';
@@ -132,8 +104,3 @@
                 });
             }
         });
-    </script> -->
-     <script type="module" src="myScript.js"></script> 
-
-</body>
-</html>
