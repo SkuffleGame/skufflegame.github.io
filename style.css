@@ -4,6 +4,14 @@
             font-family: "IBM Plex Serif", serif;
             max-width: 100%; /* Increased width for better visibility */
             margin: 10px 10px;
+            color: black;
+            background-color: antiquewhite;
+        }
+        /* Needle Engine Styling */
+                needle-engine {
+            position: absolute;
+            width: 100%;
+            height: 100%;
         }
         /*Player card styling*/
         .player {

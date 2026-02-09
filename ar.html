@@ -13,19 +13,35 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+
+
+        <!-- import needle-engine -->
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@needle-tools/engine/dist/needle-engine.min.js"
+    ></script>
 </head>
 <body>
-    <div class="container-fluid p-5 bg-primary text-white text-center">
-  <h1>Skuffle</h1>
-  <p>The Chaotic PVP Card Game</p> 
-</div>
-
-    <h1>Skuffle Test</h1>
+    <h1>AR TEST</h1>
 
     <h2>Click <a href="https://test-z1j9bw6z1hfc9x-z1hfc9x.needle.run/">here</a> to see AR!</h2>
+    <h2>Click <a href="index.html">here</a> to go to the home page</h2>
     <h2>Click <a href="tracker.html">here</a> to go to the health tracker</h2>
-    <h2>Click <a href="ar.html">here</a> to go to the ar page</h2>
 
 
+
+ <needle-engine
+      src="https://cloud.needle.tools/-/assets/Z1j9bw6Z1J0vIx-latest-converted/file"
+      camera-controls
+      background-color="transparent"
+      environment-image="studio"
+    ></needle-engine>
 </body>
+
+<script type="module">
+    import { onStart } from 'https://cdn.jsdelivr.net/npm/@needle-tools/engine/dist/needle-engine.min.js';
+    onStart((context) => {
+      console.log('Hello Needle');
+    });
+  </script>
 </html>

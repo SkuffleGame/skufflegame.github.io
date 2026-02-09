@@ -1,4 +1,4 @@
-/** Comments here are both for my own understand and for anyone else who looks at the code later. I'm learning JavasScript as I do this so this code might not be the most efficient - Aaron */
+/** Comments here are both for my own understanding and for anyone else who looks at the code later. I'm learning JavasScript as I do this so this code might not be the most efficient - Aaron */
 
 // --- GOOGLE FIREBASE SETUP --- \\
         // Import Firebase SDK (Software Development Kit) modules directly from Google's CDN
@@ -51,7 +51,7 @@
 // --- HEALTH CHANGE LOGIC --- \\
 
         // Change a player's health by a certain amount (positive or negative)
-        // playerId is the database key for that player, change is usually +1 or -1
+        // playerId is the database key for that player
          window.changeHealth = function(playerId, change) {
             // Get a reference to the specific player in the database using their unique ID: /players/<playerId>
             const playerRef = ref(database, 'players/' + playerId);
@@ -77,8 +77,8 @@
         // This variable stores which character the user has currently picked in the dropdown
         // It is used when creating a new player
         let selectedCharacter = null;
-
-        //Attach click event listeners to all links in the character dropdown
+        
+        // Attach click event listeners to all links in the character dropdown
         // When a link is clicked, we remember the chosen character and update the button text
         document.querySelectorAll('.character-option').forEach(a => {
             a.addEventListener('click', (e) => {
@@ -233,6 +233,14 @@
             if (confirm('Are you sure you want to clear all players? This cannot be undone and will permanently delete all player data.')) {
                 remove(playersRef)
                 .then(() => {
+                    // Resets character selection state
+                    selectedCharacter = null;
+                    document.getElementById('character-chosen').textContent = 'Choose Character';
+
+                    document.querySelectorAll('.character-option').forEach(a => {
+                        a.style.pointerEvents = 'auto'; // Re-enables clicking
+                        a.style.opacity = '1'; // Resets opacity
+                    })
                     console.log('All players cleared successfully');
                 })
                 .catch((error) => {
