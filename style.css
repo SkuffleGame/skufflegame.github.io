@@ -7,6 +7,26 @@
             color: black;
             background-color: antiquewhite;
         }
+        /* Navbar Styling */
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          background-color: #333333;
+          display: flex;
+        }
+        ul li a {
+          display: block;
+          color: white;
+          padding: 14px 16px;
+          text-decoration: none;;
+        }
+        ul li a:hover:not(.active) {
+          background-color: #111111;
+        }
+        ul li a.active {
+          background-color: #04AA6D;
+        }
         /* Needle Engine Styling */
                 needle-engine {
             position: absolute;
@@ -144,7 +164,6 @@
         .dropdown:hover .dropbtn {
           background-color: #0056b3;
         }
-
 /* font styles for IBM Plex Serif font */
 .ibm-plex-serif-thin {
   font-family: "IBM Plex Serif", serif;
