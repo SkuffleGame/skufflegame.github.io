@@ -27,6 +27,24 @@
             gap: 15px;
             margin-top: 10px;
         }
+        .special-control {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 10px;
+        }
+        .special-label {
+          font-weight: bold;
+        }
+        .special-value {
+          min-width: 30px;
+          text-align: center;
+          font-size: 18px;
+        }
+        .toggle-button {
+          padding: 5px 15px;
+          min-width: 100px;
+        }
         /*Styling for + and -*/
         button {
             width: 40px;

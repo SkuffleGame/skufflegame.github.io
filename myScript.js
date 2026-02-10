@@ -1,4 +1,5 @@
-/** Comments here are both for my own understanding and for anyone else who looks at the code later. I'm learning JavasScript as I do this so this code might not be the most efficient - Aaron */
+/** Comments here are both for my own understanding and for anyone else who looks at the code later. 
+ * I'm learning JavasScript as I do this so this code might not be the most efficient - Aaron */
 
 // --- GOOGLE FIREBASE SETUP --- \\
         // Import Firebase SDK (Software Development Kit) modules directly from Google's CDN
@@ -19,7 +20,7 @@
             appId: "1:656546117071:web:25437409b3c2e155fa8eba",
             measurementId: "G-E5H5Q8STFE"
         };
-
+// Const are variables that we can't reassign
         // Creates a Firebase app instance using the config from above
         // From this, we can get analytics and a connection to our Realtime Database
         const app = initializeApp(firebaseConfig);
@@ -50,9 +51,9 @@
 
 // --- HEALTH CHANGE LOGIC --- \\
 
-        // Change a player's health by a certain amount (positive or negative)
+        // Change a player's health by a certain amount (positive or negative), can be rehashed for the special abilites later on
         // playerId is the database key for that player
-         window.changeHealth = function(playerId, change) {
+        window.changeHealth = function(playerId, change) {
             // Get a reference to the specific player in the database using their unique ID: /players/<playerId>
             const playerRef = ref(database, 'players/' + playerId);
             
@@ -71,6 +72,96 @@
             }, { onlyOnce: true }); // onlyOnce: true means this listener will run once and then stop
         };
 
+// --- SPECIAL ABILITY BANK --- \\
+    const characterData = { // This stores the special ability info for each character to be called upon later
+        "Cowboy": {
+        specialName: "Bullets",
+        specialType: "number",
+        specialValue: 6, // Change to match the number of players in game
+        specialMin: 0,
+        specialMax: 6
+        },
+        "Were-Lobster": {
+        specialName: "Tide",
+        specialType: "toggle",
+        specialValue: "Low Tide", // Starting tide
+        toggleOptions: ["Low Tide", "High Tide"] // Swap between the two tides
+    },
+        "Goe Bling": {
+        specialName: "Steal",
+        specialType: "number",
+        specialValue: 0,
+        specialMin: 0,
+        specialMax: 10, // Arbitrary max for steals
+    },
+        "Salary Man": {
+        specialName: "Money",
+        specialType: "number",
+        specialValue: 0,
+        specialMin: 0,
+        specialMax: 100, // Arbitrary max for money
+    },
+        "Alien": {
+        specialName: "Dodge",
+        specialType: "number",
+        specialValue: 0,
+        specialMin: 0,
+        specialMax: 10, // Arbitrary max for dodges
+    },
+        "Margritte": { // Doesn't have special ability so everthing is null
+        specialName: null,
+        specialType: null,
+        specialValue: null,
+        specialMin: null,
+        specialMax: null,
+    }
+    }
+
+// --- SPECIAL ABILITY LOGIC --- \\
+
+        // Change a player's special value by a certain amount (positive or negative)
+        // playerId is the database key for that player
+        window.changeSpecial = function(playerId, change) {
+            // Get a reference to the specific player in the database using their unique ID: /players/<playerId>
+            const playerRef = ref(database, 'players/' + playerId);
+            
+            // Read the current player data once from the database
+            onValue(playerRef, (snapshot) => {
+                const player = snapshot.val();
+
+                if (player.specialType === 'number') {
+
+                let newSpecial = player.specialValue + change;
+                
+                newSpecial = Math.max(player.specialMin, Math.min(player.specialMax, newSpecial)); //constrains the special values for each unique character
+                
+                update(playerRef, { specialValue: newSpecial });
+
+                }
+            }, { onlyOnce: true }); // onlyOnce: true means this listener will run once and then stop
+        };
+
+        window.toggleSpecial = function(playerId, change) {
+            // Get a reference to the specific player in the database using their unique ID: /players/<playerId>
+            const playerRef = ref(database, 'players/' + playerId);
+            
+            // Read the current player data once from the database
+            onValue(playerRef, (snapshot) => {
+                const player = snapshot.val();
+
+                if (player.specialType === 'toggle'  && player.toggleOptions) {
+                                
+                    const currentIndex = player.toggleOptions.indexOf(player.specialValue); // set the currentIndex to what the current value is, so for the Were-Lobster it starts with Low Tide
+
+                    const nextIndex = (currentIndex + 1) % player.toggleOptions.length; // Moves along the index in the array to the next value, being high tide. Loops back after that.
+
+                    const newSpecialValue = player.toggleOptions[nextIndex];
+
+                    update(playerRef, { specialValue: newSpecialValue});
+
+                }
+            }, { onlyOnce: true }); // onlyOnce: true means this listener will run once and then stop
+        };
 
 // --- CHARACTER SELECTION STATE --- \\
 
@@ -84,10 +175,10 @@
             a.addEventListener('click', (e) => {
                 e.preventDefault(); // Stop the link from navigating anywhere since it's just a dropdown option
 
-                // Read the character name from the element's data-character attribute
+                // Read the character name from the element's data-character attribute, and assign it to the char variable (constant)
                 const char = a.dataset.character;
 
-                //Save the selected character in our variable
+                //Save the selected character in our selectedCharacter variable
                 selectedCharacter = char;
 
                 // Update the button label so the user sees which character they've chosen
@@ -115,7 +206,7 @@
             if (!players) return;
 
             // 1) Build a set of characters that are already in use
-            // This will allow us to disbale those characters in the dropdown
+            // This will allow us to disable those characters in the dropdown
             const takenCharacters = new Set();
             for (let id in players) {
                 const p = players[id];
@@ -131,6 +222,26 @@
                 const playerDiv = document.createElement('div');
                 playerDiv.className = 'player'; // Use CSS class .player for styling
                 
+                let specialHTML = '';
+                if (player.specialName && player.specialType) {
+                if (player.specialType === 'number') {
+                    specialHTML = `
+                    <div class="special-control">
+                    <span class="special-name">${player.specialName}:</span>
+                        <button onclick="changeSpecial('${id}', -1);">-</button>
+                        <div class="special-value">${player.specialValue}</div>
+                        <button onclick="changeSpecial('${id}', 1);">+</button>
+                    </div>
+                    `;
+                    } else if (player.specialType === 'toggle') {
+                    specialHTML = `
+                    <div class="special-control">
+                        <span class="special-label">${player.specialName}:</span>
+                        <button class="toggle-button" onclick="toggleSpecial('${id}')">${player.specialValue}</button>
+                    </div>
+                    `;
+                    }
+                }
                 // Build the inner html for this player card:
                 // - Show player's name and their character (if they have one)
                 // - Show buttons and current health value
@@ -141,6 +252,7 @@
                         <div class="health-value">${player.health}</div>
                         <button onclick="changeHealth('${id}', 1); playIncreaseSound()">+</button>
                     </div>
+                    ${specialHTML}
                 `;
 
                 // Add the finished card into the main players container
@@ -154,11 +266,10 @@
                 const char = a.dataset.character;
 
                 // If the character is in the takenCharacters set, disable it
-                a.style.pointerEvents = takenCharacters.has(char) ? 'none' : 'auto'; // Stops clicks if taken
+                a.style.pointerEvents = takenCharacters.has(char) ? 'none' : 'auto'; // Stops clicks if taken.  If takenCharacters has the char, then set pointerEvents to none, otherwise set to auto to allow clicking. Ternary Operator
                 a.style.opacity = takenCharacters.has(char) ? '0.4' : '1'; // Make taken options look faded
             });
         }
-
 
 // --- ADDING NEW PLAYERS --- \\
         // When the "Add player" button is clicked, create a new player in the database
@@ -211,12 +322,29 @@
                     // Use Date.now() as a simple unique ID for the player node
                     const newPlayerRef = ref(database, 'players/' + Date.now());
 
-                    // Save the new player object with name, starting health, and chosen character
-                    set(newPlayerRef, {
+                    // Lookup the special data for chosen Character
+                    const specialData = characterData[selectedCharacter];
+
+                    // Build the player data object to save in the realtime database
+                    const newPlayerData = {
                         name: name,
                         health: 20,
-                        character: selectedCharacter
-                    });
+                        character: selectedCharacter,
+                        specialName: specialData.specialName,
+                        specialType: specialData.specialType,
+                        specialValue: specialData.specialValue
+                    };
+
+                    // Add type-specific data for the different abilites
+                    if (specialData.specialType === 'number') {
+                        newPlayerData.specialMin = specialData.specialMin;
+                        newPlayerData.specialMax = specialData.specialMax;
+                    } else if (specialData.specialType === 'toggle') {
+                        newPlayerData.toggleOptions = specialData.toggleOptions;
+                    }
+
+                    // Save the new player object with player data
+                    set(newPlayerRef, newPlayerData);
 
                     // Clear the name input and reset the character selection in the UI
                     nameInput.value = '';
