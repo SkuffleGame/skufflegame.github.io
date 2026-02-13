@@ -3,7 +3,7 @@
         body {
             font-family: "IBM Plex Serif", serif;
             max-width: 100%; /* Increased width for better visibility */
-            margin: 10px 10px;
+            /* margin: 10px 10px; */
             color: black;
             background-color: antiquewhite;
         }
@@ -164,6 +164,57 @@
         .dropdown:hover .dropbtn {
           background-color: #0056b3;
         }
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+.columnteam {
+  float: left;
+  width: 19%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+@media screen and (max-width: 650px) {
+  .columnteam {
+    width: 100%;
+    display: block;
+  }
+}
+.cardteam {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.containerteam {
+  padding: 0 16px;
+}
+.containerteam::after, .rowteam::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.titleteam {
+  color: grey;
+}
+.buttonteam {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+.buttonteam:hover {
+  background-color: #555;
+}
+
+.padd {
+  padding: 10px 20px;
+}
+
+
+
 /* font styles for IBM Plex Serif font */
 .ibm-plex-serif-thin {
   font-family: "IBM Plex Serif", serif;
