@@ -7,6 +7,14 @@
             color: black;
             background-color: antiquewhite;
         }
+        /* Header background colour */
+        .header-bg {
+        background-color: #f1ffff;
+        }
+        .header-logo {
+        max-height: 200px;
+        width: auto;
+        }
         /* Navbar Styling */
         ul {
           list-style-type: none;
