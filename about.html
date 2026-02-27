@@ -13,86 +13,100 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <base target="_blank"> <!-- This makes every link open in new tab -->
 </head>
 <body>
     <header class="py-5 header-bg text-black">
         <div class="container d-flex flex-column align-items-center text-center">
                 <img src="img/LogoLowRes.png" alt="Skuffle logo" class="header-logo mb-3">
-                    <p class="mb-0">The Chaotic PVP Card Game</p>
+                <p class="mb-0">The Chaotic PVP Card Game</p>
         </div>
     </header>
-<ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="tracker.html">Health Tracker</a></li>
-    <li><a href="ar.html">AR Embeds</a></li>
-    <li><a href ="https://skufflegame.github.io/NeedleTest/" target="_blank">Image Tracking</a></li>
-    <li><a class="active" href ="about.html">About Us</a></li>
+
+    <!-- Responsive Navbar -->
+     <nav class="site-nav">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+<ul id="navMenu">
+    <li><a href="index.html" target="_self">Home</a></li>
+    <li><a href="tracker.html" target="_self">Health Tracker</a></li>
+    <li><a href="ar.html" target="_self">AR Embeds</a></li>
+    <li><a href ="https://skufflegame.github.io/NeedleTest/">Image Tracking</a></li>
+    <li><a class="active" href ="about.html" target="_self">About Us</a></li>
 </ul>
+</nav>
+
 <br>
     <h1 style="text-align: center;">Meet the Team!</h1>
     <br>
-    <div class="rowteam">
-        <div class="columnteam">
+
+    <div class="team-grid">
             <div class="cardteam">
-                <img src="https://media.licdn.com/dms/image/v2/D4E03AQEJbEupKhKOUg/profile-displayphoto-shrink_800_800/B4EZd1a9vEHIAc-/0/1750021693193?e=1772668800&v=beta&t=qpwlvbIuoedjaU9c2dNYLH41UP9K8-7PTPj8IKU4UeU" alt="Photo of Tom" style="width: 100%">
+                <img src="https://media.licdn.com/dms/image/v2/D4E03AQEJbEupKhKOUg/profile-displayphoto-shrink_800_800/B4EZd1a9vEHIAc-/0/1750021693193?e=1772668800&v=beta&t=qpwlvbIuoedjaU9c2dNYLH41UP9K8-7PTPj8IKU4UeU" alt="Photo of Tom">
                 <div class="containerteam">
                     <h2>Tom McMahon</h2>
                     <p class="titleteam">Project Manager</p>
-                    <p>Some text to describe stuff</p>
-                    <p>Socials/Email</p>
+                    <p>Tom is a 3rd Year, and a photographer...</p>
+                    <p>Get in Touch Below!</p>
                     <p><button class="buttonteam"><a href="https://www.linkedin.com/in/thomas-mcmahon-54738535b/">LinkedIn</a></button></p>
                 </div>
             </div>
-        </div>
-    <div class="columnteam">
+
                 <div class="cardteam">
-                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQGxqE38gxlxlQ/profile-displayphoto-crop_800_800/B4DZxWtscRJEAI-/0/1770981347905?e=1772668800&v=beta&t=y5eE3JjsUeIaHyTMLt2aR-CKNcPoQXsvudhA-OQ-8gw" alt="Photo of Aaron" style="width: 100%">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQGxqE38gxlxlQ/profile-displayphoto-crop_800_800/B4DZxWtscRJEAI-/0/1770981347905?e=1772668800&v=beta&t=y5eE3JjsUeIaHyTMLt2aR-CKNcPoQXsvudhA-OQ-8gw" alt="Photo of Aaron">
                     <div class="containerteam">
                         <h2>Aaron Lawlor</h2>
                         <p class="titleteam">3D, AR, Video, Audio and Website</p>
-                        <p>Some text to describe stuff</p>
-                        <p>Socials/Email</p>
+                        <p>Aaron is a 3rd Year, who really enjoys all things technology.</p>
+                        <p>Connect with me below</p>
                         <p><button class="buttonteam"><a href="https://www.linkedin.com/in/aaronlawlor/">LinkedIn</a></button></p>
                     </div>
                 </div>
-            </div>
-     <div class="columnteam">
+
                 <div class="cardteam">
-                    <img src="https://media.licdn.com/dms/image/v2/D5603AQGpQ3I2tSTAVg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731959225820?e=1772668800&v=beta&t=vVL4CWetxYhEWeWvJXM8ESa67lVZ4SHQG8FALUn8hik" alt="Photo of Adriana" style="width: 100%">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQGpQ3I2tSTAVg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731959225820?e=1772668800&v=beta&t=vVL4CWetxYhEWeWvJXM8ESa67lVZ4SHQG8FALUn8hik" alt="Photo of Adriana">
                     <div class="containerteam">
                         <h2>Adriana McMahon</h2>
                         <p class="titleteam">Illustrations, Vectors and Graphics</p>
-                        <p>Some text to describe stuff</p>
-                        <p>Socials/Email</p>
+                        <p>Adriana is a 3rd year who is into digital and physical art....</p>
+                        <p>Connect below</p>
                         <p><button class="buttonteam"><a href="https://www.linkedin.com/in/adriana-mcmahon-b2a321309/">LinkedIn</a></button></p>
                     </div>
                 </div>
-            </div>
-    <div class="columnteam">
+
                     <div class="cardteam">
-                        <img src="https://media.licdn.com/dms/image/v2/D4E03AQECQdglVQYjOw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731338111027?e=1772668800&v=beta&t=IUlmkVRvKnCy-VonPswwOO27KJMf2RTxpiK6evldR7Y" alt="Photo of Tadhg" style="width: 100%">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E03AQECQdglVQYjOw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731338111027?e=1772668800&v=beta&t=IUlmkVRvKnCy-VonPswwOO27KJMf2RTxpiK6evldR7Y" alt="Photo of Tadhg">
                         <div class="containerteam">
                             <h2>Tadhg Patterson</h2>
                             <p class="titleteam">Game Mechanics, Figma, Tabletop Sim</p>
-                            <p>Some text to describe stuff</p>
-                            <p>Socials/Email</p>
+                            <p>Tadhg is a 3rd year who's really into UX and anything Card Game related...</p>
+                            <p>Connect Below</p>
                             <p><button class="buttonteam"><a href="https://www.linkedin.com/in/tadhg-patterson/">LinkedIn</a></button></p>
                         </div>
                     </div>
-                </div>
-    <div class="columnteam">
+
                     <div class="cardteam">
-                        <img src="https://media.licdn.com/dms/image/v2/D4E03AQF7LkSlCUHJ4A/profile-displayphoto-scale_400_400/B4EZldamXOKcAg-/0/1758208880821?e=1772668800&v=beta&t=DbgQRe7Uqc2Qf0p1pZpUfzlkxvFW_p-PJYTgFyxSnSA" alt="Photo of Katerina" style="width: 100%">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E03AQF7LkSlCUHJ4A/profile-displayphoto-scale_400_400/B4EZldamXOKcAg-/0/1758208880821?e=1772668800&v=beta&t=DbgQRe7Uqc2Qf0p1pZpUfzlkxvFW_p-PJYTgFyxSnSA" alt="Photo of Katerina">
                         <div class="containerteam">
                             <h2>Katerina Gryczova</h2>
                             <p class="titleteam">Graphic Design</p>
-                            <p>Some text to describe stuff</p>
-                            <p>Socials/Email</p>
+                            <p>Katerina is a 3rd year student who's super into graphic design</p>
+                            <p>Say hi below!</p>
                             <p><button class="buttonteam"><a href="https://www.linkedin.com/in/katerinagryczova/">LinkedIn</a></button></p>
                         </div>
                     </div>
                 </div>
-    </div>
 
+ <script>
+    // navbar logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('navToggle');
+            const menu = document.getElementById('navMenu');
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                menu.classList.toggle('open');
+            });
+        });
+    </script>
 </body>
 </html>

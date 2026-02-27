@@ -13,9 +13,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <base target="_blank"> <!-- This makes every link open in new tab -->
 </head>
 <body>
-
     <header class="py-5 header-bg text-black">
         <div class="container d-flex flex-column align-items-center text-center">
                 <img src="img/LogoLowRes.png" alt="Skuffle logo" class="header-logo mb-3">
@@ -23,21 +23,41 @@
         </div>
     </header>
 
-<ul>
-    <li><a class="active" href="index.html">Home</a></li>
-    <li><a href="tracker.html">Health Tracker</a></li>
-    <li><a href="ar.html">AR Embeds</a></li>
-    <li><a href ="https://skufflegame.github.io/NeedleTest/" target="_blank">Image Tracking</a></li>
-    <li><a href ="about.html">About Us</a></li>
+    <nav class="site-nav">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+<ul id="navMenu">
+    <li><a class="active" href="index.html" target="_self">Home</a></li>
+    <li><a href="tracker.html" target="_self">Health Tracker</a></li>
+    <li><a href="ar.html" target="_self">AR Embeds</a></li>
+    <li><a href ="https://skufflegame.github.io/NeedleTest/">Image Tracking</a></li>
+    <li><a href ="about.html" target="_self">About Us</a></li>
 </ul>
+</nav>
 <div class="padd">
-    <h1 style="text-align: center;">Welcome!</h1>
-
+    <br>
+    <h1 style="text-align: center;">Welcome!</h1>   
 <br>
 <h3>Have a look at a playtest we did using Tabletop Simulator</h3>
 <iframe width= "560" height= "315" src="https://www.youtube.com/embed/uUVDZzgAPpc?si=8EboxPOJF5say-BU" 
 title="Playest 1 - 5th Feb Snippet" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<h3>Welcome to the Skuffle companion site! Skuffle is a
+3-6 free-for-all card game with 6 unique characters and playstyles.</h3>
+<br>
 </div>
+
+ <script>
+    // navbar logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('navToggle');
+            const menu = document.getElementById('navMenu');
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                menu.classList.toggle('open');
+            });
+        });
+    </script>
 </body>
 </html>

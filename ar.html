@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-
+    <base target="_blank"> <!-- This makes every link open in new tab -->
 
         <!-- import needle-engine -->
     <script
@@ -29,13 +29,16 @@
         </div>
     </header>
 
-<ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="tracker.html">Health Tracker</a></li>
-    <li><a class="active" href="ar.html">AR Embeds</a></li>
-    <li><a href ="https://skufflegame.github.io/NeedleTest/" target="_blank">Image Tracking</a></li>
-    <li><a href ="about.html">About Us</a></li>
+    <nav class="site-nav">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+<ul id="navMenu">
+    <li><a href="index.html" target="_self">Home</a></li>
+    <li><a href="tracker.html" target="_self">Health Tracker</a></li>
+    <li><a class="active" href="ar.html" target="_self">AR Embeds</a></li>
+    <li><a href ="https://skufflegame.github.io/NeedleTest/">Image Tracking</a></li>
+    <li><a href ="about.html" target="_self">About Us</a></li>
 </ul>
+</nav>
 <h1 style="text-align: center;">AR Embeds</h1>
 <div class="padd">
 <iframe
@@ -75,5 +78,17 @@
     onStart((context) => {
       console.log('Hello Needle');
     });
+
+    
+    // navbar logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('navToggle');
+            const menu = document.getElementById('navMenu');
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                menu.classList.toggle('open');
+            });
+        });
   </script>
 </html>

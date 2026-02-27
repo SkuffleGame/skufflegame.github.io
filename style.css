@@ -1,46 +1,170 @@
-
+/*=====================
+  Base & Body
+  ===================== */
+       *, *:before, *:after {
+            box-sizing: border-box;
+        }
       /* Main Container Styling */
         body {
             font-family: "IBM Plex Serif", serif;
-            max-width: 100%; /* Increased width for better visibility */
-            /* margin: 10px 10px; */
+            max-width: 100%; 
             color: black;
             background-color: antiquewhite;
+            margin: 0;
+            padding: 0;
         }
-        /* Header background colour */
+/*=====================
+  Header
+  ===================== */
         .header-bg {
         background-color: #f1ffff;
         }
         .header-logo {
         max-height: 200px;
         width: auto;
+        max-width: 100%;
         }
-        /* Navbar Styling */
-        ul {
+
+/*=====================
+    Navbar - Responsive
+    ===================== */
+        .site-nav {
+          background-color: #333333;
+          position: relative;
+        }
+        .site-nav ul {
           list-style-type: none;
           margin: 0;
           padding: 0;
-          background-color: #333333;
           display: flex;
+          flex-wrap: wrap;
         }
-        ul li a {
+        .site-nav ul li a {
           display: block;
           color: white;
           padding: 14px 16px;
           text-decoration: none;;
         }
-        ul li a:hover:not(.active) {
+        .site-nav ul li a:hover:not(.active) {
           background-color: #111111;
         }
-        ul li a.active {
+        .site-nav ul li a.active {
           background-color: #04AA6D;
         }
-        /* Needle Engine Styling */
-                needle-engine {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+        /* Hamburger menu - hidden on desktop */
+        .nav-toggle {
+          display: none;
+          background: none;
+          border: none;
+          color: white;
+          font-size: 24px;
+          padding: 12px 16px;
+          cursor: pointer;
+          width: auto;
+          height: auto;
         }
+        @media screen and (max-width: 600px) {
+          .nav-toggle {
+            display: block;
+          }
+          .site-nav ul {
+            display: none;
+            flex-direction: column;
+          }
+          .site-nav ul.open {
+            display: flex;
+          }
+        }
+
+/* =====================
+   Team Grid — Responsive
+   ===================== */
+   .team-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    padding: 0 16px 32px;
+   }
+
+   /* 3 columns on tablets */
+   @media screen and (max-width: 1100px) {
+    .team-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+   }
+
+   /* 2 columns on small tablets */
+   @media screen and (max-width: 700px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+   }
+
+   /* 1 column on phones */
+   @media screen and (max-width: 480px) {
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+   }
+
+   .cardteam {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+   }
+
+   .cardteam img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover; /* keeps faces centered, no distortion*/
+    display: block;
+   }
+
+   .containerteam {
+    padding: 12px 16px 16px;
+    text-align: center;
+   }
+
+   .containerteam h2 {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    margin-bottom: 4px;
+   }
+
+   .containerteam p:last-child {
+    text-align: center;
+    padding: 0 16px 16px;
+   }
+
+   .titleteam {
+    color: grey;
+    font-size: 0.85rem;
+   }
+
+   .buttonteam {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 10px 24px;
+    color: white;
+    background-color: #0072b1;
+    text-align: center;
+    cursor: pointer;
+    width: auto;
+    min-width: 120px;
+    font-size: 1rem;
+    border-radius: 2px;
+    transition: background-color 0.2s;
+   }
+
+   .buttonteam a {
+    color: white;
+    text-decoration: none;
+    display: block;
+   }
+  /*=====================
+    Health Tracker Controls
+    ===================== */
         /*Player card styling*/
         .player {
             border: 1px solid #ccc;
@@ -176,45 +300,11 @@
 *, *:before, *:after {
   box-sizing: inherit;
 }
-.columnteam {
-  float: left;
-  width: 19%;
-  margin-bottom: 16px;
-  padding: 0 8px;
-}
-@media screen and (max-width: 650px) {
-  .columnteam {
+
+needle-engine {
+    position: absolute;
     width: 100%;
-    display: block;
-  }
-}
-.cardteam {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-.containerteam {
-  padding: 0 16px;
-}
-.containerteam::after, .rowteam::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-.titleteam {
-  color: grey;
-}
-.buttonteam {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-}
-.buttonteam:hover {
-  background-color: #555;
+    height: 100%;
 }
 
 .padd {
@@ -223,87 +313,21 @@
 
 
 
-/* font styles for IBM Plex Serif font */
-.ibm-plex-serif-thin {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 100;
-  font-style: normal;
-}
+/* =====================
+   IBM Plex Serif Variants
+   ===================== */
+.ibm-plex-serif-thin        { font-family: "IBM Plex Serif", serif; font-weight: 100; font-style: normal; }
+.ibm-plex-serif-extralight  { font-family: "IBM Plex Serif", serif; font-weight: 200; font-style: normal; }
+.ibm-plex-serif-light       { font-family: "IBM Plex Serif", serif; font-weight: 300; font-style: normal; }
+.ibm-plex-serif-regular     { font-family: "IBM Plex Serif", serif; font-weight: 400; font-style: normal; }
+.ibm-plex-serif-medium      { font-family: "IBM Plex Serif", serif; font-weight: 500; font-style: normal; }
+.ibm-plex-serif-semibold    { font-family: "IBM Plex Serif", serif; font-weight: 600; font-style: normal; }
+.ibm-plex-serif-bold        { font-family: "IBM Plex Serif", serif; font-weight: 700; font-style: normal; }
 
-.ibm-plex-serif-extralight {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 200;
-  font-style: normal;
-}
-
-.ibm-plex-serif-light {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.ibm-plex-serif-regular {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.ibm-plex-serif-medium {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.ibm-plex-serif-semibold {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.ibm-plex-serif-bold {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.ibm-plex-serif-thin-italic {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 100;
-  font-style: italic;
-}
-
-.ibm-plex-serif-extralight-italic {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 200;
-  font-style: italic;
-}
-
-.ibm-plex-serif-light-italic {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 300;
-  font-style: italic;
-}
-
-.ibm-plex-serif-regular-italic {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.ibm-plex-serif-medium-italic {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 500;
-  font-style: italic;
-}
-
-.ibm-plex-serif-semibold-italic {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 600;
-  font-style: italic;
-}
-
-.ibm-plex-serif-bold-italic {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 700;
-  font-style: italic;
-}
+.ibm-plex-serif-thin-italic       { font-family: "IBM Plex Serif", serif; font-weight: 100; font-style: italic; }
+.ibm-plex-serif-extralight-italic { font-family: "IBM Plex Serif", serif; font-weight: 200; font-style: italic; }
+.ibm-plex-serif-light-italic      { font-family: "IBM Plex Serif", serif; font-weight: 300; font-style: italic; }
+.ibm-plex-serif-regular-italic    { font-family: "IBM Plex Serif", serif; font-weight: 400; font-style: italic; }
+.ibm-plex-serif-medium-italic     { font-family: "IBM Plex Serif", serif; font-weight: 500; font-style: italic; }
+.ibm-plex-serif-semibold-italic   { font-family: "IBM Plex Serif", serif; font-weight: 600; font-style: italic; }
+.ibm-plex-serif-bold-italic       { font-family: "IBM Plex Serif", serif; font-weight: 700; font-style: italic; }

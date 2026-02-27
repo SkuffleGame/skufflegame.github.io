@@ -376,3 +376,11 @@
                 });
             }
         });
+// navbar logic
+const toggle = document.getElementById('navToggle');
+const menu = document.getElementById('navMenu');
+toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    menu.classList.toggle('open');
+});
