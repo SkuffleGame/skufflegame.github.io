@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Skuffle</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+        <!-- Favicon and app icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <base target="_blank"> <!-- This makes every link open in new tab -->
+
+        <!-- import needle-engine -->
+    <!-- <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@needle-tools/engine/dist/needle-engine.min.js"
+    ></script> -->
+</head>
+<body>
+    <header class="py-5 header-bg text-black">
+        <div class="container d-flex flex-column align-items-center text-center">
+                <img src="img/LogoLowRes.png" alt="Skuffle logo" class="header-logo mb-3">
+                    <p class="mb-0">The Chaotic PVP Card Game</p>
+        </div>
+    </header>
+
+    <nav class="site-nav">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+<ul id="navMenu">
+    <li><a href="index.html" target="_self">Home</a></li>
+    <li><a class="active" href="characters.html" target="_self">Characters</a></li>
+    <li><a href="tracker.html" target="_self">Health Tracker</a></li>
+    <!-- <li><a href ="https://skufflegame.github.io/NeedleTest/">Image Tracking</a></li> -->
+    <li><a href ="about.html" target="_self">About Us</a></li>
+    <li><a href="promo.html" target="_self">Promo</a></li>
+</ul>
+</nav>
+<div class="padd">
+<h1 style="text-align: center;">Character Bio's</h1>
+
+<div class="character-layout">
+    <!-- Left: 3D embed + AR -->
+     <div class="model-panel">
+        <iframe
+            id="needle-frame"
+            src="https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-ZIYUyM-world"
+            title="3D Character Viewer"
+            frameborder="0"
+            allow="xr-spatial-tracking; accelerometer; gyroscope; display-capture; geolocation; camera; microphone"
+            allowfullscreen>   
+        </iframe>
+        <a id="ar-btn" href="https://skufflegame.github.io/NeedleTest/" class="ar-btn">View in AR</a>
+     </div>
+
+     <!-- Right: Bio -->
+      <div class="bio-panel">
+        <h2 id="char-name">Cowboy</h2>
+        <p id="char-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit.</p>
+      </div>
+
+</div>
+
+<!-- Gallery Navigation -->
+ <div class="gallery-nav">
+    <button id="btn-prev" onclick="navigate(-1)">&#8592; Prev</button>
+    <div id="dot-nav"></div>
+    <button id="btn-next" onclick="navigate(1)">Next &#8594;</button>
+ </div>
+
+</div>
+
+ <script>
+    // navbar logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('navToggle');
+            const menu = document.getElementById('navMenu');
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                menu.classList.toggle('open');
+            });
+
+            // Character Gallery Init
+            buildDots();
+            goTo(0);
+        });
+
+        const characters = [
+            {
+                name: "Cowboy",
+                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-ZIYUyM-world",
+                arLink: "https://skufflegame.github.io/NeedleTest/",
+                bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit. "
+            },
+            {
+                name: "Were-Lobster",
+                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6ZMcFuE-ZMcFuE-world",
+                arLink: "https://skufflegame.github.io/NeedleTest/",
+                bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit. "
+            },
+            //add the rest of the characters when they're ready
+        ];
+
+        let current = 0;
+
+        function buildDots() {
+            const nav = document.getElementById('dot-nav');
+            characters.forEach((_, i) => {
+                const d =document.createElement('span');
+                    d.className = 'dot' + (i ===0 ? ' active' : '');
+                    d.onclick = () => goTo(i);
+                    nav.appenChild(d);
+            });
+        }
+
+        function goTo(i) {
+            current = i;
+            const c = characters[i];
+            document.getElementById('needle-frame').src = c.embedSrc;
+            document.getElementById('ar-btn').href = c.arLink;
+            document.getElementById('char-name').textContent = c.name;
+            document.getElementById('char-bio').textContent = c.bio;
+            document.querySelectorAll('.dot').forEach((d, di) => d.classList.toggle('active', di === i)
+            );
+        document.getElementById('btn-prev').disabled = i === 0;
+        document.getElementById('btn-next').disabled = i === characters.length - 1;
+        }
+    
+    function navigate(dir) { goTo(current + dir); }
+    </script>
+</body>
+</html>
