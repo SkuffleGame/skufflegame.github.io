@@ -16,10 +16,10 @@
     <base target="_blank"> <!-- This makes every link open in new tab -->
 
         <!-- import needle-engine -->
-    <script
+    <!-- <script
       type="module"
       src="https://cdn.jsdelivr.net/npm/@needle-tools/engine/dist/needle-engine.min.js"
-    ></script>
+    ></script> -->
 </head>
 <body>
     <header class="py-5 header-bg text-black">
@@ -33,54 +33,47 @@
         <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
 <ul id="navMenu">
     <li><a href="index.html" target="_self">Home</a></li>
+    <li><a class="active" href="cowboy.html" target="_self">Characters</a></li>
     <li><a href="tracker.html" target="_self">Health Tracker</a></li>
-    <li><a class="active" href="ar.html" target="_self">AR Embeds</a></li>
     <!-- <li><a href ="https://skufflegame.github.io/NeedleTest/">Image Tracking</a></li> -->
     <li><a href ="about.html" target="_self">About Us</a></li>
-    <li style="float:right"><a href="promo.html" target="_self">Promo</a></li>
+    <li><a href="promo.html" target="_self">Promo</a></li>
 </ul>
 </nav>
-<h1 style="text-align: center;">AR Embeds</h1>
 <div class="padd">
+<h1 style="text-align: center;">Character Bio's</h1>
+
+<div>
 <iframe
+    align="middle"
     src="https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-ZIYUyM-world"
     title="Cowboy | Hosted on Needle Cloud"
-    style="width: 25%; height: 600px"
+    style="width: 25%; height: 600px;"
     frameborder="0"
     allow="xr-spatial-tracking; accelerometer; gyroscope; display-capture; geolocation; camera; microphone"
     allowfullscreen>
 </iframe>
-<iframe
-    src="https://cloud.needle.tools/view/embed?file=Z1j9bw6ZMcFuE-ZMcFuE-world"
-    title="Fisherman | Hosted on Needle Cloud"
-    style="width: 25%; height: 600px"
-    frameborder="0"
-    allow="xr-spatial-tracking; accelerometer; gyroscope; display-capture; geolocation; camera; microphone"
-    allowfullscreen>
-</iframe>
-<h3>The above is an iframe embed</h3>
+
 <br>
-<h3>Here's some WIP videos for the AR Image Tracking</h3>
-<iframe width="500" height="315" src="https://www.youtube.com/embed/AT6BRezqPMc?si=oWaneFNo1E-Qg4n3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<iframe width="500" height="315" src="https://www.youtube.com/embed/lzKPw6SPy5M?si=TWWgjZTHjIphxDGt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<iframe width="500" height="315" src="https://www.youtube.com/embed/xSMKE5a9o-U?si=jPT23E1VzVZp75hN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
- <needle-engine
-      src="https://cloud.needle.tools/-/assets/Z1j9bw6Z1J0vIx-latest-converted/file"
-      camera-controls
-      background-color="transparent"
-      environment-image="studio"
-    ></needle-engine>
-    <h3>The below is a Needle Cloud Embed</h3>
+        <div class="dropdown">
+            <button class="dropbtn" id="character-chosen">Choose Character</button>
+            <div class="dropdown-content" id="character-dropdown">
+                <a href="cowboy.html" target="_self" class="character-option">Cowboy</a>
+                <a href="#" class="character-option" data-character="Were-Lobster">Were-Lobster</a>
+                <a href="#" class="character-option" data-character="Goe Bling">Goe Bling</a>
+                <a href="#" class="character-option" data-character="Salary Man">Salary Man</a>
+                <a href="#" class="character-option" data-character="Margritte">Margritte</a>
+                <a href="#" class="character-option" data-character="Alien">Alien</a>
+            </div>
+        </div>
+        <div class="button-group">
+        <button id="ar">AR</button>
+        </div>
     </div>
-</body>
 
-<script type="module">
-    import { onStart } from 'https://cdn.jsdelivr.net/npm/@needle-tools/engine/dist/needle-engine.min.js';
-    onStart((context) => {
-      console.log('Hello Needle');
-    });
+</div>
 
-    
+ <script>
     // navbar logic
         document.addEventListener('DOMContentLoaded', function() {
             const toggle = document.getElementById('navToggle');
@@ -91,5 +84,6 @@
                 menu.classList.toggle('open');
             });
         });
-  </script>
+    </script>
+</body>
 </html>

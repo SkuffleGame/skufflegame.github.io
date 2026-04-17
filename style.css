@@ -239,6 +239,19 @@
             margin: 0; /* reset default margin */
             width: 200px;
         }
+        #ar {
+          padding: 12px 24px;
+            font-size: 18px;
+            background-color: rgb(4, 175, 188);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: 600;
+            white-space: nowrap; /* prevent text from wrapping */
+            margin: 0; /* reset default margin */
+            width: 200px;
+        }
         #clear-all {
           padding: 12px 24px;
           font-size: 18px;
