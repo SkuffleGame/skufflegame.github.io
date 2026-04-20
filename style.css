@@ -341,6 +341,7 @@
   border: none;
   border-radius: 6px;
   display: block;
+  height: 500px;
 }
 
 .ar-btn {
@@ -394,6 +395,11 @@
   .character-layout {
     grid-template-columns: 1fr;
   }
+}
+
+/* Needle Engine */
+needle-engine {
+  background: #04AA6D;
 }
 
 

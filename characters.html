@@ -93,19 +93,25 @@
         const characters = [
             {
                 name: "Cowboy",
-                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-ZIYUyM-world",
+                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-1HHF0m-world",
                 arLink: "https://skufflegame.github.io/NeedleTest/",
                 bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit. "
             },
             {
                 name: "Were-Lobster",
-                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6ZMcFuE-ZMcFuE-world",
+                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6ZMcFuE-17la2w-world",
                 arLink: "https://skufflegame.github.io/NeedleTest/",
                 bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit. "
             },
             {
                 name: "Goe-Bling",
                 embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6np3DL-np3DL-world",
+                arLink: "https://skufflegame.github.io/NeedleTest/",
+                bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit. "
+            },
+            {
+                name: "NeedleTest",
+                embedSrc: "https://skufflegame.github.io/NeedleTest/",
                 arLink: "https://skufflegame.github.io/NeedleTest/",
                 bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit. "
             },
@@ -120,13 +126,14 @@
                 const d =document.createElement('span');
                     d.className = 'dot' + (i ===0 ? ' active' : '');
                     d.onclick = () => goTo(i);
-                    nav.appenChild(d);
+                    nav.appendChild(d);
             });
         }
 
         function goTo(i) {
             current = i;
             const c = characters[i];
+
             document.getElementById('needle-frame').src = c.embedSrc;
             document.getElementById('ar-btn').href = c.arLink;
             document.getElementById('char-name').textContent = c.name;
