@@ -289,13 +289,13 @@
             }
 
                 // Read the current list of players once so we can:
-                // - check how many players exsist
+                // - check how many players exist
                 // - ensure the selected character is not already taken
                 onValue(playersRef, (snapshot) => {
                     const players = snapshot.val();
 
                     // Count how many players we currently have
-                    // If players is null, ther are 0 players; otherwise count the keys
+                    // If players is null, there are 0 players; otherwise count the keys
                     const playerCount = players ? Object.keys(players).length : 0;
 
                     // Enforce a maximum of 6 players in total

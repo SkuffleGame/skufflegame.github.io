@@ -33,11 +33,11 @@
         <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
 <ul id="navMenu">
     <li><a href="index.html" target="_self">Home</a></li>
-    <li><a class="active" href="characters.html" target="_self">Characters</a></li>
     <li><a href="tracker.html" target="_self">Health Tracker</a></li>
+    <li><a class="active" href="characters.html" target="_self">Characters</a></li>
     <!-- <li><a href ="https://skufflegame.github.io/NeedleTest/">Image Tracking</a></li> -->
-    <li><a href ="about.html" target="_self">About Us</a></li>
-    <li><a href="promo.html" target="_self">Promo</a></li>
+    <!-- <li><a href ="about.html" target="_self">About Us</a></li> -->
+    <!-- <li><a href="promo.html" target="_self">Promo</a></li> -->
 </ul>
 </nav>
 <div class="padd">
@@ -61,6 +61,7 @@
       <div class="bio-panel">
         <h2 id="char-name">Cowboy</h2>
         <p id="char-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit.</p>
+        <p id="char-mechanics">Playstyle: Fast Paced - Ability: Bullets - Aggresion: High - Complexity: Low</p>
       </div>
 
 </div>
@@ -92,28 +93,46 @@
 
         const characters = [
             {
-                name: "Cowboy",
+                name: "Caballero the Cowboy",
                 embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-1HHF0m-world",
                 arLink: "https://skufflegame.github.io/NeedleTest/",
-                bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit. "
+                bio: "Bounty Hunting isn't usually a labour of love, but this Caballero loves to hunt for bounties. They've brought in bounties that haven't even had bounties put on them yet.",
+                mechanics: "Playstyle: Fast Paced - Ability: Bullets - Aggresion: High - Complexity: Low"
             },
             {
-                name: "Were-Lobster",
+                name: "Lawrence the Were-Lobster",
                 embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6ZMcFuE-17la2w-world",
                 arLink: "https://skufflegame.github.io/NeedleTest/",
-                bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit. "
+                bio: "Dockyards are tough on the back. Even tougher if you have a crustacean's posture. Lawrence has been a were-lobster since he was a lad, and that was quite a while. Turning into a Half-Lobster at high tide lost its novelty quite quickly. So now he just takes advantage of the strength it gives him by working with the heaviest things others can't carry.",
+                mechanics: "Playstyle: Slow and steady - Ability: Tide - Aggresion: High - Complexity: Medium"
             },
             {
-                name: "Goe-Bling",
+                name: "Goe Bling the Goblin",
                 embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6np3DL-np3DL-world",
                 arLink: "https://skufflegame.github.io/NeedleTest/",
-                bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit. "
+                bio: "You know what they say about the antiques business. It's not what it used to be! Under the table deals are becoming more common to keep these pawnsters and trinket dealers in business. That's where Goe Bling comes in. Swiping, climbing, crawling, stealing and squealing, she gets into trouble, gets out of it, and makes a profit!",
+                mechanics: "Playstyle: Fast paced - Ability: Thievery - Aggresion: Low - Complexity: Low"
             },
             {
-                name: "NeedleTest",
+                name: "Sal the Office Worker",
+                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw619WO70-Z525to-world",
+                arLink: "https://skufflegame.github.io/NeedleTest/",
+                bio: "Sal is devoted to two things, his wife and his job. He is yet to find a wife. 8am to 8pm, Sal doesn't love working, but he hates not having his TPS reports submitted on time. Work hard, get paid, pay bills, work hard. It's a simple life of staying off his feet. Some day he'll retire, and then he can kick back.",
+                mechanics: "Playstyle: Slow and steady - Ability: Paperwork - Aggresion: Low - Complexity: Medium"
+            },
+            {
+                name: "Margritte the Wizard",
                 embedSrc: "https://skufflegame.github.io/NeedleTest/",
                 arLink: "https://skufflegame.github.io/NeedleTest/",
-                bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit. "
+                bio: "Reading tarot is an easy swindle, but Maggie can actually get results from them. She and her cat make a living by reading for rich clients and telling them about their twisted end.",
+                mechanics: "Playstyle: Fast combo slinging - Ability: Blitzing Combos - Aggression: Medium - Complexity: Low"
+            },
+            {
+                name: "Alan the Alien",
+                embedSrc: "https://skufflegame.github.io/NeedleTest/",
+                arLink: "https://skufflegame.github.io/NeedleTest/",
+                bio: "Alan can use a dodge point to avoid one instance of damage. He starts off with 3, and can’t gain more than that.",
+                mechanics: "Playstyle: Medium pace - Ability: Improved basic attacks - Aggression: Medium - Complexity: Low"
             },
             //add the rest of the characters when they're ready
         ];
@@ -123,7 +142,7 @@
         function buildDots() {
             const nav = document.getElementById('dot-nav');
             characters.forEach((_, i) => {
-                const d =document.createElement('span');
+                const d = document.createElement('span');
                     d.className = 'dot' + (i ===0 ? ' active' : '');
                     d.onclick = () => goTo(i);
                     nav.appendChild(d);
@@ -138,6 +157,7 @@
             document.getElementById('ar-btn').href = c.arLink;
             document.getElementById('char-name').textContent = c.name;
             document.getElementById('char-bio').textContent = c.bio;
+            document.getElementById('char-mechanics').textContent = c.mechanics;
             document.querySelectorAll('.dot').forEach((d, di) => d.classList.toggle('active', di === i)
             );
         document.getElementById('btn-prev').disabled = i === 0;
