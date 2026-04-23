@@ -17,10 +17,12 @@
     <base target="_blank"> <!-- This makes every link open in new tab -->
 
         <!-- import needle-engine -->
-    <!-- <script
+    <script
       type="module"
       src="https://cdn.jsdelivr.net/npm/@needle-tools/engine/dist/needle-engine.min.js"
-    ></script> -->
+    ></script>
+
+    
 </head>
 <body>
     <header class="py-5 header-bg text-black">
@@ -43,12 +45,13 @@
      <div class="model-panel">
         <iframe
             id="needle-frame"
-            src="https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-ZIYUyM-world"
+            src="https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-1HHF0m-world"
             title="3D Character Viewer"
             frameborder="0"
             allow="xr-spatial-tracking; accelerometer; gyroscope; display-capture; geolocation; camera; microphone"
             allowfullscreen>   
         </iframe>
+
         <a id="ar-btn" href="https://skufflegame.github.io/NeedleTest/" class="ar-btn">View in AR</a>
      </div>
 
@@ -62,25 +65,17 @@
 </div>
 
 <!-- Gallery Navigation -->
- <div class="gallery-nav">
-    <button id="btn-prev" onclick="navigate(-1)">&#8592; Prev</button>
+<div class="gallery-nav">
+    <button id="btn-prev" onclick="navigate(-1)"><i class="fa fa-chevron-left"></i></button>
     <div id="dot-nav"></div>
-    <button id="btn-next" onclick="navigate(1)">Next &#8594;</button>
- </div>
+    <button id="btn-next" onclick="navigate(1)"><i class="fa fa-chevron-right"></i></button>
+</div>
 
 </div>
 
  <script>
-    // navbar logic
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggle = document.getElementById('navToggle');
-            const menu = document.getElementById('navMenu');
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                menu.classList.toggle('open');
-            });
 
+        document.addEventListener('DOMContentLoaded', function() {
             // Character Gallery Init
             buildDots();
             goTo(0);
@@ -117,14 +112,14 @@
             },
             {
                 name: "Margritte the Wizard",
-                embedSrc: "https://skufflegame.github.io/NeedleTest/",
+                embedSrc: "null",
                 arLink: "https://skufflegame.github.io/NeedleTest/",
                 bio: "Reading tarot is an easy swindle, but Maggie can actually get results from them. She and her cat make a living by reading for rich clients and telling them about their twisted end.",
                 mechanics: "Playstyle: Fast combo slinging - Ability: Blitzing Combos - Aggression: Medium - Complexity: Low"
             },
             {
                 name: "Alan the Alien",
-                embedSrc: "https://skufflegame.github.io/NeedleTest/",
+                embedSrc: "null",
                 arLink: "https://skufflegame.github.io/NeedleTest/",
                 bio: "Alan can use a dodge point to avoid one instance of damage. He starts off with 3, and can’t gain more than that.",
                 mechanics: "Playstyle: Medium pace - Ability: Improved basic attacks - Aggression: Medium - Complexity: Low"
@@ -148,7 +143,9 @@
             current = i;
             const c = characters[i];
 
-            document.getElementById('needle-frame').src = c.embedSrc;
+            const engine = document.getElementById('needle-frame');
+            engine.setAttribute('src', c.embedSrc);
+            // document.getElementById('needle-frame').src = c.embedSrc;
             document.getElementById('ar-btn').href = c.arLink;
             document.getElementById('char-name').textContent = c.name;
             document.getElementById('char-bio').textContent = c.bio;
