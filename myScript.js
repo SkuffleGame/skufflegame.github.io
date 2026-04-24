@@ -6,7 +6,8 @@
         //This gives us functions to connect to our Firebase project and talk to the Realtime Database for the health tracker
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js';
         import { getDatabase, ref, onValue, set, update, remove } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js';
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
+        //Import the anonymous authentication functions we need
+        import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js';
 
       // Confirguration object for our specific Firebase project
       // These values come from the Firebase console and identity which project we want to connect to
@@ -24,12 +25,31 @@
         // Creates a Firebase app instance using the config from above
         // From this, we can get analytics and a connection to our Realtime Database
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);//analytics setup (optional)
         const database = getDatabase(app);// Main handle to interact with the Realtime Database
 
         // Create a reference to the "players" node in our database
         // All player data will be stored under this path: /players
         const playersRef = ref(database, 'players');
+
+        //Get a handle to Firebase Authentication so we can sign in anonymously
+        const auth = getAuth(app);
+        //This variable will hold the current user's unique ID once they're signed in
+        //It starts as null because sign-in hasn't happened yet when the page first loads
+        let currentUID = null;
+
+// --- ANONYMOUS SIGN-IN --- \\
+        // signInAnonymously returns a Promise - meaning it goes off and does its work and calls the .then() function when it's done, without freezing the page
+        signInAnonymously(auth)
+        .then((userCredential) => {
+            // Sign-in succeeded - userCredential contains info about this "ghost account"
+            // We pull out just the uid (unique ID) and store it in our currentUID variable
+            currentUID = userCredential.user.uid;
+            console.log('Signed in anonymously, UID:', currentUID); // Useful for debugging
+        })
+        .catch((error) => {
+            // Something went wrong - log it so you can see it in the browser console
+            console.error('Anonymous sign-in failed:', error);
+        });
 
 // --- SOUND EFFECTS SETUP --- \\
 
@@ -222,22 +242,31 @@
                 const playerDiv = document.createElement('div');
                 playerDiv.className = 'player'; // Use CSS class .player for styling
                 
+                // want to check if the currently signed in user owns this player card
+                // if currentUID matches ownerUID stored in database for this player, isOwner = true
+                const isOwner = player.ownerUID === currentUID;
+                console.log(player.name, '| ownerUID:', player.ownerUID, '| currentUID:', currentUID, '| isOwner:', isOwner);
+                //for debugging
+                
                 let specialHTML = '';
                 if (player.specialName && player.specialType) {
                 if (player.specialType === 'number') {
                     specialHTML = `
                     <div class="special-control">
                     <span class="special-name">${player.specialName}:</span>
-                        <button onclick="changeSpecial('${id}', -1);">-</button>
+                        <button onclick="changeSpecial('${id}', -1);"
+                        ${!isOwner ? 'disabled title="Not your character"' : ''}>-</button>
                         <div class="special-value">${player.specialValue}</div>
-                        <button onclick="changeSpecial('${id}', 1);">+</button>
+                        <button onclick="changeSpecial('${id}', 1);"
+                        ${!isOwner ? 'disabled title="Not your character"' : ''}>+</button>
                     </div>
                     `;
                     } else if (player.specialType === 'toggle') {
                     specialHTML = `
                     <div class="special-control">
                         <span class="special-label">${player.specialName}:</span>
-                        <button class="toggle-button" onclick="toggleSpecial('${id}')">${player.specialValue}</button>
+                        <button class="toggle-button" onclick="toggleSpecial('${id}')"
+                        ${!isOwner ? 'disabled title="Not your character"' : ''}>${player.specialValue}</button>
                     </div>
                     `;
                     }
@@ -245,15 +274,18 @@
                 // Build the inner html for this player card:
                 // - Show player's name and their character (if they have one)
                 // - Show buttons and current health value
+                
                 playerDiv.innerHTML = `
                     <div>${player.name} ${player.character ? '(' + player.character + ')' : ''}</div>
                     <div class="health-control">
-                        <button onclick="changeHealth('${id}', -1); playDecreaseSound()">-</button>
+                        <button onclick="changeHealth('${id}', -1); playDecreaseSound()"
+                        ${!isOwner ? 'disabled title="Not your character"' : ''}>-</button> 
                         <div class="health-value">${player.health}</div>
-                        <button onclick="changeHealth('${id}', 1); playIncreaseSound()">+</button>
+                        <button onclick="changeHealth('${id}', 1); playIncreaseSound()"
+                        ${!isOwner ? 'disabled title="Not your character"' : ''}>+</button>
                     </div>
                     ${specialHTML}
-                `;
+                `; // If this is not your player, add the word disabled to the button element, otherwise add nothing
 
                 // Add the finished card into the main players container
                 container.appendChild(playerDiv);
@@ -332,7 +364,9 @@
                         character: selectedCharacter,
                         specialName: specialData.specialName,
                         specialType: specialData.specialType,
-                        specialValue: specialData.specialValue
+                        specialValue: specialData.specialValue,
+                        //store who created this player
+                        ownerUID: currentUID
                     };
 
                     // Add type-specific data for the different abilites
@@ -376,11 +410,3 @@
                 });
             }
         });
-// navbar logic
-const toggle = document.getElementById('navToggle');
-const menu = document.getElementById('navMenu');
-toggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    menu.classList.toggle('open');
-});

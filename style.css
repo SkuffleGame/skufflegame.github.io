@@ -228,6 +228,10 @@
               cursor: pointer; /*show pointer cursor on hover*/
               font-weight: bold;
           }
+          button:disabled {
+              opacity: 0.4;
+              cursor: not-allowed;
+          }
           /*health number display*/
           .health-value {
               font-size: 24px;
