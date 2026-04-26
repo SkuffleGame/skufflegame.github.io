@@ -37,7 +37,7 @@
 
 <h3>Story</h3><br>
 <p>The world of Skuffle is an absurdist fantasy world, akin to Terry Pratchett's Discworld. <br><br> 
-The players control characters with eclectic designs, and a rag-tag dynamic, as they should by all means be disconnected from one another. As the name suggests, these characters are not fighting to the death, they’re merely having a scuffle over something minor. Whatever the cause may be, a slight was made, and now the players will dictate who will win. <br><br>
+The players control characters with eclectic designs, and a rag-tag dynamic, as they should by all means be disconnected from one another. As the name suggests, these characters are not fighting to the death, they’re merely having a scuffle over something minor.Whatever the cause may be, a slight was made, and now the players will dictate who will win. <br><br>
 The characters are: <br>
 <ul>
 <li>A bounty hunting cowboy</li>
@@ -50,7 +50,7 @@ The characters are: <br>
 </ul>
 <br><h3>Mechanics</h3><br>
 <p>Skuffle itself is a free-for-all, turn based card game with a responsive AR integrated companion web-app. <br><br>
-What sets it apart from the mechanics of other card games is its discard-based resource system. With this system, in order to play a one cost card, you must discard another card in your hand. At the end of each turn, players draw back up to 5 cards, fueling the players’ choice of cards to play and ability to play them. Each of the six characters have a special ability and 10 uniquely designed cards, each adding to their character’s personality. <br><br>
+What sets it apart from the mechanics of other card games is its discard based resource system. With this system, in order to play a one cost card, you must discard another card in your hand. At the end of each turn, players draw back up to 5 cards, fueling the players’ choice of cards to play and ability to play them. Each of the six characters have a special ability and 10 uniquely designed cards, each adding to their character’s personality. <br><br>
 The companion web-app’s primary purpose is to track each player's health in an online database, where each player can see their health, and the health of their opponents. It also adds immersion to the gameplay experience with reactive AR models of each character and tailored audio for health / ability tracking. With it’s responsive design, this will work for devices of all sizes.
 </p>
 <div class="spacer_box"></div>
@@ -115,10 +115,13 @@ The companion web-app’s primary purpose is to track each player's health in an
 <div class="spacer_box"></div>
 <h1 style="text-align: center;">Promo Video</h1>
 <div class="spacer_box"></div>
-<div style="text-align: center;">
-<iframe width= "560" height= "315" src="https://www.youtube.com/embed/AT6BRezqPMc?si=LWFp9cSX6SXWIXKY" 
-title="Playest 1 - 5th Feb Snippet" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<div class="video-wrapper">
+  <iframe src="https://www.youtube.com/embed/AT6BRezqPMc?si=LWFp9cSX6SXWIXKY" 
+    title="Playest 1 - 5th Feb Snippet" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+  </iframe>
+</div>
 <div class="spacer_box"></div>
 <h1 style="text-align: center;">Project Gallery</h1>
 <div class="spacer_box"></div>
@@ -152,7 +155,12 @@ referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
 </div>
 </div>
-<div class="spacer_box"></div>
+
+    <div class="footer_block">
+        <p class="text-center" id="current_year"></p>
+        <p class="text-center">A project by Aaron, Tom, Adriana, Tadhg and Katerina</p>
+        </div>
+
  <script>
     // navbar logic
         document.addEventListener('DOMContentLoaded', function() {
@@ -164,6 +172,10 @@ referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
                 menu.classList.toggle('open');
             });
         });
+            const d = new Date();
+            let year = d.getFullYear();
+            let customString = "Skuffle © ";
+            document.getElementById("current_year").innerHTML = customString + year;
     </script>
 </body>
 </html>

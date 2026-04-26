@@ -30,7 +30,7 @@
         <a class="active" href="tracker.html" target="_self"><i class="fa fa-fw fa-heart"></i><span class="nav-text"> Health Tracker</span></a>
         <a href="characters.html" target="_self"><i class="fa fa-fw fa-users"></i><span class="nav-text"> Characters</span></a>
     </div>
-
+<br>
 <h1 style="text-align: center;">Health Tracker</h1>
 <!-- input selection for adding new players -->
  <div class="padd">
@@ -54,8 +54,18 @@
     </div>
 <!-- container where all player cards are displayed -->
     <div id="players"></div>
+
 <!-- external script file-->
      <script type="module" src="myScript.js"></script> 
 </div>
+    <div class="spacer_box"></div>
+        <div class="footer_block">
+        <p class="text-center" id="current_year"></p>
+        <p class="text-center">A project by Aaron, Tom, Adriana, Tadhg and Katerina</p>
+        </div>
+<script>                    const d = new Date();
+            let year = d.getFullYear();
+            let customString = "Skuffle © ";
+            document.getElementById("current_year").innerHTML = customString + year;</script>
 </body>
 </html>

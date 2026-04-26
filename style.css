@@ -345,6 +345,22 @@
     padding: 10px 20px;
   }
 
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding-bottom: min(315px, 56.25%);
+  height: 0;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
   /*=====================
       Characters Page
       ===================== */
@@ -443,6 +459,16 @@
       opacity: 0.3;
       cursor: default;
   }
+
+.footer_block {
+  background-color: #333333;
+    padding: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    color: white;
+}
 
   /* =====================
     IBM Plex Serif Variants

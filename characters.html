@@ -72,7 +72,10 @@
 </div>
 
 </div>
-
+    <div class="footer_block">
+        <p class="text-center" id="current_year"></p>
+        <p class="text-center">A project by Aaron, Tom, Adriana, Tadhg and Katerina</p>
+        </div>
  <script>
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -157,6 +160,11 @@
         }
     
     function navigate(dir) { goTo(current + dir); }
+
+                const d = new Date();
+            let year = d.getFullYear();
+            let customString = "Skuffle © ";
+            document.getElementById("current_year").innerHTML = customString + year;
     </script>
 </body>
 </html>
