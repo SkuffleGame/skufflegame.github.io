@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic page setup and mobile responsiveness -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Skuffle is a chaotic PvP card game with AR integration and unique discard-based mechanics.">
+    
+    <title>Skuffle</title>
+    
+    <!-- Bootstrap CSS and JavaScript for layout, responsiveness, and carousel functionality -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Skuffle</title>
+
+    <!-- Google Font used for the site -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Font Awesome for icons -->
+    
+    <!-- Font Awesome icons used in the navigation and LinkedIn buttons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Main custom stylesheet -->
     <link rel="stylesheet" href="style.css">
-        <!-- Favicon and app icons -->
+
+    <!-- Favicon and app icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <base target="_blank"> <!-- This makes every link open in new tab -->
+    
+    <!-- This makes every link open in a new tab -->
+    <base target="_blank">
 </head>
+
 <body>
+    <!-- Header section containing the Skuffle logo and tagline -->
     <header class="py-5 header-bg text-black">
         <div class="container d-flex flex-column align-items-center text-center">
                 <img src="img/LogoLowRes.png" alt="Skuffle logo" class="header-logo mb-3">
@@ -24,47 +40,59 @@
         </div>
     </header>
 
+    <!-- Main navigation bar linking to the key pages of the site -->
     <div class="navbar">
         <a class="active" href="index.html" target="_self"><i class="fa fa-fw fa-home"></i><span class="nav-text"> Home</span></a>
         <a href="tracker.html" target="_self"><i class="fa fa-fw fa-heart"></i><span class="nav-text"> Health Tracker</span></a>
         <a href="characters.html" target="_self"><i class="fa fa-fw fa-users"></i><span class="nav-text"> Characters</span></a>
     </div>
 
+<!-- Main page content wrapper -->
 <div class="padd">
     <br>
     <h1 style="text-align: center;">Welcome to Skuffle!</h1>
 <br>
 
 <h3>Story</h3><br>
-<p>The world of Skuffle is an absurdist fantasy world, akin to Terry Pratchett's Discworld. <br><br> 
-The players control characters with eclectic designs, and a rag-tag dynamic, as they should by all means be disconnected from one another. As the name suggests, these characters are not fighting to the death, they’re merely having a scuffle over something minor.Whatever the cause may be, a slight was made, and now the players will dictate who will win. <br><br>
-The characters are: <br>
-<ul>
-<li>A bounty hunting cowboy</li>
-<li>A dockworker were-lobster</li>
-<li>A thieving goblin child</li>
-<li>A disheveled office worker</li>
-<li>A tarot reading magician</li>
-<li>And an alien living in a humanoid suit of goo</li>
-</ul>
-</ul>
+
+<p>The world of Skuffle is an absurdist fantasy world, akin to Terry Pratchett's Discworld.</p>
+
+<p>The players control characters with eclectic designs, and a rag-tag dynamic, as they should by all means be disconnected from one another. As the name suggests, these characters are not fighting to the death, they’re merely having a scuffle over something minor.Whatever the cause may be, a slight was made, and now the players will dictate who will win.</p>
+
+<p>The characters are: </p>
+
+    <ul>
+        <li>A bounty hunting cowboy</li>
+        <li>A dockworker were-lobster</li>
+        <li>A thieving goblin child</li>
+        <li>A disheveled office worker</li>
+        <li>A tarot reading magician</li>
+        <li>And an alien living in a humanoid suit of goo</li>
+    </ul>
+
 <br><h3>Mechanics</h3><br>
-<p>Skuffle itself is a free-for-all, turn based card game with a responsive AR integrated companion web-app. <br><br>
-What sets it apart from the mechanics of other card games is its discard based resource system. With this system, in order to play a one cost card, you must discard another card in your hand. At the end of each turn, players draw back up to 5 cards, fueling the players’ choice of cards to play and ability to play them. Each of the six characters have a special ability and 10 uniquely designed cards, each adding to their character’s personality. <br><br>
-The companion web-app’s primary purpose is to track each player's health in an online database, where each player can see their health, and the health of their opponents. It also adds immersion to the gameplay experience with reactive AR models of each character and tailored audio for health / ability tracking. With it’s responsive design, this will work for devices of all sizes.
-</p>
+
+<p>Skuffle itself is a free-for-all, turn based card game with a responsive AR integrated companion web-app. </p>
+
+<p>What sets it apart from the mechanics of other card games is its discard based resource system. With this system, in order to play a one cost card, you must discard another card in your hand. At the end of each turn, players draw back up to 5 cards, fueling the players’ choice of cards to play and ability to play them. Each of the six characters have a special ability and 10 uniquely designed cards, each adding to their character’s personality. </p>
+
+<p>The companion web-app’s primary purpose is to track each player's health in an online database, where each player can see their health, and the health of their opponents. It also adds immersion to the gameplay experience with reactive AR models of each character and tailored audio for health / ability tracking. With it’s responsive design, this will work for devices of all sizes.</p>
+
 <div class="spacer_box"></div>
+
+<!-- Meet the team section -->
 <h1 style="text-align: center;">Meet the team!</h1>
+
 <div class="spacer_box"></div>
+
 <div class="team-grid">
             <div class="cardteam">
                 <img src="img/Tom.jpeg" alt="Photo of Tom">
                 <div class="containerteam">
-                    <h2>Tom McMahon</h2>
-                    <p class="titleteam">Project Manager</p>
-                    <p>Tom is a 3rd Year, and a photographer...</p>
-                    <p>Get in Touch Below!</p>
-                    <p><button class="buttonteam"><a href="https://www.linkedin.com/in/thomas-mcmahon-54738535b/">LinkedIn</a></button></p>
+                    <h2>Thomas (Tom) McMahon</h2>
+                    <p class="titleteam">Project Manager, Video & Audio</p>
+                    <p>Tom is a 3rd year student at DkIT, and has a passion for photography.</p>
+                    <p class="button-wrapper"><a href="https://www.linkedin.com/in/thomas-mcmahon-54738535b/" class="buttonteam" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i></a></p>                    
                 </div>
             </div>
 
@@ -72,10 +100,9 @@ The companion web-app’s primary purpose is to track each player's health in an
                     <img src="img/Aaron.jpeg" alt="Photo of Aaron">
                     <div class="containerteam">
                         <h2>Aaron Lawlor</h2>
-                        <p class="titleteam">3D, AR, Video, Audio and Website</p>
-                        <p>Aaron is a 3rd Year, who really enjoys all things technology.</p>
-                        <p>Connect with me below</p>
-                        <p><button class="buttonteam"><a href="https://www.linkedin.com/in/aaronlawlor/">LinkedIn</a></button></p>
+                        <p class="titleteam">3D, AR, Video, Audio & Website</p>
+                        <p>Aaron is a 3rd year student who really enjoys all things technology.</p>
+                        <p class="button-wrapper"><a href="https://www.linkedin.com/in/aaronlawlor/" class="buttonteam" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i></a></p>
                     </div>
                 </div>
 
@@ -84,9 +111,8 @@ The companion web-app’s primary purpose is to track each player's health in an
                     <div class="containerteam">
                         <h2>Adriana McMahon</h2>
                         <p class="titleteam">Illustrations, Vectors and Graphics</p>
-                        <p>Adriana is a 3rd year who is into digital and physical art....</p>
-                        <p>Connect below</p>
-                        <p><button class="buttonteam"><a href="https://www.linkedin.com/in/adriana-mcmahon-b2a321309/">LinkedIn</a></button></p>
+                        <p>Adriana is a 3rd year who has a passion for digital and physical art.</p>
+                        <p class="button-wrapper"><a href="https://www.linkedin.com/in/adriana-mcmahon-b2a321309/" class="buttonteam" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i></a></p>
                     </div>
                 </div>
 
@@ -95,9 +121,8 @@ The companion web-app’s primary purpose is to track each player's health in an
                         <div class="containerteam">
                             <h2>Tadhg Patterson</h2>
                             <p class="titleteam">Game Mechanics, Figma, Tabletop Sim</p>
-                            <p>Tadhg is a 3rd year who's really into UX and anything Card Game related...</p>
-                            <p>Connect Below</p>
-                            <p><button class="buttonteam"><a href="https://www.linkedin.com/in/tadhg-patterson/">LinkedIn</a></button></p>
+                            <p>Tadhg is a 3rd year who's really into card games and UX</p>
+                            <p class="button-wrapper"><a href="https://www.linkedin.com/in/tadhg-patterson/" class="buttonteam" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i></a></p>        
                         </div>
                     </div>
 
@@ -106,9 +131,8 @@ The companion web-app’s primary purpose is to track each player's health in an
                         <div class="containerteam">
                             <h2>Katerina Gryczova</h2>
                             <p class="titleteam">Graphic Design</p>
-                            <p>Katerina is a 3rd year student who's super into graphic design</p>
-                            <p>Say hi below!</p>
-                            <p><button class="buttonteam"><a href="https://www.linkedin.com/in/katerinagryczova/">LinkedIn</a></button></p>
+                            <p>Katerina is a 3rd year student who's interested in anything graphic design</p>
+                            <p class="button-wrapper"><a href="https://www.linkedin.com/in/katerinagryczova/" class="buttonteam" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i></a></p>    
                         </div>
                     </div>
                 </div>
@@ -116,8 +140,8 @@ The companion web-app’s primary purpose is to track each player's health in an
 <h1 style="text-align: center;">Promo Video</h1>
 <div class="spacer_box"></div>
 <div class="video-wrapper">
-  <iframe src="https://www.youtube.com/embed/AT6BRezqPMc?si=LWFp9cSX6SXWIXKY" 
-    title="Playest 1 - 5th Feb Snippet" frameborder="0" 
+  <iframe src="https://www.youtube.com/embed/uUVDZzgAPpc?si=8_HpisEOHbIV4GBq" 
+    title="Playtest 1 - 5th Feb Snippet" frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
   </iframe>
@@ -132,18 +156,26 @@ The companion web-app’s primary purpose is to track each player's health in an
         <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
         <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
         <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="4"></button>
     </div>
 
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="img/TableTopSim.png" alt="Sample Text" class="d-block w-100">
+        <div class="carousel-item active" data-caption="A screenshot of Photoshop courtesy of Tom">
+            <img src="img/PhotoshopTom.png" alt="A screenshot of Photoshop courtesy of Tom" class="d-block w-100">
         </div>
-    <div class="carousel-item">
-            <img src="img/GoblinBlender.png" alt="Sample Text" class="d-block w-100">
+    <div class="carousel-item" data-caption="A screenshot of Krita, the digital art software used by Adriana">
+            <img src="img/KritaScreenshot.png" alt="A screenshot of Krita, the digital art software used by Adriana" class="d-block w-100">
         </div>
-    <div class="carousel-item">
-            <img src="img/TableTopModels.png" alt="Sample Text" class="d-block w-100">
-</div>
+    <div class="carousel-item" data-caption="A screenshot of the Cowboy Blender model from Aaron">
+            <img src="img/BlenderCowboy.png" alt="A screenshot of the Cowboy Blender model from Aaron" class="d-block w-100">
+        </div>
+    <div class="carousel-item" data-caption="A screenshot of Adobe Illustrator with some of Katerinas work">
+        <img src="img/KaterinaIllustrator.png" alt="A screenshot of Adobe Illustrator with some of Katerinas work" class="d-block w-100">
+    </div>
+    <div class="carousel-item" data-caption="A screenshot of TableTop Simulator, the digital space for our card game. Tadhg">
+        <img src="img/TableTopSim.png" alt="A screenshot of TableTop Simulator, the digital space for our card game. Tadhg" class="d-block w-100">
+    </div>
 </div>
 <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
     <span class="carousel-control-prev-icon"></span>
@@ -152,8 +184,8 @@ The companion web-app’s primary purpose is to track each player's health in an
     <span class="carousel-control-next-icon"></span>
 </button>
 </div>
+<p id="carousel-caption" style="text-align: center; margin-top: 10px;">A screenshot of Photoshop courtesy of Tom</p>
 
-</div>
 </div>
 
     <div class="footer_block">
@@ -162,20 +194,19 @@ The companion web-app’s primary purpose is to track each player's health in an
         </div>
 
  <script>
-    // navbar logic
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggle = document.getElementById('navToggle');
-            const menu = document.getElementById('navMenu');
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                menu.classList.toggle('open');
-            });
+    // Automatically update copyright year
+    document.getElementById("current_year").textContent =
+    `Skuffle © ${new Date().getFullYear()}`;
+        
+        // Gets the Bootstrap carousel and the seperate caption paragraph underneath it 
+        const carouselEl = document.getElementById('demo');
+        const captionEl = document.getElementById('carousel-caption');
+
+        // When carousel moves to a new slide, update caption text using the custom data-caption value from the incoming slide
+        carouselEl.addEventListener('slide.bs.carousel', function (e) {
+            const incoming = e.relatedTarget;
+            captionEl.textContent = incoming.dataset.caption;
         });
-            const d = new Date();
-            let year = d.getFullYear();
-            let customString = "Skuffle © ";
-            document.getElementById("current_year").innerHTML = customString + year;
     </script>
 </body>
 </html>

@@ -1,170 +1,247 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>Skuffle</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="style.css">
-        <!-- Favicon and app icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <base target="_blank"> <!-- This makes every link open in new tab -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Favicon and app icons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <base target="_blank" />
+    <!-- This makes every link open in new tab -->
 
-        <!-- import needle-engine -->
+    <!-- import needle-engine -->
     <script
       type="module"
       src="https://cdn.jsdelivr.net/npm/@needle-tools/engine/dist/needle-engine.min.js"
     ></script>
-
-    
-</head>
-<body>
+  </head>
+  <body>
     <header class="py-5 header-bg text-black">
-        <div class="container d-flex flex-column align-items-center text-center">
-                <img src="img/LogoLowRes.png" alt="Skuffle logo" class="header-logo mb-3">
-                    <p class="mb-0">The Chaotic PVP Card Game</p>
-        </div>
+      <div class="container d-flex flex-column align-items-center text-center">
+        <img
+          src="img/LogoLowRes.png"
+          alt="Skuffle logo"
+          class="header-logo mb-3"
+        />
+        <p class="mb-0">The Chaotic PVP Card Game</p>
+      </div>
     </header>
 
     <div class="navbar">
-        <a href="index.html" target="_self"><i class="fa fa-fw fa-home"></i><span class="nav-text"> Home</span></a>
-        <a href="tracker.html" target="_self"><i class="fa fa-fw fa-heart"></i><span class="nav-text"> Health Tracker</span></a>
-        <a class="active" href="characters.html" target="_self"><i class="fa fa-fw fa-users"></i><span class="nav-text"> Characters</span></a>
+      <a href="index.html" target="_self"
+        ><i class="fa fa-fw fa-home"></i><span class="nav-text"> Home</span></a
+      >
+      <a href="tracker.html" target="_self"
+        ><i class="fa fa-fw fa-heart"></i
+        ><span class="nav-text"> Health Tracker</span></a
+      >
+      <a class="active" href="characters.html" target="_self"
+        ><i class="fa fa-fw fa-users"></i
+        ><span class="nav-text"> Characters</span></a
+      >
     </div>
-<div class="padd">
-<h1 style="text-align: center;">Character Bio's</h1>
+    <div class="padd">
+      <h1 style="text-align: center">Character Bios</h1>
 
-<div class="character-layout">
-    <!-- Left: 3D embed + AR -->
-     <div class="model-panel">
-        <iframe
+      <div class="character-layout">
+        <!-- Left: 3D embed + AR -->
+        <div class="model-panel">
+          <iframe
             id="needle-frame"
-            src="https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-1HHF0m-world"
+            src="https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-1HHF0m-product"
             title="3D Character Viewer"
             frameborder="0"
-            allow="xr-spatial-tracking; accelerometer; gyroscope; display-capture; geolocation; camera; microphone"
-            allowfullscreen>   
-        </iframe>
+            allow="
+              xr-spatial-tracking;
+              accelerometer;
+              gyroscope;
+              display-capture;
+              geolocation;
+              camera;
+              microphone;
+            "
+            allowfullscreen
+          >
+          </iframe>
 
-        <a id="ar-btn" href="https://skufflegame.github.io/NeedleTest/" class="ar-btn">View in AR</a>
-     </div>
+          <a
+            id="ar-btn"
+            href="https://skufflegame.github.io/AR-Image-Tracking/"
+            class="ar-btn"
+            rel="noopener noreferrer"
+            ><i class="fa fa-mobile" aria-hidden="true"></i> View in AR</a
+          >
+        </div>
 
-     <!-- Right: Bio -->
-      <div class="bio-panel">
-        <h2 id="char-name">Cowboy</h2>
-        <p id="char-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula magna lacus. Pellentesque ut dolor sem. Pellentesque varius nisl eu consectetur ultrices. In quis bibendum dui, et fringilla ex. Sed interdum placerat tincidunt. Vestibulum eleifend lorem vitae libero sodales luctus. Pellentesque malesuada ultricies nisi, eget commodo erat eleifend ac. Integer nec commodo nisl, sit amet vulputate diam. Fusce et aliquam elit.</p>
-        <p id="char-mechanics">Playstyle: Fast Paced - Ability: Bullets - Aggresion: High - Complexity: Low</p>
+        <!-- Right: Bio -->
+        <div class="bio-panel">
+          <h2 id="char-name">Cowboy</h2>
+          <p id="char-bio">
+            Bounty Hunting isn't usually a labour of love, but this Caballero
+            loves to hunt for bounties. They've brought in bounties that haven't
+            even had bounties put on them yet.
+          </p>
+          <ul id="char-stats" class="char-stats"></ul>
+        </div>
       </div>
 
-</div>
-
-<!-- Gallery Navigation -->
-<div class="gallery-nav">
-    <button id="btn-prev" onclick="navigate(-1)"><i class="fa fa-chevron-left"></i></button>
-    <div id="dot-nav"></div>
-    <button id="btn-next" onclick="navigate(1)"><i class="fa fa-chevron-right"></i></button>
-</div>
-
-</div>
+      <!-- Gallery Navigation -->
+      <div class="gallery-nav">
+        <button id="btn-prev" onclick="navigate(-1)">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <div id="dot-nav"></div>
+        <button id="btn-next" onclick="navigate(1)">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
     <div class="footer_block">
-        <p class="text-center" id="current_year"></p>
-        <p class="text-center">A project by Aaron, Tom, Adriana, Tadhg and Katerina</p>
-        </div>
- <script>
+      <p class="text-center" id="current_year"></p>
+      <p class="text-center">
+        A project by Aaron, Tom, Adriana, Tadhg and Katerina
+      </p>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Character Gallery Init
+        buildDots();
+        goTo(0);
+      });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Character Gallery Init
-            buildDots();
-            goTo(0);
+      const characters = [
+        {
+          name: "Caballero the Cowboy",
+          embedSrc:
+            "https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-1HHF0m-product",
+          bio: "Bounty Hunting isn't usually a labour of love, but this Caballero loves to hunt for bounties. They've brought in bounties that haven't even had bounties put on them yet.",
+          playstyle: "Fast Paced",
+          ability: "Bullets",
+          aggression: "High",
+          complexity: "Low",
+        },
+        {
+          name: "Lawrence the Were-Lobster",
+          embedSrc:
+            "https://cloud.needle.tools/view/embed?file=Z1j9bw6ZMcFuE-Z1YgDtv-product",
+          bio: "Dockyards are tough on the back. Even tougher if you have a crustacean's posture. Lawrence has been a were-lobster since he was a lad, and that was quite a while. Turning into a Half-Lobster at high tide lost its novelty quite quickly. So now he just takes advantage of the strength it gives him by working with the heaviest things others can't carry.",
+          playstyle: "Slow and steady",
+          ability: "Tide",
+          aggression: "High",
+          complexity: "Medium",
+        },
+        {
+          name: "Goe Bling the Goblin",
+          embedSrc:
+            "https://cloud.needle.tools/view/embed?file=Z1j9bw6np3DL-1Yhjam-product",
+          bio: "You know what they say about the antiques business. It's not what it used to be! Under the table deals are becoming more common to keep these pawnsters and trinket dealers in business. That's where Goe Bling comes in. Swiping, climbing, crawling, stealing and squealing, she gets into trouble, gets out of it, and makes a profit!",
+          playstyle: "Fast paced",
+          ability: "Thievery",
+          aggression: "Low",
+          complexity: "Low",
+        },
+        {
+          name: "Sal the Office Worker",
+          embedSrc:
+            "https://cloud.needle.tools/view/embed?file=Z1j9bw619WO70-Z525to-product",
+          bio: "Sal is devoted to two things, his wife and his job. He is yet to find a wife. 8am to 8pm, Sal doesn't love working, but he hates not having his TPS reports submitted on time. Work hard, get paid, pay bills, work hard. It's a simple life of staying off his feet. Some day he'll retire, and then he can kick back.",
+          playstyle: "Slow and steady",
+          ability: "Paperwork",
+          aggression: "Low",
+          complexity: "Medium",
+        },
+        {
+          name: "Margritte the Wizard",
+          embedSrc: null,
+          bio: "Reading tarot is an easy swindle, but Maggie can actually get results from them. She and her cat make a living by reading for rich clients and telling them about their twisted end.",
+          playstyle: "Fast combo slinging",
+          ability: "Blitzing Combos",
+          aggression: "Medium",
+          complexity: "Low",
+        },
+        {
+          name: "Alan the Alien",
+          embedSrc: null,
+          bio: "Alan can use a dodge point to avoid one instance of damage. He starts off with 3, and can’t gain more than that.",
+          playstyle: "Medium",
+          ability: "Improved basic attacks",
+          aggression: "Medium",
+          complexity: "Low",
+        },
+      ];
+
+      let current = 0;
+
+      function buildDots() {
+        const nav = document.getElementById("dot-nav");
+        characters.forEach((_, i) => {
+          const d = document.createElement("span");
+          d.className = "dot" + (i === 0 ? " active" : "");
+          d.onclick = () => goTo(i);
+          nav.appendChild(d);
         });
+      }
 
-        const characters = [
-            {
-                name: "Caballero the Cowboy",
-                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6Z1J0vIx-1HHF0m-world",
-                arLink: "https://skufflegame.github.io/NeedleTest/",
-                bio: "Bounty Hunting isn't usually a labour of love, but this Caballero loves to hunt for bounties. They've brought in bounties that haven't even had bounties put on them yet.",
-                mechanics: "Playstyle: Fast Paced - Ability: Bullets - Aggresion: High - Complexity: Low"
-            },
-            {
-                name: "Lawrence the Were-Lobster",
-                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6ZMcFuE-17la2w-world",
-                arLink: "https://skufflegame.github.io/NeedleTest/",
-                bio: "Dockyards are tough on the back. Even tougher if you have a crustacean's posture. Lawrence has been a were-lobster since he was a lad, and that was quite a while. Turning into a Half-Lobster at high tide lost its novelty quite quickly. So now he just takes advantage of the strength it gives him by working with the heaviest things others can't carry.",
-                mechanics: "Playstyle: Slow and steady - Ability: Tide - Aggresion: High - Complexity: Medium"
-            },
-            {
-                name: "Goe Bling the Goblin",
-                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw6np3DL-np3DL-world",
-                arLink: "https://skufflegame.github.io/NeedleTest/",
-                bio: "You know what they say about the antiques business. It's not what it used to be! Under the table deals are becoming more common to keep these pawnsters and trinket dealers in business. That's where Goe Bling comes in. Swiping, climbing, crawling, stealing and squealing, she gets into trouble, gets out of it, and makes a profit!",
-                mechanics: "Playstyle: Fast paced - Ability: Thievery - Aggresion: Low - Complexity: Low"
-            },
-            {
-                name: "Sal the Office Worker",
-                embedSrc: "https://cloud.needle.tools/view/embed?file=Z1j9bw619WO70-Z525to-world",
-                arLink: "https://skufflegame.github.io/NeedleTest/",
-                bio: "Sal is devoted to two things, his wife and his job. He is yet to find a wife. 8am to 8pm, Sal doesn't love working, but he hates not having his TPS reports submitted on time. Work hard, get paid, pay bills, work hard. It's a simple life of staying off his feet. Some day he'll retire, and then he can kick back.",
-                mechanics: "Playstyle: Slow and steady - Ability: Paperwork - Aggresion: Low - Complexity: Medium"
-            },
-            {
-                name: "Margritte the Wizard",
-                embedSrc: "null",
-                arLink: "https://skufflegame.github.io/NeedleTest/",
-                bio: "Reading tarot is an easy swindle, but Maggie can actually get results from them. She and her cat make a living by reading for rich clients and telling them about their twisted end.",
-                mechanics: "Playstyle: Fast combo slinging - Ability: Blitzing Combos - Aggression: Medium - Complexity: Low"
-            },
-            {
-                name: "Alan the Alien",
-                embedSrc: "null",
-                arLink: "https://skufflegame.github.io/NeedleTest/",
-                bio: "Alan can use a dodge point to avoid one instance of damage. He starts off with 3, and can’t gain more than that.",
-                mechanics: "Playstyle: Medium pace - Ability: Improved basic attacks - Aggression: Medium - Complexity: Low"
-            },
-            //add the rest of the characters when they're ready
-        ];
+      function goTo(i) {
+        current = i;
+        const c = characters[i];
 
-        let current = 0;
+        document.getElementById("needle-frame").src = c.embedSrc || "";
+        document.getElementById("char-name").textContent = c.name;
+        document.getElementById("char-bio").textContent = c.bio;
+        document.getElementById("char-stats").innerHTML = `
+                <li><strong>Playstyle:</strong> ${c.playstyle}</li>
+                <li><strong>Ability:</strong> ${c.ability}</li>
+                <li><strong>Aggression:</strong> ${c.aggression}</li>
+                <li><strong>Complexity:</strong> ${c.complexity}</li>
+            `;
 
-        function buildDots() {
-            const nav = document.getElementById('dot-nav');
-            characters.forEach((_, i) => {
-                const d = document.createElement('span');
-                    d.className = 'dot' + (i ===0 ? ' active' : '');
-                    d.onclick = () => goTo(i);
-                    nav.appendChild(d);
-            });
-        }
+        document
+          .querySelectorAll(".dot")
+          .forEach((d, di) => d.classList.toggle("active", di === i));
+        document.getElementById("btn-prev").disabled = i === 0;
+        document.getElementById("btn-next").disabled =
+          i === characters.length - 1;
+      }
 
-        function goTo(i) {
-            current = i;
-            const c = characters[i];
+      function navigate(dir) {
+        goTo(current + dir);
+      }
 
-            const engine = document.getElementById('needle-frame');
-            engine.setAttribute('src', c.embedSrc);
-            // document.getElementById('needle-frame').src = c.embedSrc;
-            document.getElementById('ar-btn').href = c.arLink;
-            document.getElementById('char-name').textContent = c.name;
-            document.getElementById('char-bio').textContent = c.bio;
-            document.getElementById('char-mechanics').textContent = c.mechanics;
-            document.querySelectorAll('.dot').forEach((d, di) => d.classList.toggle('active', di === i)
-            );
-        document.getElementById('btn-prev').disabled = i === 0;
-        document.getElementById('btn-next').disabled = i === characters.length - 1;
-        }
-    
-    function navigate(dir) { goTo(current + dir); }
-
-                const d = new Date();
-            let year = d.getFullYear();
-            let customString = "Skuffle © ";
-            document.getElementById("current_year").innerHTML = customString + year;
+      document.getElementById("current_year").textContent =
+        `Skuffle © ${new Date().getFullYear()}`;
     </script>
-</body>
+  </body>
 </html>

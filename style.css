@@ -1,349 +1,401 @@
-  /*=====================
+/*=====================
     Base & Body
     ===================== */
-        *, *:before, *:after {
-              box-sizing: border-box;
-          }
-        /* Main Container Styling */
-          body {
-              font-family: "IBM Plex Serif", serif;
-              max-width: 100%; 
-              color: black;
-              background-color: #f0f4ef;
-              /* background-color: antiquewhite; */
-              margin: 0;
-              padding: 0;
-          }
-  /*=====================
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Main body styling */
+body {
+  font-family: "IBM Plex Serif", serif;
+  max-width: 100%;
+  color: black;
+  background-color: #f0f4ef;
+  margin: 0;
+  padding: 0;
+}
+
+/*=====================
     Header
     ===================== */
-          .header-bg {
-          background-color: #f0f4ef;
-          }
-          .header-logo {
-          max-height: 200px;
-          width: auto;
-          max-width: 100%;
-          }
 
-  /*=====================
+.header-bg {
+  background-color: #f0f4ef;
+}
+
+.header-logo {
+  max-height: 200px;
+  width: auto;
+  max-width: 100%;
+}
+
+/*=====================
       Navbar - Responsive
       ===================== */
 
-  .navbar {
-    width: 100%;
-    background-color: #333333;
-    overflow: auto;
-  }
+.navbar {
+  display: flex;
+  width: 100%;
+  background-color: #333333;
+  padding: 0;
+}
 
+.navbar a {
+  flex: 1;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  min-height: 65px;
+  padding: 0;
+  transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: #111111;
+}
+
+.navbar a.active {
+  background-color: #04aa6d;
+}
+
+@media screen and (max-width: 500px) {
   .navbar a {
-    float: left;
-    padding: 12px;
-    color: white;
-    text-decoration: none;
-    font-size: 17px;
-    width: 33.33%; /* Three links of equal widths */
-    text-align: center;
+    flex: 1;
+    display: flex;
+    width: auto;
+    padding: 0;
+    font-size: 20px;
   }
-
-  .navbar a:hover {
-    background-color: #111111;
+  .navbar a .nav-text {
+    display: none;
   }
+}
 
-  .navbar a.active {
-    background-color: #04AA6D;
-  }
-
-  @media screen and (max-width: 500px) {
-    .navbar a {
-      float: left;
-      display: block;
-      width: 33.33%; /* this one stays 100% — correct for mobile */
-      text-align: center;
-    }
-      .navbar a .nav-text {
-      display: none;
-    }
-  }
-
-    /* =====================
+/* =====================
     Image Gallery
     ===================== */
- .carousel-item img {
-    width: 100%;
-    height: 400px;
-    object-fit: contain;
+.carousel-item img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
 }
- 
+
 .carousel-control-prev,
 .carousel-control-next {
-    width: 48px;
-    height: 48px;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
 }
- 
+
 .carousel-control-prev {
-    left: 10px;
+  left: 10px;
 }
- 
+
 .carousel-control-next {
-    right: 10px;
+  right: 10px;
 }
- 
+
 .spacer_box {
-    width: 100%;
-    height: 60px;
+  width: 100%;
+  height: 60px;
 }
 
+/* =====================
+  Team Grid — Responsive
+  ===================== */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  padding: 0 16px 32px;
+}
 
-  /* =====================
-    Team Grid — Responsive
-    ===================== */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-      padding: 0 16px 32px;
-    }
+@media screen and (max-width: 1100px) {
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
-    /* 3 columns on tablets */
-    @media screen and (max-width: 1100px) {
-      .team-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+@media screen and (max-width: 700px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
-    /* 2 columns on small tablets */
-    @media screen and (max-width: 700px) {
-      .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+@media screen and (max-width: 480px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
-    /* 1 column on phones */
-    @media screen and (max-width: 480px) {
-      .team-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+.cardteam {
+  display: flex;
+  flex-direction: column;
 
-    .cardteam {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      background-color: #fff;
-      border-radius: 4px;
-      overflow: hidden;
-    }
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-    .cardteam img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover; /* keeps faces centered, no distortion*/
-      display: block;
-    }
+.cardteam:hover {
+    transform: scale(1.02);
+    transition: 0.5s;
+}
 
-    .containerteam {
-      padding: 12px 16px 16px;
-      text-align: center;
-    }
+.cardteam img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
 
-    .containerteam h2 {
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      margin-bottom: 4px;
-    }
+.containerteam {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 
-    .containerteam p:last-child {
-      text-align: center;
-      padding: 0 16px 16px;
-    }
+  padding: 16px;
+  text-align: center; /* keep names centered */
+}
 
-    .titleteam {
-      color: grey;
-      font-size: 0.85rem;
-    }
+.containerteam h2 {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
 
-    .buttonteam {
-      border: none;
-      outline: 0;
-      display: inline-block;
-      padding: 10px 24px;
-      color: white;
-      background-color: #0072b1;
-      text-align: center;
-      cursor: pointer;
-      width: auto;
-      min-width: 120px;
-      font-size: 1rem;
-      border-radius: 2px;
-      transition: background-color 0.2s;
-    }
+.titleteam {
+  color: #777;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
 
-    .buttonteam a {
-      color: white;
-      text-decoration: none;
-      display: block;
-    }
-    /*=====================
+/* main description text */
+.containerteam p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 4px 0;
+}
+
+/* make description easier to read */
+.containerteam p:nth-of-type(2),
+.containerteam p:nth-of-type(3) {
+  text-align: left;
+}
+
+.button-wrapper {
+  margin-top: auto;
+  padding-top: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.buttonteam {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+  padding: 0;
+
+  background-color: #0077b5;
+  color: white;
+  text-decoration: none;
+  border-radius: 50%;
+
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.buttonteam:hover {
+  background-color: #005582;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.buttonteam:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.buttonteam i {
+  line-height: 1;
+}
+/*=====================
       Health Tracker Controls
       ===================== */
-          /*Player card styling*/
-          .player {
-              border: 1px solid #ccc;
-              padding: 15px;
-              margin: 10px 20px;
-              border-radius: 5px;
-          }
-          /*Container for health +HP Value-*/
-          .health-control {
-              display: flex;
-              align-items: center;
-              gap: 15px;
-              margin-top: 10px;
-          }
-          .special-control {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-          }
-          .special-label {
-            font-weight: bold;
-          }
-          .special-value {
-            min-width: 30px;
-            text-align: center;
-            font-size: 18px;
-          }
-          .toggle-button {
-            padding: 5px 15px;
-            min-width: 100px;
-          }
-          /*Styling for + and -*/
-          button {
-              width: 40px;
-              height: 40px;
-              font-size: 20px;
-              cursor: pointer; /*show pointer cursor on hover*/
-              font-weight: bold;
-          }
-          button:disabled {
-              opacity: 0.4;
-              cursor: not-allowed;
-          }
-          /*health number display*/
-          .health-value {
-              font-size: 24px;
-              font-weight: bold;
-              min-width: 50px;
-              text-align: center;
-          }
-                  /*Text input for player name*/
-          input {
-              padding: 12px 15px;
-              font-size: 18px;
-              border-radius: 4px;
-              border: 1px solid #ccc;
-              width: 250px; /* fixed width, change later for mobile */
-          }
-          .button-group {
-            margin-top: 10px;
-            display: flex;
-            gap: 10px; /*space between buttons*/
-          }
-          /*The Add Player button*/
-          #add-player {
-              padding: 12px 24px;
-              font-size: 18px;
-              background-color: darkgreen;
-              color: white;
-              border: none;
-              cursor: pointer;
-              border-radius: 4px;
-              font-weight: 600;
-              white-space: nowrap; /* prevent text from wrapping */
-              margin: 0; /* reset default margin */
-              width: 200px;
-          }
-          #ar {
-            padding: 12px 24px;
-              font-size: 18px;
-              background-color: rgb(4, 175, 188);
-              color: white;
-              border: none;
-              cursor: pointer;
-              border-radius: 4px;
-              font-weight: 600;
-              white-space: nowrap; /* prevent text from wrapping */
-              margin: 0; /* reset default margin */
-              width: 200px;
-          }
-          #clear-all {
-            padding: 12px 24px;
-            font-size: 18px;
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: 600;
-            white-space: nowrap; /* prevent text from wrapping */
-            margin: 0;
-            width: 200px;
-          }
-          #clear-all:hover {
-            background-color: #c82333;
-          }
-          /* Dropdown container */
-          .dropbtn {
-            padding: 12px 24px;
-            font-size: 18px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: 600;
-            white-space: nowrap; /* prevent text from wrapping */
-            margin: 0;
-            width: 200px;
-          }
-          .dropdown {
-            position: relative;
-            display: inline-block;
-          }
-          .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 200px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-          }
-          .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-          }
-          .dropdown-content a:hover {
-            background-color: #f1f1f1;
-          }
-          .dropdown:hover .dropdown-content {
-            display: block;
-          }
-          .dropdown:hover .dropbtn {
-            background-color: #0056b3;
-          }
+/*Player card styling*/
+.player {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 10px 20px;
+  border-radius: 5px;
+}
+/*Container for health +HP Value-*/
+.health-control {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+.special-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.special-label {
+  font-weight: bold;
+}
+.special-value {
+  min-width: 30px;
+  text-align: center;
+  font-size: 18px;
+}
+.toggle-button {
+  padding: 5px 15px;
+  min-width: 100px;
+}
+/*Styling for + and -*/
+button {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer; /*show pointer cursor on hover*/
+  font-weight: bold;
+}
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+/*health number display*/
+.health-value {
+  font-size: 24px;
+  font-weight: bold;
+  min-width: 50px;
+  text-align: center;
+}
+/*Text input for player name*/
+input {
+  padding: 12px 15px;
+  font-size: 18px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 250px; /* fixed width, change later for mobile */
+}
+.button-group {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px; /*space between buttons*/
+}
+/*The Add Player button*/
+#add-player {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: darkgreen;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  white-space: nowrap; /* prevent text from wrapping */
+  margin: 0; /* reset default margin */
+  width: 200px;
+}
+#ar {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: rgb(4, 175, 188);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  white-space: nowrap; /* prevent text from wrapping */
+  margin: 0; /* reset default margin */
+  width: 200px;
+}
+#clear-all {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  white-space: nowrap; /* prevent text from wrapping */
+  margin: 0;
+  width: 200px;
+}
+#clear-all:hover {
+  background-color: #c82333;
+}
+/* Dropdown container */
+.dropbtn {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  white-space: nowrap; /* prevent text from wrapping */
+  margin: 0;
+  width: 200px;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown:hover .dropbtn {
+  background-color: #0056b3;
+}
 
-  /* *, *:before, *:after {
+/* *, *:before, *:after {
     box-sizing: inherit;
   } */
 
-  .padd {
-    padding: 10px 20px;
-  }
+.padd {
+  padding: 10px 20px;
+}
 
 .video-wrapper {
   position: relative;
@@ -361,130 +413,193 @@
   width: 100%;
   height: 100%;
 }
-  /*=====================
+/*=====================
       Characters Page
       ===================== */
+.character-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  margin-top: 1.5rem;
+}
+
+.model-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.model-panel iframe {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: none;
+  border-radius: 6px;
+  display: block;
+  height: 500px;
+}
+.char-stats {
+  padding-left: 1.2rem;
+  line-height: 1.8;
+}
+.ar-btn {
+  display: inline-block;
+  text-align: center;
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: rgb(4, 175, 188);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.ar-btn:hover {
+  background-color: rgb(3, 140, 158);
+}
+
+.bio-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Gallery Nav */
+.gallery-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ccc;
+}
+
+#dot-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dot.active {
+  background: #333;
+}
+
+/* stack on mobile */
+@media screen and (max-width: 700px) {
   .character-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: start;
-    margin-top: 1.5rem;
+    grid-template-columns: 1fr;
   }
+}
 
-  .model-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+.gallery-nav button {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: rgb(0, 0, 0);
+  color: white;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+}
 
-  .model-panel iframe {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    border: none;
-    border-radius: 6px;
-    display: block;
-    height: 500px;
-  }
+.gallery-nav button:hover {
+  background: #454545;
+}
 
-  .ar-btn {
-    display: block;
-    text-align: center;
-    padding: 12px 24px;
-    font-size: 18px;
-    background-color: rgb(4, 175, 188);
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 600;
-  }
-
-  .bio-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  /* Gallery Nav */
-  .gallery-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid #ccc;
-  }
-
-  #dot-nav {
-    display: flex;
-    gap: 8px;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ccc;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-
-  .dot.active {
-    background: #333;
-  }
-
-  /* stack on mobile */
-  @media screen and (max-width: 700px) {
-    .character-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .gallery-nav button {
-      width: 44px;
-      height: 44px;
-      border: none;
-      background: rgb(0, 0, 0);
-      color: white;
-      border-radius: 4px;
-      font-size: 18px;
-      cursor: pointer;
-  }
-
-  .gallery-nav button:hover {
-      background: #454545;
-  }
-
-  .gallery-nav button:disabled {
-      opacity: 0.3;
-      cursor: default;
-  }
+.gallery-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
 
 .footer_block {
   background-color: #333333;
-    padding: 10px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    color: white;
+  padding: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  color: white;
 }
 
-  /* =====================
+/* =====================
     IBM Plex Serif Variants
     ===================== */
-  .ibm-plex-serif-thin        { font-family: "IBM Plex Serif", serif; font-weight: 100; font-style: normal; }
-  .ibm-plex-serif-extralight  { font-family: "IBM Plex Serif", serif; font-weight: 200; font-style: normal; }
-  .ibm-plex-serif-light       { font-family: "IBM Plex Serif", serif; font-weight: 300; font-style: normal; }
-  .ibm-plex-serif-regular     { font-family: "IBM Plex Serif", serif; font-weight: 400; font-style: normal; }
-  .ibm-plex-serif-medium      { font-family: "IBM Plex Serif", serif; font-weight: 500; font-style: normal; }
-  .ibm-plex-serif-semibold    { font-family: "IBM Plex Serif", serif; font-weight: 600; font-style: normal; }
-  .ibm-plex-serif-bold        { font-family: "IBM Plex Serif", serif; font-weight: 700; font-style: normal; }
+.ibm-plex-serif-thin {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 100;
+  font-style: normal;
+}
+.ibm-plex-serif-extralight {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 200;
+  font-style: normal;
+}
+.ibm-plex-serif-light {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.ibm-plex-serif-regular {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.ibm-plex-serif-medium {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.ibm-plex-serif-semibold {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.ibm-plex-serif-bold {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+}
 
-  .ibm-plex-serif-thin-italic       { font-family: "IBM Plex Serif", serif; font-weight: 100; font-style: italic; }
-  .ibm-plex-serif-extralight-italic { font-family: "IBM Plex Serif", serif; font-weight: 200; font-style: italic; }
-  .ibm-plex-serif-light-italic      { font-family: "IBM Plex Serif", serif; font-weight: 300; font-style: italic; }
-  .ibm-plex-serif-regular-italic    { font-family: "IBM Plex Serif", serif; font-weight: 400; font-style: italic; }
-  .ibm-plex-serif-medium-italic     { font-family: "IBM Plex Serif", serif; font-weight: 500; font-style: italic; }
-  .ibm-plex-serif-semibold-italic   { font-family: "IBM Plex Serif", serif; font-weight: 600; font-style: italic; }
-  .ibm-plex-serif-bold-italic       { font-family: "IBM Plex Serif", serif; font-weight: 700; font-style: italic; }
+.ibm-plex-serif-thin-italic {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 100;
+  font-style: italic;
+}
+.ibm-plex-serif-extralight-italic {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 200;
+  font-style: italic;
+}
+.ibm-plex-serif-light-italic {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+.ibm-plex-serif-regular-italic {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+.ibm-plex-serif-medium-italic {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 500;
+  font-style: italic;
+}
+.ibm-plex-serif-semibold-italic {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 600;
+  font-style: italic;
+}
+.ibm-plex-serif-bold-italic {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 700;
+  font-style: italic;
+}
