@@ -133,16 +133,16 @@ const characterData = {
   "Salary Man": {
     specialName: "Money",
     specialType: "number",
-    specialValue: 0,
+    specialValue: 4,
     specialMin: 0,
     specialMax: 100, // Arbitrary max for money
   },
   Alien: {
     specialName: "Dodge",
     specialType: "number",
-    specialValue: 0,
+    specialValue: 3,
     specialMin: 0,
-    specialMax: 10, // Arbitrary max for dodges
+    specialMax: 3, //  max for dodges
   },
   Margritte: {
     // Doesn't have special ability so everthing is null
