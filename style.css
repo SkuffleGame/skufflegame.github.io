@@ -529,6 +529,18 @@ input {
   color: white;
 }
 
+.steam-link {
+  color: black;
+  text-decoration: none;
+}
+
+.steam-link:hover,
+.steam-link:focus,
+.steam-link:active {
+  color: black;
+  text-decoration: none;
+}
+
 /* =====================
     IBM Plex Serif Variants
     ===================== */
