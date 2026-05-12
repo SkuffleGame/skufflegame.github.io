@@ -53,9 +53,64 @@
         <i class="fa fa-fw fa-users"></i>
         <span class="nav-text"> Characters</span></a>
     </div>
-    <br>
+    
+    <main class="tracker-page">
+      <h1 class="tracker-title">Health Tracker</h1>
+
+      <section id="setup-panel" class="setup-panel">
+        <h2 class="setup-heading">Choose your player</h2>
+        <div class="setup-controls">
+          <input type="text" id="player-name" placeholder="Player name"/>
+          <div class="dropdown">
+            <button class="dropbtn" id="character-chosen">Choose Character</button>
+            <div class="dropdown-content" id="character-dropdown">
+              <a href="#" class="character-option" data-character="Cowboy">Cowboy</a>
+              <a href="#" class="character-option" data-character="Were-Lobster">Were-Lobster</a>
+              <a href="#" class="character-option" data-character="Goe Bling">Goe Bling</a>
+              <a href="#" class="character-option" data-character="Salary Man">Salary Man</a>
+              <a href="#" class="character-option" data-character="Margritte">Margritte</a>
+              <a href="#" class="character-option" data-character="Alien">Alien</a>
+            </div>
+          </div>
+          <div class="button-group">
+            <button id="add-player">Add Player</button>
+            <button id="clear-all">Clear All Players</button> 
+          </div>
+
+        </div>
+      </section>
+
+      <!-- This section is hidden at first, this will reveal itself once a player is added -->
+       <section id="game-area" class="game-area hidden">
+        <!-- This is where the Hero Character will appear (the chosen character) -->
+         <section id="hero-panel" class="hero-panel">
+          <!-- Javascript will generate the hero here -->
+         </section>
+
+         <!-- Grid section for other players -->
+          <section class="other-players-section">
+            <h2 class="other-players-title">Other Players</h2>
+
+            <div id="players-grid" class="players-grid">
+              <!-- Player cards will be generated here -->
+            </div>
+          </section>
+
+       </section>
+
+    </main>
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- <br>
     <h1 style="text-align: center">Health Tracker</h1>
-    <!-- input selection for adding new players -->
     <div class="padd">
       <div>
         <input type="text" id="player-name" placeholder="Player name"/>
@@ -77,19 +132,20 @@
           <button id="clear-all">Clear All Players</button>
         </div>
       </div>
-      <!-- container where all player cards are displayed -->
-      <div id="players"></div>
+      <div id="players"></div> -->
 
-      <!-- external script file-->
-      <script type="module" src="myScript.js"></script>
-    </div>
     <div class="spacer_box"></div>
+    
     <div class="footer_block">
       <p class="text-center" id="current_year"></p>
       <p class="text-center">
         A project by Aaron, Tom, Adriana, Tadhg and Katerina
       </p>
     </div>
+    
+          <!-- external script file-->
+      <script type="module" src="myScript.js"></script>
+      
     <script>
       document.getElementById("current_year").textContent =
         `Skuffle © ${new Date().getFullYear()}`;

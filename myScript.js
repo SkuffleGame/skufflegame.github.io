@@ -56,6 +56,17 @@ signInAnonymously(auth)
     // We pull out just the uid (unique ID) and store it in our currentUID variable
     currentUID = userCredential.user.uid;
     console.log("Signed in anonymously, UID:", currentUID); // Useful for debugging
+
+    // Re-check the players once after sign-in
+    // This matters because the database listener may have loaded before currentUID was ready
+    onValue(
+      playersRef,
+      (snapshot) => {
+      const data = snapshot.val();
+      displayPlayers(data);
+    },
+    { onlyOnce: true },
+    );
   })
   .catch((error) => {
     // Something went wrong - log it so you can see it in the browser console
@@ -93,6 +104,8 @@ window.changeHealth = function (playerId, change) {
     playerRef,
     (snapshot) => {
       const player = snapshot.val();
+
+      if (!player) return;
 
       // Calculate the new health by adding the change
       let newHealth = player.health + change;
@@ -153,6 +166,16 @@ const characterData = {
     specialMax: null,
   },
 };
+// --- CHARACTER IMAGE BANK --- \\
+// change file paths once we have artwork
+const characterImages = {
+  Cowboy: "img/cowboy.png",
+  "Were-Lobster": "img/lobster.png",
+  "Goe Bling": "img/goe.png",
+  "Salary Man": "img/sal.png",
+  Alien: "img/alien.png",
+  Margritte: "img/margritte.png",
+};
 
 // --- SPECIAL ABILITY LOGIC --- \\
 
@@ -167,6 +190,8 @@ window.changeSpecial = function (playerId, change) {
     playerRef,
     (snapshot) => {
       const player = snapshot.val();
+
+      if (!player) return;
 
       if (player.specialType === "number") {
         let newSpecial = player.specialValue + change;
@@ -183,7 +208,7 @@ window.changeSpecial = function (playerId, change) {
   ); // onlyOnce: true means this listener will run once and then stop
 };
 
-window.toggleSpecial = function (playerId, change) {
+window.toggleSpecial = function (playerId) {
   // Get a reference to the specific player in the database using their unique ID: /players/<playerId>
   const playerRef = ref(database, "players/" + playerId);
 
@@ -192,6 +217,8 @@ window.toggleSpecial = function (playerId, change) {
     playerRef,
     (snapshot) => {
       const player = snapshot.val();
+
+      if (!player) return;
 
       if (player.specialType === "toggle" && player.toggleOptions) {
         const currentIndex = player.toggleOptions.indexOf(player.specialValue); // set the currentIndex to what the current value is, so for the Were-Lobster it starts with Low Tide
@@ -205,6 +232,26 @@ window.toggleSpecial = function (playerId, change) {
     },
     { onlyOnce: true },
   ); // onlyOnce: true means this listener will run once and then stop
+};
+
+// --- REMOVE SINGLE PLAYER --- \\
+// Allows user to remove their character
+window.removePlayer = function (playerId) {
+  if (
+    confirm(
+      "Are you sure you want to remove your player? This cannot be undone.",
+    )
+  ) {
+    const playerRef = ref(database, "players/" + playerId);
+
+    remove(playerRef)
+    .then(() => {
+      console.log("Player removed successfully");
+    })
+    .catch((error) => {
+      console.error("Error removing player:", error);
+    });
+  }
 };
 
 // --- CHARACTER SELECTION STATE --- \\
@@ -238,99 +285,179 @@ onValue(playersRef, (snapshot) => {
   displayPlayers(data); // Update the display with the new data
 });
 
+
 // --- RENDER PLAYERS ON THE PAGE --- \\
-// Display all the players on the page inside the #players container div
+// This function decides how the tracker page should look based on who owns which character
+// The current user's character becomes the hero card
+// Everyone else appears in the smaller grid
 function displayPlayers(players) {
-  const container = document.getElementById("players");
+  const setupPanel = document.getElementById("setup-panel");
+  const gameArea = document.getElementById("game-area");
+  const heroPanel = document.getElementById("hero-panel");
+  const playersGrid = document.getElementById("players-grid");
 
-  // Clear any previous player cards so we can re-render from scratch
-  container.innerHTML = "";
+  // Clear the hero and grid each time before rebuilding them
+  // This avoids duplicate cards appearing whenever Firebase updates
+  heroPanel.innerHTML = "";
+  playersGrid.innerHTML = "";
 
-  // If there are no players in the database yet, just stop here
-  if (!players) return;
-
-  // 1) Build a set of characters that are already in use
-  // This will allow us to disable those characters in the dropdown
-  const takenCharacters = new Set();
-  for (let id in players) {
-    const p = players[id];
-    if (p.character) takenCharacters.add(p.character);
+  //If there are no players yet, show the setup panel and hide the game area
+  if (!players) {
+    setupPanel.classList.remove("hidden");
+    gameArea.classList.add("hidden");
+    updateCharacterDropdown(players);
+    return;
   }
 
-  // 2) Loop over each player and create a visual card for them
-  // "id" is the unique Firebase key (timestap when the player was added)
+  // This will store the current users player, if we find one
+  let myPlayer = null;
+  let myPlayerId = null;
+
+  //Loop through all players and check if any of them belong to the current browser/user
   for (let id in players) {
-    const player = players[id]; //create a new div for this player
+    const player = players[id];
 
-    // Create a container element for this player's card
-    const playerDiv = document.createElement("div");
-    playerDiv.className = "player"; // Use CSS class .player for styling
+    if (player.ownerUID === currentUID) {
+      myPlayer = player;
+      myPlayerId = id;
+      break;
+    }
+  }
 
-    // want to check if the currently signed in user owns this player card
-    // if currentUID matches ownerUID stored in database for this player, isOwner = true
-    const isOwner = player.ownerUID === currentUID;
-    console.log(
-      player.name,
-      "| ownerUID:",
-      player.ownerUID,
-      "| currentUID:",
-      currentUID,
-      "| isOwner:",
-      isOwner,
-    );
-    //for debugging
+  // If this browser/user has not made a player yet;
+  // show the setup panel and hide the game area
+  if (!myPlayer) {
+    setupPanel.classList.remove("hidden");
+    gameArea.classList.add("hidden");
+    updateCharacterDropdown(players);
+    return;
+  }
 
-    let specialHTML = "";
-    if (player.specialName && player.specialType) {
-      if (player.specialType === "number") {
-        specialHTML = `
-                    <div class="special-control">
-                    <span class="special-name">${player.specialName}:</span>
-                        <button onclick="changeSpecial('${id}', -1);"
-                        ${!isOwner ? 'disabled title="Not your character"' : ""}>-</button>
-                        <div class="special-value">${player.specialValue}</div>
-                        <button onclick="changeSpecial('${id}', 1);"
-                        ${!isOwner ? 'disabled title="Not your character"' : ""}>+</button>
-                    </div>
-                    `;
-      } else if (player.specialType === "toggle") {
-        specialHTML = `
-                    <div class="special-control">
-                        <span class="special-label">${player.specialName}:</span>
-                        <button class="toggle-button" onclick="toggleSpecial('${id}')"
-                        ${!isOwner ? 'disabled title="Not your character"' : ""}>${player.specialValue}</button>
-                    </div>
-                    `;
+  // If this browser/user does have player
+  // hide the setup panel andn show the game area
+  setupPanel.classList.add("hidden");
+  gameArea.classList.remove("hidden");
+
+  //Render the current user's character as the big hero
+  renderHeroPlayer(myPlayerId, myPlayer);
+
+  // Render all other players as small cards in the grid
+  for (let id in players) {
+    //Skip the current user's own player because it is already shown as the hero
+    if (id === myPlayerId) continue;
+
+    const player = players[id];
+    renderOtherPlayer(id, player);
+  }
+  // Update dropdown options so already-taken characters are faded/disbaled
+  updateCharacterDropdown(players);
+}
+     
+// --- RENDER CURRENT USER'S HERO ID --- \\
+// This creates the large hero card for the player owned by the browser/user
+function renderHeroPlayer(playerId, player) {
+  const heroPanel = document.getElementById("hero-panel");
+
+  // Get characters image
+  const imagePath = characterImages[player.character] || "img/default.png"; // Fallback to default image if character not found
+
+  // Build special ability controls
+  let specialHTML = "";
+
+  if (player.specialName && player.specialType) {
+    if (player.specialType === "number") {
+      specialHTML = `
+      <div class="hero-control">
+        <strong>${player.specialName}:</strong>
+        <button onclick="changeSpecial('${playerId}', -1)">-</button>
+        <span class="hero-value">${player.specialValue}</span>
+        <button onclick="changeSpecial('${playerId}', 1)">+</button>
+        </div>
+        `;
+    } else if (player.specialType === "toggle") {
+      specialHTML = `
+      <div class="hero-control">
+        <strong>${player.specialName}:</strong>
+        <button class="toggle-button" onclick="toggleSpecial('${playerId}')">
+        ${player.specialValue}</button></div>
+      `;
+    }
+  }
+
+// Create the full hero card
+heroPanel.innerHTML = `
+<div class="hero-card">
+<img src="${imagePath}" alt="${player.character}">
+
+<div class="hero-info">
+<h2>${player.character}</h2>
+<p>${player.name}</p>
+
+<div class="hero-control">
+<strong>Health:</strong>
+
+<button onclick="changeHealth('${playerId}', -1); playDecreaseSound()">-</button>
+<span class="hero-value">${player.health}</span>
+<button onclick="changeHealth('${playerId}', 1); playIncreaseSound()">+</button>
+</div>
+
+${specialHTML}
+
+<button class="remove-player-button" onclick="removePlayer('${playerId}')">
+Remove Player
+</button>
+</div>
+</div>
+`;
+}
+
+// --- RENDER OTHER PLAYERS --- \\
+// This creates smaller cards for everyone who is not the current user
+function renderOtherPlayer(playerId, player) {
+  const playersGrid = document.getElementById("players-grid");
+
+  const playerCard = document.createElement("div");
+  playerCard.className = "other-player-card";
+
+  let specialText = "";
+
+  if (player.specialName && player.specialValue !== null) {
+    specialText = `<p>${player.specialName}: ${player.specialValue}</p>`;
+  }
+
+  playerCard.innerHTML = `
+  <h3>${player.name}</h3>
+  <p>${player.character}</p>
+  <p>Health: ${player.health}</p>
+  ${specialText}
+  `;
+  playersGrid.appendChild(playerCard);
+}
+
+// --- UPDATE CHARACTER DROPDOWN --- \\
+// This fades/disables characters in the dropdown that are already taken by existing players
+function updateCharacterDropdown(players) {
+  const takenCharacters = new Set();
+
+  if (players) {
+    for (let id in players) {
+      const player = players[id];
+
+      if (player.character) {
+        takenCharacters.add(player.character);
       }
     }
-    // Build the inner html for this player card:
-    // - Show player's name and their character (if they have one)
-    // - Show buttons and current health value
-
-    playerDiv.innerHTML = `
-                    <div>${player.name} ${player.character ? "(" + player.character + ")" : ""}</div>
-                    <div class="health-control">
-                        <button onclick="changeHealth('${id}', -1); playDecreaseSound()"
-                        ${!isOwner ? 'disabled title="Not your character"' : ""}>-</button> 
-                        <div class="health-value">${player.health}</div>
-                        <button onclick="changeHealth('${id}', 1); playIncreaseSound()"
-                        ${!isOwner ? 'disabled title="Not your character"' : ""}>+</button>
-                    </div>
-                    ${specialHTML}
-                `; // If this is not your player, add the word disabled to the button element, otherwise add nothing
-
-    // Add the finished card into the main players container
-    container.appendChild(playerDiv);
   }
-
-  // 3) Disable any characters in the dropdown that are already taken
-  // Visually fade them and prevent clicking so two players cannot pick the same character
   document.querySelectorAll(".character-option").forEach((a) => {
     const char = a.dataset.character;
 
-    // If the character is in the takenCharacters set, disable it
-    a.style.pointerEvents = takenCharacters.has(char) ? "none" : "auto"; // Stops clicks if taken.  If takenCharacters has the char, then set pointerEvents to none, otherwise set to auto to allow clicking. Ternary Operator
-    a.style.opacity = takenCharacters.has(char) ? "0.4" : "1"; // Make taken options look faded
+    if (takenCharacters.has(char)) {
+      a.style.pointerEvents = "none";
+      a.style.opacity = "0.4";
+    } else {
+      a.style.pointerEvents = "auto";
+      a.style.opacity = "1";
+    }
   });
 }
 
@@ -348,6 +475,11 @@ document.getElementById("add-player").addEventListener("click", () => {
   // Enforce that a character must be chosen before adding a player
   if (!selectedCharacter) {
     alert("Please select a character first.");
+    return;
+  }
+  // Wait till UID is assigned
+  if (!currentUID) {
+    alert("Still signing in, please wait a moment and try again.");
     return;
   }
 
