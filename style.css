@@ -161,8 +161,8 @@ button:disabled {
 }
 
 .cardteam:hover {
-    transform: scale(1.02);
-    transition: 0.5s;
+  transform: scale(1.02);
+  transition: 0.5s;
 }
 
 .cardteam img {
@@ -399,8 +399,8 @@ Health Tracker - Hero Area
   margin-top: 30px;
 }
 .hero-panel {
-max-width: 1000px;
-margin: 0 auto 50px auto;
+  max-width: 1000px;
+  margin: 0 auto 50px auto;
 }
 .hero-card {
   display: grid;
@@ -454,7 +454,7 @@ Health Tracker - Grid Area
   margin: 0 auto;
 }
 .other-players-title {
-  text-align:center;
+  text-align: center;
   margin-bottom: 20px;
 }
 .players-grid {
@@ -518,17 +518,17 @@ Health Tracker - Grid Area
 }
 .health-control button,
 .special-control button {
-width: 40px;
-height: 40px;
-font-size: 20px;
-cursor: pointer;
-font-weight: bold;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
 }
 .health-control button:disabled,
 .special-control button:disabled,
 .hero-control button:disabled {
-opacity: 0.4;
-cursor: not-allowed;
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .remove-player-button {
@@ -581,9 +581,6 @@ Health Tracker - Mobile
     justify-content: center;
   }
 }
-
-
-
 
 /*================
     Video Wrapper

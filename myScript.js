@@ -62,10 +62,10 @@ signInAnonymously(auth)
     onValue(
       playersRef,
       (snapshot) => {
-      const data = snapshot.val();
-      displayPlayers(data);
-    },
-    { onlyOnce: true },
+        const data = snapshot.val();
+        displayPlayers(data);
+      },
+      { onlyOnce: true },
     );
   })
   .catch((error) => {
@@ -245,12 +245,12 @@ window.removePlayer = function (playerId) {
     const playerRef = ref(database, "players/" + playerId);
 
     remove(playerRef)
-    .then(() => {
-      console.log("Player removed successfully");
-    })
-    .catch((error) => {
-      console.error("Error removing player:", error);
-    });
+      .then(() => {
+        console.log("Player removed successfully");
+      })
+      .catch((error) => {
+        console.error("Error removing player:", error);
+      });
   }
 };
 
@@ -284,7 +284,6 @@ onValue(playersRef, (snapshot) => {
   const data = snapshot.val(); // snapshot.val() gets the current data at the 'players' location
   displayPlayers(data); // Update the display with the new data
 });
-
 
 // --- RENDER PLAYERS ON THE PAGE --- \\
 // This function decides how the tracker page should look based on who owns which character
@@ -352,7 +351,7 @@ function displayPlayers(players) {
   // Update dropdown options so already-taken characters are faded/disbaled
   updateCharacterDropdown(players);
 }
-     
+
 // --- RENDER CURRENT USER'S HERO ID --- \\
 // This creates the large hero card for the player owned by the browser/user
 function renderHeroPlayer(playerId, player) {
@@ -384,8 +383,8 @@ function renderHeroPlayer(playerId, player) {
     }
   }
 
-// Create the full hero card
-heroPanel.innerHTML = `
+  // Create the full hero card
+  heroPanel.innerHTML = `
 <div class="hero-card">
 <img src="${imagePath}" alt="${player.character}">
 
