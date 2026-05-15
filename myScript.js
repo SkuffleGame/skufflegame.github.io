@@ -167,14 +167,13 @@ const characterData = {
   },
 };
 // --- CHARACTER IMAGE BANK --- \\
-// change file paths once we have artwork
 const characterImages = {
-  Cowboy: "img/cowboy.png",
-  "Were-Lobster": "img/lobster.png",
-  "Goe Bling": "img/goe.png",
-  "Salary Man": "img/sal.png",
-  Alien: "img/alien.png",
-  Margritte: "img/margritte.png",
+  Cowboy: "img/character/Cabarello (Medium).png",
+  "Were-Lobster": "img/character/Lawrence (Medium).png",
+  "Goe Bling": "img/character/Goe (Medium).png",
+  "Salary Man": "img/character/Sal (Medium).png",
+  Alien: "img/character/Alan (Medium).png",
+  Margritte: "img/character/Margritte (Medium).png",
 };
 
 // --- SPECIAL ABILITY LOGIC --- \\
@@ -386,7 +385,7 @@ function renderHeroPlayer(playerId, player) {
   // Create the full hero card
   heroPanel.innerHTML = `
 <div class="hero-card">
-<img src="${imagePath}" alt="${player.character}">
+<img src="${imagePath}" alt="${player.character}" width="280" height="280">
 
 <div class="hero-info">
 <h2>${player.character}</h2>

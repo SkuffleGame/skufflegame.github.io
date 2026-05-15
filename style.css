@@ -401,6 +401,8 @@ Health Tracker - Hero Area
 .hero-panel {
   max-width: 1000px;
   margin: 0 auto 50px auto;
+  /* Keep the hero area from shrinking/growing when firebase updates */
+  min-height: 420px;
 }
 .hero-card {
   display: grid;
@@ -411,10 +413,13 @@ Health Tracker - Hero Area
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 10px;
+  min-height: 360px;
 }
 .hero-card img {
   width: 100%;
   max-width: 280px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
   height: auto;
   border-radius: 8px;
 }
@@ -449,9 +454,10 @@ Health Tracker - Hero Area
 /* =======================
 Health Tracker - Grid Area 
 ==========================*/
-.other-player-section {
+.other-players-section {
   max-width: 1100px;
   margin: 0 auto;
+  min-height: 180px;
 }
 .other-players-title {
   text-align: center;
@@ -467,6 +473,7 @@ Health Tracker - Grid Area
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 10px;
+  min-height: 150px;
 }
 .other-player-card h3 {
   margin-bottom: 5px;
@@ -570,15 +577,23 @@ Health Tracker - Mobile
     width: 260px;
     max-width: 90vw;
   }
+  .hero-panel {
+    min-height: 620px;
+  }
   .hero-card {
     grid-template-columns: 1fr;
     text-align: center;
+    min-height: 560px;
   }
   .hero-card img {
     margin: 0 auto;
+    max-width: 240px;
   }
   .hero-control {
     justify-content: center;
+  }
+  .other-players-section {
+    min-height: 180px;
   }
 }
 
