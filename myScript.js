@@ -133,8 +133,8 @@ const characterData = {
   "Were-Lobster": {
     specialName: "Tide",
     specialType: "toggle",
-    specialValue: "Low Tide", // Starting tide
-    toggleOptions: ["Low Tide", "High Tide"], // Swap between the two tides
+    specialValue: "Low", // Starting tide
+    toggleOptions: ["Low", "High"], // Swap between the two tides
   },
   "Goe Bling": {
     specialName: "Steal",
@@ -174,6 +174,40 @@ const characterImages = {
   "Salary Man": "img/character/Sal (Medium).png",
   Alien: "img/character/Alan (Medium).png",
   Margritte: "img/character/Margritte (Medium).png",
+};
+// --- CHARACTER COLOUR BANK --- \\
+// Will update the colours in the future, this is just for testing purposes
+const characterThemes = {
+  Cowboy: {
+    border: "#561300",
+    background: "#ad8c83",
+    text: "#000000",
+  },
+  "Were-Lobster": {
+    border: "#18163b",
+    background: "#a1d0fc",
+    text: "#18163b",
+  },
+  "Goe Bling": {
+    border: "#223323",
+    background: "#466948",
+    text: "#ffffff",
+  },
+  "Salary Man": {
+    border: "#393939",
+    background: "#d9d9d9",
+    text: "#393939",
+  },
+  Alien: {
+    border: "#fc6fe7",
+    background: "#efeacd",
+    text: "#fc6fe7",
+  },
+  Margritte: {
+    border: "#541037",
+    background: "#f2bb5b",
+    text: "#541037",
+  },
 };
 
 // --- SPECIAL ABILITY LOGIC --- \\
@@ -358,7 +392,12 @@ function renderHeroPlayer(playerId, player) {
 
   // Get characters image
   const imagePath = characterImages[player.character] || "img/default.png"; // Fallback to default image if character not found
-
+  
+  const theme = characterThemes[player.character] || {
+    border: "#ccc",
+    background: "#ffffff",
+    text: "#000000",
+  };
   // Build special ability controls
   let specialHTML = "";
 
@@ -384,12 +423,16 @@ function renderHeroPlayer(playerId, player) {
 
   // Create the full hero card
   heroPanel.innerHTML = `
-<div class="hero-card">
+<div class="hero-card" style="
+  --card-border: ${theme.border};
+  --card-bg: ${theme.background};
+  --card-text: ${theme.text};
+  ">
 <img src="${imagePath}" alt="${player.character}" width="280" height="280">
 
 <div class="hero-info">
-<h2>${player.character}</h2>
-<p>${player.name}</p>
+<h2>${player.name}</h2>
+<p>${player.character}</p>
 
 <div class="hero-control">
 <strong>Health:</strong>
@@ -414,8 +457,18 @@ Remove Player
 function renderOtherPlayer(playerId, player) {
   const playersGrid = document.getElementById("players-grid");
 
+  const theme = characterThemes[player.character] || {
+    border: "#ccc",
+    background: "#ffffff",
+    text: "#000000",
+  };
+
   const playerCard = document.createElement("div");
   playerCard.className = "other-player-card";
+  
+  playerCard.style.setProperty("--card-border", theme.border);
+  playerCard.style.setProperty("--card-bg", theme.background);
+  playerCard.style.setProperty("--card-text", theme.text);
 
   let specialText = "";
 
@@ -545,7 +598,12 @@ document.getElementById("add-player").addEventListener("click", () => {
       }
 
       // Save the new player object with player data
-      set(newPlayerRef, newPlayerData);
+      set(newPlayerRef, newPlayerData).then(() => {
+        // Hide the setup panel immediately after Firebase saves the player
+        document.getElementById("setup-panel").classList.add("hidden");
+        // Show the game area immediately
+        document.getElementById("game-area").classList.remove("hidden");
+      })
 
       // Clear the name input and reset the character selection in the UI
       nameInput.value = "";

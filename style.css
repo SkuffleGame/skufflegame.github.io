@@ -261,11 +261,6 @@ button:disabled {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
 }
-/* This is used by the javascript to hide/show sections */
-.hidden {
-  display: none;
-}
-
 /*=====================
       Health Tracker - Setup Panel
       ===================== */
@@ -410,9 +405,14 @@ Health Tracker - Hero Area
   gap: 30px;
   align-items: center;
   padding: 25px;
-  background-color: white;
-  border: 1px solid #ccc;
+
+  background-color: var(--card-bg, white);
+  color: var(--card-text, black);
+  
+  border: 4px solid var(--card-border, #ccc);
+  border-left: 18px solid var(--card-border, #ccc);
   border-radius: 10px;
+
   min-height: 360px;
 }
 .hero-card img {
@@ -444,6 +444,18 @@ Health Tracker - Hero Area
   font-weight: bold;
   cursor: pointer;
 }
+.hero-control button,
+.toggle-button {
+  background-color: var(--card-bg, white);
+  color: var(--card-text, black);
+  border: 2px solid var(--card-border, #333);
+  border-radius: 6px;
+}
+.hero-control button:hover,
+.toggle-button:hover {
+  background-color: var(--card-border, #333);
+  color: var(--card-bg, white);
+}
 .hero-value {
   min-width: 40px;
   font-size: 24px;
@@ -455,7 +467,7 @@ Health Tracker - Hero Area
 Health Tracker - Grid Area 
 ==========================*/
 .other-players-section {
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
   min-height: 180px;
 }
@@ -465,14 +477,19 @@ Health Tracker - Grid Area
 }
 .players-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 }
 .other-player-card {
   padding: 20px;
-  background-color: white;
-  border: 1px solid #ccc;
+
+  background-color: var(--card-bg, white);
+  color: var(--card-text, black);
+  
+  border: 4px solid var(--card-border, #ccc);
+  border-left: 18px solid var(--card-border, #ccc);;
   border-radius: 10px;
+
   min-height: 150px;
 }
 .other-player-card h3 {
@@ -481,63 +498,10 @@ Health Tracker - Grid Area
 .other-player-card p {
   margin-bottom: 6px;
 }
-/* ===================================================== */
-/* Maintaining this until we update the JS */
-/*Player card styling*/
-.player {
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin: 10px 20px;
-  border-radius: 5px;
-  background-color: white;
+.hero-info h2,
+.other-player-card h3 {
+  color: var(--card-text, black);
 }
-/*Container for health +HP Value-*/
-.health-control {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-top: 10px;
-}
-.special-control {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-.special-label {
-  font-weight: bold;
-}
-.special-value {
-  min-width: 30px;
-  text-align: center;
-  font-size: 18px;
-}
-.toggle-button {
-  padding: 5px 15px;
-  min-width: 100px;
-}
-/*health number display*/
-.health-value {
-  font-size: 24px;
-  font-weight: bold;
-  min-width: 50px;
-  text-align: center;
-}
-.health-control button,
-.special-control button {
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  cursor: pointer;
-  font-weight: bold;
-}
-.health-control button:disabled,
-.special-control button:disabled,
-.hero-control button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
 .remove-player-button {
   width: auto;
   min-width: 160px;
@@ -558,16 +522,27 @@ Health Tracker - Grid Area
 .padd {
   padding: 10px 20px;
 }
-
+.toggle-button {
+  padding: 5px 15px;
+  min-width: 100px;
+}
 /*=====================
 Health Tracker - Mobile
 ===================== */
+@media screen and (max-width: 480px) {
+  .player-grid {
+    grid-template-columns: 1fr;
+  }
+}
 @media screen and (max-width: 700px) {
   .button-group {
     flex-direction: column;
     align-items: center;
   }
-
+  .players-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 10px;
+  }
   #add-player,
   #clear-all,
   #ar,
@@ -744,7 +719,10 @@ Health Tracker - Mobile
   color: black;
   text-decoration: none;
 }
-
+/* This is used by the javascript to hide/show sections */
+.hidden {
+  display: none;
+}
 /* =====================
     IBM Plex Serif Variants
     ===================== */
