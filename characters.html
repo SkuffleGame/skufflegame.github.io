@@ -65,7 +65,7 @@
       >
     </div>
     <div class="padd">
-      <h1 style="text-align: center">Character Bios</h1>
+      <h1 class="tracker-title">Character Bios</h1>
 
       <div class="character-layout">
         <!-- Left: 3D embed + AR -->
@@ -86,8 +86,10 @@
             "
             allowfullscreen>
           </iframe>
-          <p style="text-align: center;">If you want normal AR, click the buttons above (This works best on iOS). If you want the AR Image tracking click the button below.</p>
-          <p style="text-align: center;">To get this working on Android devices, refer to the guide <a href="https://engine.needle.tools/docs/how-to-guides/xr/image-tracking.html#android-webxr-image-tracking"> here.</a></p>
+          <div class="ar-note">
+            <p><strong>AR note:</strong> AR works for both Android and iOS, but is best on iOS.</p>
+            <p>Image tracking is natively supported for iOS, Android users will need to enable WebXR incubations in Chrome for image tracking. <a href="https://engine.needle.tools/docs/how-to-guides/xr/image-tracking.html#android-webxr-image-tracking">View setup guide</a></p>
+          </div>
           <a
             id="ar-btn"
             href="https://skufflegame.github.io/AR-Image-Tracking/"
@@ -107,6 +109,10 @@
             even had bounties put on them yet.
           </p>
           <ul id="char-stats" class="char-stats"></ul>
+
+          <div class="char-extra-image">
+            <img id="char-extra-img" src="img/cardbacks/Cabarello.png" alt="Character Card Backs">
+          </div>
         </div>
       </div>
 
@@ -146,6 +152,13 @@
             "Bullets: You can use bullets to pay for cards, instead of discarding. You start off with one bullet for each player in the game.",
           aggression: "High",
           complexity: "Low",
+          extraImage: "img/cardbacks/Cabarello.png",
+
+          theme: {
+            border: "#561300",
+            background: "#ad8c83",
+            text: "#000000",
+          }
         },
         {
           name: "Lawrence the Were-Lobster",
@@ -158,6 +171,13 @@
             "Tide: At the start of the game, you’re on Low Tide. At the end of each turn, change the tide. Cards have different effects depending on what tide you’re on.",
           aggression: "High",
           complexity: "Medium",
+          extraImage: "img/cardbacks/Lawrence.png",
+
+          theme: {
+            border: "#18163b",
+            background: "#a1d0fc",
+            text: "#18163b",
+          },
         },
         {
           name: "Goe Bling the Goblin",
@@ -170,6 +190,13 @@
             "Thievery: At the end of every turn, heal 2hp for each time you’ve stolen a card from an opponent. ",
           aggression: "Low",
           complexity: "Low",
+          extraImage: "img/cardbacks/GoeBling.png",
+
+          theme: {
+            border: "#223323",
+            background: "#466948",
+            text: "#ffffff",
+          },
         },
         {
           name: "Sal the Office Worker",
@@ -182,6 +209,13 @@
             "Paperwork: You start every game with four dollars, and can gain or spend them by playing different cards. If you play a card without having sufficient cash, the card is still removed from your hand, however its effect does not occur",
           aggression: "Low",
           complexity: "Medium",
+          extraImage: "img/cardbacks/Sal.png",
+
+          theme: {
+            border: "#393939",
+            background: "#d9d9d9",
+            text: "#393939",
+          },
         },
         {
           name: "Margritte the Wizard",
@@ -192,6 +226,13 @@
           ability: "N/A",
           aggression: "Medium",
           complexity: "Low",
+          extraImage: "img/cardbacks/Margritte.png",
+
+          theme: {
+            border: "#541037",
+            background: "#f2bb5b",
+            text: "#541037",
+          },
         },
         {
           name: "Alan the Alien",
@@ -204,6 +245,13 @@
             "Dodge Points: Starting with 3 dodge points, use them to avoid an instance of damage.",
           aggression: "Medium",
           complexity: "Low",
+          extraImage: "img/cardbacks/Alan.png",
+
+          theme: {
+            border: "#fc6fe7",
+            background: "#efeacd",
+            text: "#660A54",
+          },
         },
       ];
 
@@ -223,15 +271,27 @@
         current = i;
         const c = characters[i];
 
+        const theme = c.theme || {
+          border: "#ccc",
+          background: "#ffffff",
+          text: "#000000",
+        };
+
+        const bioPanel = document.querySelector(".bio-panel");
+        bioPanel.style.setProperty("--char-border", theme.border);
+        bioPanel.style.setProperty("--char-bg", theme.background);
+        bioPanel.style.setProperty("--char-text", theme.text);
+
         document.getElementById("needle-frame").src = c.embedSrc || "";
         document.getElementById("char-name").textContent = c.name;
         document.getElementById("char-bio").textContent = c.bio;
         document.getElementById("char-stats").innerHTML = `
-                <li><strong>Playstyle:</strong> ${c.playstyle}</li>
-                <li><strong>Ability:</strong> ${c.ability}</li>
-                <li><strong>Aggression:</strong> ${c.aggression}</li>
-                <li><strong>Complexity:</strong> ${c.complexity}</li>
+                <li><strong>Playstyle <i class="fa fa-gamepad"></i></strong> ${c.playstyle}</li>
+                <li><strong>Ability <i class="fa fa-magic"></i></strong> ${c.ability}</li>
+                <li><strong>Aggression <i class="fa fa-fire"></i></strong> ${c.aggression}</li>
+                <li><strong>Complexity <i class="fa fa-puzzle-piece"></i></strong> ${c.complexity}</li>
             `;
+            document.getElementById("char-extra-img").src = c.extraImage || "img/cardbacks/cabarello.png";
 
         document
           .querySelectorAll(".dot")
