@@ -218,7 +218,6 @@ const characterThemes = {
 };
 
 // --- CHARACTER SOUND BANK --- \\
-// placeholders just to make sure it works, will update to actual unique sounds for each action later on
 const characterSounds = {
   Cowboy: {
     increase: new Audio("audio/cowboy_health_up.wav"),
