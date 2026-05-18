@@ -73,24 +73,31 @@ signInAnonymously(auth)
     console.error("Anonymous sign-in failed:", error);
   });
 
-// --- SOUND EFFECTS SETUP --- \\
 
-// Preloads the audio effects for health increase and decrease so they can play instantly when triggered
-const increaseSound = new Audio("audio/increase.mp3");
-const decreaseSound = new Audio("audio/decrease.mp3");
 
-// Expose a function on window (browser window) to play the "increase health" sound effect
-// Reset currentTime to 0 so the sound starts from the beginning each time
-window.playIncreaseSound = function () {
-  increaseSound.currentTime = 0;
-  increaseSound.play();
+// --- CHARACTER SOUND LOGIC --- \\
+// Plays specific sound for each character
+// soundType is either "increase", "decrease", or "ability" depending on the action being taken
+window.playCharacterSound = function (characterName, soundType) {
+  const characterSound = characterSounds[characterName];
+
+  if (!characterSound) {
+    console.warn(`No sound found for character: ${characterName}`);
+    return;
+  }
+  const sound = characterSound[soundType];
+
+  if (!sound) {
+    console.warn("No", soundType, "sound found for:", characterName);
+    return;
+  }
+
+  sound.currentTime = 0;
+  
+  sound.play().catch((error) => {
+    console.error("Could not play sound:", error);
+  });
 };
-// Same as above but for the "decrease health" sound effect
-window.playDecreaseSound = function () {
-  decreaseSound.currentTime = 0;
-  decreaseSound.play();
-};
-
 // --- HEALTH CHANGE LOGIC --- \\
 
 // Change a player's health by a certain amount (positive or negative), can be rehashed for the special abilites later on
@@ -210,6 +217,40 @@ const characterThemes = {
   },
 };
 
+// --- CHARACTER SOUND BANK --- \\
+// placeholders just to make sure it works, will update to actual unique sounds for each action later on
+const characterSounds = {
+  Cowboy: {
+    increase: new Audio("audio/increase.mp3"),
+    decrease: new Audio("audio/decrease.mp3"),
+    ability: new Audio("audio/ability.wav"),
+  },
+  "Were-Lobster": {
+    increase: new Audio("audio/decrease.mp3"),
+    decrease: new Audio("audio/ability.wav"),
+    ability: new Audio("audio/increase.mp3"), 
+  },
+  "Goe Bling": {
+    increase: new Audio("audio/increase.mp3"),
+    decrease: new Audio("audio/decrease.mp3"),
+    ability: new Audio("audio/ability.wav"),
+  },
+  "Salary Man": {
+    increase: new Audio("audio/increase.mp3"),
+    decrease: new Audio("audio/decrease.mp3"),
+    ability: new Audio("audio/ability.wav"),
+  },
+  Alien: {
+    increase: new Audio("audio/increase.mp3"),
+    decrease: new Audio("audio/decrease.mp3"),
+    ability: new Audio("audio/ability.wav"),
+  },
+  Margritte: {
+    increase: new Audio("audio/increase.mp3"),
+    decrease: new Audio("audio/decrease.mp3"),
+    ability: null, // Margritte doesn't have an ability, therefore no audio
+  },
+};
 // --- SPECIAL ABILITY LOGIC --- \\
 
 // Change a player's special value by a certain amount (positive or negative)
@@ -406,16 +447,16 @@ function renderHeroPlayer(playerId, player) {
       specialHTML = `
       <div class="hero-control">
         <strong>${player.specialName}:</strong>
-        <button onclick="changeSpecial('${playerId}', -1)">-</button>
+        <button onclick="changeSpecial('${playerId}', -1); playCharacterSound('${player.character}', 'ability')">-</button>
         <span class="hero-value">${player.specialValue}</span>
-        <button onclick="changeSpecial('${playerId}', 1)">+</button>
+        <button onclick="changeSpecial('${playerId}', 1); playCharacterSound('${player.character}', 'ability')">+</button>
         </div>
         `;
     } else if (player.specialType === "toggle") {
       specialHTML = `
       <div class="hero-control">
         <strong>${player.specialName}:</strong>
-        <button class="toggle-button" onclick="toggleSpecial('${playerId}')">
+        <button class="toggle-button" onclick="toggleSpecial('${playerId}'); playCharacterSound('${player.character}', 'ability')">
         ${player.specialValue}</button></div>
       `;
     }
@@ -437,9 +478,9 @@ function renderHeroPlayer(playerId, player) {
 <div class="hero-control">
 <strong>Health:</strong>
 
-<button onclick="changeHealth('${playerId}', -1); playDecreaseSound()">-</button>
+<button onclick="changeHealth('${playerId}', -1); playCharacterSound('${player.character}', 'decrease')">-</button>
 <span class="hero-value">${player.health}</span>
-<button onclick="changeHealth('${playerId}', 1); playIncreaseSound()">+</button>
+<button onclick="changeHealth('${playerId}', 1); playCharacterSound('${player.character}', 'increase')">+</button>
 </div>
 
 ${specialHTML}
