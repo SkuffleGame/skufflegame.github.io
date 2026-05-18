@@ -221,33 +221,33 @@ const characterThemes = {
 // placeholders just to make sure it works, will update to actual unique sounds for each action later on
 const characterSounds = {
   Cowboy: {
-    increase: new Audio("audio/increase.mp3"),
-    decrease: new Audio("audio/decrease.mp3"),
-    ability: new Audio("audio/ability.wav"),
+    increase: new Audio("audio/cowboy_health_up.wav"),
+    decrease: new Audio("audio/cowboy_health_down.wav"),
+    ability: new Audio("audio/cowboy_skill.wav"),
   },
   "Were-Lobster": {
-    increase: new Audio("audio/decrease.mp3"),
-    decrease: new Audio("audio/ability.wav"),
-    ability: new Audio("audio/increase.mp3"), 
+    increase: new Audio("audio/warelobster_health_up.wav"),
+    decrease: new Audio("audio/warelobster_health_down.wav"),
+    ability: new Audio("audio/warelobster_skill.wav"), 
   },
   "Goe Bling": {
-    increase: new Audio("audio/increase.mp3"),
-    decrease: new Audio("audio/decrease.mp3"),
-    ability: new Audio("audio/ability.wav"),
+    increase: new Audio("audio/goblin_health_up.wav"),
+    decrease: new Audio("audio/goblin_health_down.wav"),
+    ability: new Audio("audio/goblin_skill.wav"),
   },
   "Salary Man": {
-    increase: new Audio("audio/increase.mp3"),
-    decrease: new Audio("audio/decrease.mp3"),
-    ability: new Audio("audio/ability.wav"),
+    increase: new Audio("audio/salary_health_up.wav"),
+    decrease: new Audio("audio/salary_health_down.wav"),
+    ability: new Audio("audio/salary_skill.wav"),
   },
   Alien: {
-    increase: new Audio("audio/increase.mp3"),
-    decrease: new Audio("audio/decrease.mp3"),
-    ability: new Audio("audio/ability.wav"),
+    increase: new Audio("audio/alien_health_up.wav"),
+    decrease: new Audio("audio/alien_health_down.wav"),
+    ability: new Audio("audio/alien_skill.wav"),
   },
   Margritte: {
-    increase: new Audio("audio/increase.mp3"),
-    decrease: new Audio("audio/decrease.mp3"),
+    increase: new Audio("audio/wizard_health_up.wav"),
+    decrease: new Audio("audio/wizard_health_down.wav"),
     ability: null, // Margritte doesn't have an ability, therefore no audio
   },
 };
