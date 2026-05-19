@@ -1,3 +1,18 @@
+/* ==============
+        ROOT
+================= */
+:root {
+  --page-bg: #f3ead8;
+  --panel-bg: #fff9ea;
+  --ink: #24160f;
+  --muted-ink: #777;
+  --dark: #2b2118;
+  --accent: #04aa6d;
+  --accent-blue: rgb(4, 175, 188);
+  --danger: #dc3545;
+  --border-dark: #3a2718;
+  --soft-shadow: 0 8px 20px rgba(43, 33, 24, 0.18);
+}
 /*=====================
     Base & Body
     ===================== */
@@ -10,8 +25,10 @@
 body {
   font-family: "IBM Plex Serif", serif;
   max-width: 100%;
-  color: black;
-  background-color: #f0f4ef;
+  /* color: black; */
+  /* background-color: #f0f4ef; */
+  color: var(--ink);
+  background-color: var(--page-bg);
   margin: 0;
   padding: 0;
 }
@@ -27,12 +44,18 @@ button:disabled {
     Header
     ===================== */
 .header-bg {
-  background-color: #f0f4ef;
+  background: linear-gradient(135deg, #f7edd9, #e4d0ad);
 }
 .header-logo {
   max-height: 200px;
   width: auto;
   max-width: 100%;
+}
+header p {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--dark);
 }
 /*=====================
       Navbar - Responsive
@@ -40,8 +63,10 @@ button:disabled {
 .navbar {
   display: flex;
   width: 100%;
-  background-color: #333333;
+  background-color: var(--dark);
   padding: 0;
+  border-top: 3px solid var(--dark);
+  border-bottom: 3px solid var(--dark);
 }
 .navbar a {
   flex: 1;
@@ -57,13 +82,18 @@ button:disabled {
 
   min-height: 65px;
   padding: 0;
-  transition: background-color 0.3s ease;
+  font-weight: 700;
+  transition:
+    background-color 0.5s ease,
+    box-shadow 0.5s ease;
 }
 .navbar a:hover {
-  background-color: #111111;
+  background-color: #120d09;
 }
 .navbar a.active {
-  background-color: #04aa6d;
+  background-color: var(--accent);
+  color: #fff;
+  box-shadow: inset 0 -2.5px 0 rgba(0, 0, 0, 0.25);
 }
 @media screen and (max-width: 500px) {
   .navbar a {
@@ -77,28 +107,37 @@ button:disabled {
     display: none;
   }
 }
+
 /* =====================
-    Image Gallery
+    General Page Content
     ===================== */
-.carousel-item img {
-  width: 100%;
-  height: 400px;
-  object-fit: contain;
+.padd {
+  padding: 28px 20px;
 }
-.carousel-control-prev,
-.carousel-control-next {
-  width: 48px;
-  height: 48px;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
+.tracker-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--dark);
 }
-.carousel-control-prev {
-  left: 10px;
+.padd > p {
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.05rem;
+  line-height: 1.75;
 }
-.carousel-control-next {
-  right: 10px;
+.padd h3 {
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--dark);
+  font-weight: 800;
+}
+.padd h1 {
+  color: var(--dark);
+  font-weight: 800;
 }
 .spacer_box {
   width: 100%;
@@ -131,15 +170,15 @@ button:disabled {
 .cardteam {
   display: flex;
   flex-direction: column;
-
-  background-color: #fff;
-  border-radius: 6px;
+  background-color: var(--panel-bg);
+  border: 3px solid var(--border-dark);
+  border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .cardteam:hover {
   transform: scale(1.02);
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .cardteam img {
   width: 100%;
@@ -151,7 +190,6 @@ button:disabled {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-
   padding: 16px;
   text-align: center; /* keep names centered */
 }
@@ -159,11 +197,14 @@ button:disabled {
   font-size: clamp(1.1rem, 2vw, 1.3rem);
   margin-bottom: 6px;
   line-height: 1.2;
+  color: var(--dark);
+  font-weight: 800;
 }
 .titleteam {
-  color: #777;
-  font-size: 0.85rem;
+  color: var(--muted-ink);
+  font-size: 0.78rem;
   margin-bottom: 10px;
+  font-weight: 400;
 }
 /* main description text */
 .containerteam p {
@@ -198,13 +239,13 @@ button:disabled {
 
   font-size: 1.2rem;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 0px #00466b;
 }
 .buttonteam:hover {
   background-color: #005582;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 0px #00466b;
 }
 .buttonteam:active {
   transform: translateY(0);
@@ -213,19 +254,97 @@ button:disabled {
 .buttonteam i {
   line-height: 1;
 }
-/*=====================
-      Health Tracker Page
-      ===================== */
-/* Wraps tracker page content */
-.tracker-page {
-  padding: 30px 20px;
+/*================
+    Video Wrapper
+=================== */
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding-bottom: min(427px, 56.25%);
+  height: 0;
+  background: var(--panel-bg);
+  border: 4px solid var(--border-dark);
+  border-radius: 18px;
+  box-shadow: var(--soft-shadow);
+  overflow: hidden;
 }
-/* replaces inline h1 style */
-.tracker-title {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/* =====================
+    Image Gallery
+    ===================== */
+.carousel {
+  background: var(--panel-bg);
+  border: 4px solid #1f1a14;
+  border-radius: 18px;
+  box-shadow: var(--soft-shadow);
+  overflow: hidden;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.carousel-item img {
+  width: 100%;
+  height: 430px;
+  object-fit: contain;
+  background-color: #1f1a14;
+  padding: 14px;
+}
+.carousel-control-prev,
+.carousel-control-next {
+  width: 48px;
+  height: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.carousel-control-prev {
+  left: 10px;
+}
+.carousel-control-next {
+  right: 10px;
+}
+.carousel-indicators button {
+  border: 2px solid var(--border-dark);
+}
+/*=====================
+      Footer
+      ===================== */
+.footer_block {
+  background-color: var(--dark);
+  padding: 24px 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  color: #fff9ea;
+}
+.footer_block p {
+  margin-bottom: 6px;
+}
+/*=====================
+      Mobile Adjustments
+      ===================== */
+@media screen and (max-width: 700px) {
+  .padd {
+    padding: 22px 14px;
+  }
+  .carousel-item img {
+    height: 300px;
+  }
+  .spacer_box {
+    height: 32px;
+  }
 }
 /*=====================
       Health Tracker - Setup Panel
@@ -234,31 +353,49 @@ button:disabled {
 /* This centers the choose-player area */
 .setup-panel {
   min-height: 42vh;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 34px 22px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  gap: 18px;
+
+  background-color: var(--panel-bg);
+  border: 4px wolid var(--border-dark);
+  border-radius: 18px;
+  box-shadow: var(--soft-shadow);
 }
 /* Heading above the setup controls */
 .setup-heading {
-  margin-bottom: 20px;
+  margin-bottom: 6px;
   font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--dark);
 }
 /* Groups the name input, dropdown and buttons neatly */
 .setup-controls {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 .setup-controls input {
   padding: 12px 15px;
   font-size: 18px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  border-radius: 10px;
+  border: 3px solid var(--border-dark);
   width: 250px;
   max-width: 90vw;
+  background-color: #fffdf6;
+  color: var(--ink);
+}
+.setup-controls input:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(4, 109, 170, 0.25);
 }
 .button-group {
   margin-top: 10px;
@@ -273,78 +410,84 @@ button:disabled {
   padding: 12px 24px;
   font-size: 18px;
   color: white;
-  border: none;
+  border: 3px solid var(--border-dark);
   cursor: pointer;
-  border-radius: 4px;
-  font-weight: 600;
+  border-radius: 10px;
+  font-weight: 800;
   white-space: nowrap;
   margin: 0;
-  width: 200px;
+  width: 220px;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.2s ease;
 }
 #add-player {
-  background-color: darkgreen;
+  background-color: var(--accent);
 }
 #add-player:hover {
-  background-color: #004d00;
+  background-color: #038957;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
 }
+#clear-all {
+  background-color: var(--danger);
+  font-size: 15px;
+}
+#clear-all:hover {
+  background-color: #912121;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+}
+.dropbtn {
+  background-color: var(--dark);
+  width: 250px;
+  max-width: 90vw;
+  color: white;
+  height: 50px;
+}
+.dropdown:hover .dropbtn {
+  background-color: #120d09;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--panel-bg);
+  width: 250px;
+  max-width: 90vw;
+  border: 3px solid var(--border-dark);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  box-shadow: var(--soft-shadow);
+  z-index: 10;
+  text-align: left;
+  overflow: hidden;
+}
+.dropdown-content a {
+  color: var(--ink);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-weight: 700;
+}
+.dropdown-content a:hover {
+  background-color: #ead7b7;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 #ar {
   background-color: rgb(4, 175, 188);
 }
 #ar:hover {
   background-color: rgb(3, 140, 158);
 }
-#clear-all {
-  background-color: #dc3545;
-}
-#clear-all:hover {
-  background-color: #c82333;
-}
+
 /* =====================
 Health Tracker - Dropdown
 =======================*/
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropbtn {
-  padding: 12px 24px;
-  font-size: 18px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-  font-weight: 600;
-  white-space: nowrap;
-  margin: 0;
-  width: 250px;
-  max-width: 90vw;
-}
-.dropdown:hover .dropbtn {
-  background-color: #0056b3;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  width: 250px;
-  max-width: 90vw;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 10;
-  text-align: left;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+
 /* =======================
 Health Tracker - Hero Area 
 ==========================*/
@@ -364,14 +507,16 @@ Health Tracker - Hero Area
   align-items: center;
   padding: 25px;
 
-  background-color: var(--card-bg, white);
-  color: var(--card-text, black);
+  background-color: var(--card-bg, var(--panel-bg));
+  color: var(--card-text, var(--ink));
 
-  border: 4px solid var(--card-border, #ccc);
+  border: 5px solid var(--card-border, var(--border-dark));
   border-left: 18px solid var(--card-border, #ccc);
   border-radius: 10px;
 
   min-height: 360px;
+  box-shadow: var(--soft-shadow);
+  overflow: hidden;
 }
 .hero-card img {
   width: 100%;
@@ -379,11 +524,15 @@ Health Tracker - Hero Area
   aspect-ratio: 1 / 1;
   object-fit: contain;
   height: auto;
-  border-radius: 8px;
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 10px;
 }
 .hero-info h2 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   margin-bottom: 5px;
+  font-weight: 800;
+  color: var(--card-text, var(--ink));
 }
 .hero-info p {
   margin-bottom: 15px;
@@ -395,30 +544,33 @@ Health Tracker - Hero Area
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-.hero-control button {
-  width: 42px;
-  height: 42px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
 .hero-control button,
 .toggle-button {
-  background-color: var(--card-bg, white);
+  background-color: transparent;
   color: var(--card-text, black);
-  border: 2px solid var(--card-border, #333);
-  border-radius: 6px;
+  border: 3px solid var(--card-border, #333);
+  border-radius: 10px;
+  font-weight: 800;
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease;
 }
 .hero-control button:hover,
 .toggle-button:hover {
   background-color: var(--card-border, #333);
   color: var(--card-bg, white);
+  transform: translateY(-2px);
 }
 .hero-value {
-  min-width: 40px;
+  min-width: 48px;
   font-size: 24px;
+  font-weight: 800;
   font-weight: bold;
   text-align: center;
+  padding: 4px 10px;
+  border: 3px solid currentColor;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 /* =======================
@@ -441,17 +593,27 @@ Health Tracker - Grid Area
 .other-player-card {
   padding: 20px;
 
-  background-color: var(--card-bg, white);
-  color: var(--card-text, black);
+  background-color: var(--card-bg, var(--panel-bg));
+  color: var(--card-text, var(--ink));
 
-  border: 4px solid var(--card-border, #ccc);
-  border-left: 18px solid var(--card-border, #ccc);
-  border-radius: 10px;
+  border: 5px solid var(--card-border, var(--border-dark));
+  border-left: 18px solid var(--card-border, var(--border-dark));
+  border-radius: 16px;
 
   min-height: 150px;
+  box-shadow: var(--soft-shadow);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.other-player-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(43, 33, 24, 0.25);
 }
 .other-player-card h3 {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  font-weight: 800;
+  color: var(--card-text, var(--ink));
 }
 .other-player-card p {
   margin-bottom: 6px;
@@ -477,9 +639,6 @@ Health Tracker - Grid Area
   background-color: #c82333;
 }
 
-.padd {
-  padding: 10px 20px;
-}
 .toggle-button {
   padding: 5px 15px;
   min-width: 100px;
@@ -488,8 +647,11 @@ Health Tracker - Grid Area
 Health Tracker - Mobile
 ===================== */
 @media screen and (max-width: 480px) {
-  .player-grid {
+  .players-grid {
     grid-template-columns: 1fr;
+  }
+  .model-panel iframe {
+    height: 360px;
   }
 }
 @media screen and (max-width: 700px) {
@@ -525,55 +687,53 @@ Health Tracker - Mobile
   .hero-control {
     justify-content: center;
   }
+  .character-layout {
+    grid-template-columns: 1fr;
+  }
+  .model-panel iframe {
+    height: 420px;
+  }
+  .char-stats {
+    grid-template-columns: 1fr;
+  }
+  .char-extra-image {
+    min-height: 180px;
+  }
   .other-players-section {
     min-height: 180px;
   }
 }
 
-/*================
-    Video Wrapper
-=================== */
-
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 560px;
-  margin: 0 auto;
-  padding-bottom: min(315px, 56.25%);
-  height: 0;
-}
-
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 /*=====================
       Characters Page
       ===================== */
 .character-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
   gap: 1.5rem;
-  align-items: start;
+  align-items: stretch;
   margin-top: 1.5rem;
 }
-
 .model-panel {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  background-color: rgba(255, 249, 234, 0.65);
+  border: 4px solid var(--border-dark);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: var(--soft-shadow);
 }
 
 .model-panel iframe {
   width: 100%;
   aspect-ratio: 3 / 4;
-  border: none;
-  border-radius: 6px;
+  border: 4px solid var(--border-dark);
+  border-radius: 14px;
   display: block;
-  height: 500px;
+  height: 600px;
+  background-color: #1f1a14;
 }
 .char-stats {
   display: grid;
@@ -586,44 +746,52 @@ Health Tracker - Mobile
 .char-stats li {
   min-height: 120px;
   padding: 14px;
-  background-color: var(--char-bg, white);
+  background-color: rgba(255, 255, 255, 0.28);
   color: var(--char-text, black);
   border: 3px solid var(--char-border, #ccc);
-  border-radius: 8px;
+  border-radius: 14px;
   line-height: 1.4;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+}
+.char-stats li:hover {
+  transform: translateY(-3px);
 }
 .char-stats li strong {
   display: block;
   margin-bottom: 6px;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
 }
 .char-stats li strong i {
   margin-right: 6px;
 }
 .char-extra-image {
   width: 100%;
-  min-height: 220px;
+  min-height: 240px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
-  padding: 16px;
-  background-color: var(--char-bg, white);
+  margin-top: 4px;
+  padding: 18px;
+  background-color: rgba(255, 255, 255, 0.28);
   border: 3px solid var(--char-border, #ccc);
-  border-radius: 8px;
+  border-radius: 14px;
 }
 .char-extra-image img {
   max-width: 100%;
-  max-height: 260px;
+  max-height: 280px;
   object-fit: contain;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
 }
 .ar-note {
-  padding: 12px 14px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-left: 8px solid rgb(4, 175, 188);
-  border-radius: 8px;
+  padding: 14px 16px;
+  background-color: var(--page-bg);
+  border: 3px solid var(--accent-blue);
+  border-left: 10px solid var(--accent-blue);
+  border-radius: 12px;
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 .ar-note p {
   margin: 0;
@@ -633,50 +801,96 @@ Health Tracker - Mobile
 }
 .ar-note a {
   color: rgb(3, 140, 158);
-  font-weight: 700;
+  font-weight: 800;
 }
 .ar-btn {
   display: inline-block;
   text-align: center;
   padding: 12px 24px;
   font-size: 18px;
-  background-color: rgb(4, 175, 188);
+  background-color: var(--accent-blue);
   color: white;
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: 700;
+  border: 3px solid var(--border-dark);
+  border-radius: 12px;
+  font-weight: 800;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.2s ease;
 }
 .ar-btn:hover {
   background-color: rgb(3, 140, 158);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 0 #1c5960;
 }
 .bio-panel {
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  background-color: var(--char-bg, var(--page-bg));
+  color: var(--char-text, var(--ink));
+  border: 5px solid var(--char-border, var(--border-dark));
+  border-left: 22px solid var(--char-border, var(--border-dark));
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: var(--soft-shadow);
+}
+.bio-panel h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+  color: var(--char-text, var(--ink));
+}
+#char-bio {
+  font-size: 1.05rem;
+  line-height: 1.65;
 }
 /* Gallery Nav */
 .gallery-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 18px;
   margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid #ccc;
+  padding-top: 1.5rem;
+  border-top: 3px solid var(--border-dark);
+}
+.gallery-nav button {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--border-dark);
+  background: var(--dark);
+  color: white;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #000;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 #dot-nav {
   display: flex;
   gap: 8px;
 }
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: #ccc;
+  background-color: #b8a98f;
   cursor: pointer;
-  transition: background 0.15s;
+  transition:
+    background-color 0.15s,
+    transform 0.15s;
+}
+.dov:hover {
+  transform: scale(1.15);
 }
 .dot.active {
-  background: #333;
+  background: var(--accent);
 }
 /* stack on mobile */
 @media screen and (max-width: 700px) {
@@ -707,15 +921,7 @@ Health Tracker - Mobile
   opacity: 0.3;
   cursor: default;
 }
-.footer_block {
-  background-color: #333333;
-  padding: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  color: white;
-}
+
 .steam-link {
   color: black;
   text-decoration: none;
@@ -733,16 +939,6 @@ Health Tracker - Mobile
 /* =====================
     IBM Plex Serif Variants
     ===================== */
-.ibm-plex-serif-thin {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 100;
-  font-style: normal;
-}
-.ibm-plex-serif-extralight {
-  font-family: "IBM Plex Serif", serif;
-  font-weight: 200;
-  font-style: normal;
-}
 .ibm-plex-serif-light {
   font-family: "IBM Plex Serif", serif;
   font-weight: 300;
