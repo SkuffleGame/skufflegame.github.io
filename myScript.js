@@ -73,8 +73,6 @@ signInAnonymously(auth)
     console.error("Anonymous sign-in failed:", error);
   });
 
-
-
 // --- CHARACTER SOUND LOGIC --- \\
 // Plays specific sound for each character
 // soundType is either "increase", "decrease", or "ability" depending on the action being taken
@@ -93,7 +91,7 @@ window.playCharacterSound = function (characterName, soundType) {
   }
 
   sound.currentTime = 0;
-  
+
   sound.play().catch((error) => {
     console.error("Could not play sound:", error);
   });
@@ -227,7 +225,7 @@ const characterSounds = {
   "Were-Lobster": {
     increase: new Audio("audio/warelobster_health_up.wav"),
     decrease: new Audio("audio/warelobster_health_down.wav"),
-    ability: new Audio("audio/warelobster_skill.wav"), 
+    ability: new Audio("audio/warelobster_skill.wav"),
   },
   "Goe Bling": {
     increase: new Audio("audio/goblin_health_up.wav"),
@@ -432,7 +430,7 @@ function renderHeroPlayer(playerId, player) {
 
   // Get characters image
   const imagePath = characterImages[player.character] || "img/default.png"; // Fallback to default image if character not found
-  
+
   const theme = characterThemes[player.character] || {
     border: "#ccc",
     background: "#ffffff",
@@ -505,7 +503,7 @@ function renderOtherPlayer(playerId, player) {
 
   const playerCard = document.createElement("div");
   playerCard.className = "other-player-card";
-  
+
   playerCard.style.setProperty("--card-border", theme.border);
   playerCard.style.setProperty("--card-bg", theme.background);
   playerCard.style.setProperty("--card-text", theme.text);
@@ -643,7 +641,7 @@ document.getElementById("add-player").addEventListener("click", () => {
         document.getElementById("setup-panel").classList.add("hidden");
         // Show the game area immediately
         document.getElementById("game-area").classList.remove("hidden");
-      })
+      });
 
       // Clear the name input and reset the character selection in the UI
       nameInput.value = "";
@@ -682,3 +680,25 @@ document.getElementById("clear-all").addEventListener("click", () => {
       });
   }
 });
+// --- Select Character Dropdown --- \\
+const dropdown = document.querySelector(".dropdown");
+const characterButton = document.getElementById("character-chosen");
+const characterOptions = document.querySelectorAll(".character-option");
+
+characterButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  dropdown.classList.toggle("open");
+});
+//Tapping the button open/closes the dropdown
+characterOptions.forEach(function (option) {
+  option.addEventListener("click", function () {
+    dropdown.classList.remove("open");
+  });
+});
+//Tapping a character closes it immediately
+document.addEventListener("click", function (event) {
+  if (!dropdown.contains(event.target)) {
+    dropdown.classList.remove("open");
+  }
+});
+//Tapping outside also closes it

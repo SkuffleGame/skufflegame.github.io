@@ -365,7 +365,7 @@ header p {
   gap: 18px;
 
   background-color: var(--panel-bg);
-  border: 4px wolid var(--border-dark);
+  border: 4px solid var(--border-dark);
   border-radius: 18px;
   box-shadow: var(--soft-shadow);
 }
@@ -439,15 +439,30 @@ header p {
   transform: translateY(-2px);
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
 }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 .dropbtn {
+  padding: 12px 24px;
+  font-size: 18px;
   background-color: var(--dark);
+  color: #fff9ea;
+  border: 3px solid var(--border-dark);
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+  margin: 0;
   width: 250px;
   max-width: 90vw;
-  color: white;
-  height: 50px;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
 }
 .dropdown:hover .dropbtn {
   background-color: #120d09;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
 }
 .dropdown-content {
   display: none;
@@ -473,7 +488,15 @@ header p {
 .dropdown-content a:hover {
   background-color: #ead7b7;
 }
-.dropdown:hover .dropdown-content {
+.dropdown:hover {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+}
+
+.dropdown.open .dropdown-content {
   display: block;
 }
 
