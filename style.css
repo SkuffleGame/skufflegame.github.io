@@ -1,21 +1,22 @@
 /* ==============
         ROOT
 ================= */
+/* These are some variables that I call upon often */
 :root {
   --page-bg: #f3ead8;
   --panel-bg: #fff9ea;
   --ink: #24160f;
   --muted-ink: #777;
   --dark: #2b2118;
-  --accent: #04aa6d;
+  --accent: #683a16;
   --accent-blue: rgb(4, 175, 188);
   --danger: #dc3545;
   --border-dark: #3a2718;
   --soft-shadow: 0 8px 20px rgba(43, 33, 24, 0.18);
 }
 /*=====================
-    Base & Body
-    ===================== */
+      Base & Body
+===================== */
 *,
 *:before,
 *:after {
@@ -25,8 +26,6 @@
 body {
   font-family: "IBM Plex Serif", serif;
   max-width: 100%;
-  /* color: black; */
-  /* background-color: #f0f4ef; */
   color: var(--ink);
   background-color: var(--page-bg);
   margin: 0;
@@ -40,26 +39,32 @@ button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
+/* This sets up the buttons being enabled and disabled */
 /*=====================
-    Header
-    ===================== */
+        Header
+===================== */
 .header-bg {
   background: linear-gradient(135deg, #f7edd9, #e4d0ad);
 }
+/* This adds a subtle gradient that just makes the header slightly more interesting, at least that's what I think */
 .header-logo {
   max-height: 200px;
   width: auto;
   max-width: 100%;
 }
 header p {
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-size: clamp(
+    1.1rem,
+    2vw,
+    1.35rem
+  ); /* These are relative sizes, this just helps when it comes to responsiveness*/
   font-weight: 500;
   letter-spacing: 0.04em;
   color: var(--dark);
 }
 /*=====================
-      Navbar - Responsive
-      ===================== */
+        Navbar 
+===================== */
 .navbar {
   display: flex;
   width: 100%;
@@ -67,6 +72,7 @@ header p {
   padding: 0;
   border-top: 3px solid var(--dark);
   border-bottom: 3px solid var(--dark);
+  /* Subtle border just to seperate the "buttons" from the rest of the navbar */
 }
 .navbar a {
   flex: 1;
@@ -74,18 +80,17 @@ header p {
   text-decoration: none;
   font-size: 17px;
   text-align: center;
-
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-
   min-height: 65px;
   padding: 0;
   font-weight: 700;
   transition:
     background-color 0.5s ease,
     box-shadow 0.5s ease;
+  /* Slight animation to make hovering over a tab feel nicer */
 }
 .navbar a:hover {
   background-color: #120d09;
@@ -93,8 +98,8 @@ header p {
 .navbar a.active {
   background-color: var(--accent);
   color: #fff;
-  box-shadow: inset 0 -2.5px 0 rgba(0, 0, 0, 0.25);
 }
+/* This gives the active page a different colour, making it obvious what page you're on */
 @media screen and (max-width: 500px) {
   .navbar a {
     flex: 1;
@@ -107,13 +112,14 @@ header p {
     display: none;
   }
 }
-
+/* Mobile responsiveness, to change the header to just icons to improve legibility */
 /* =====================
-    General Page Content
-    ===================== */
+  General Page Content
+===================== */
 .padd {
   padding: 28px 20px;
 }
+/* This just gives the elements on a page some more breathing room */
 .tracker-title {
   text-align: center;
   margin-bottom: 30px;
@@ -143,8 +149,9 @@ header p {
   width: 100%;
   height: 60px;
 }
+/* Better than using a load of <br>'s, just helps with giving things some space */
 /* =====================
-  Team Grid — Responsive
+        Team Grid
   ===================== */
 .team-grid {
   display: grid;
@@ -167,6 +174,7 @@ header p {
     grid-template-columns: 1fr;
   }
 }
+/* This just sets up the grid, and adjusts it based on how wide your device is */
 .cardteam {
   display: flex;
   flex-direction: column;
@@ -180,6 +188,7 @@ header p {
   transform: scale(1.02);
   transition: 0.3s;
 }
+/* Gives some energy to looking at the team "cards" */
 .cardteam img {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -211,12 +220,9 @@ header p {
   font-size: 0.9rem;
   line-height: 1.5;
   margin: 4px 0;
-}
-/* make description easier to read */
-.containerteam p:nth-of-type(2),
-.containerteam p:nth-of-type(3) {
   text-align: left;
 }
+/* Below is for the LinkedIn button link */
 .button-wrapper {
   margin-top: auto;
   padding-top: 14px;
@@ -227,37 +233,28 @@ header p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   width: 44px;
   height: 44px;
   padding: 0;
-
   background-color: #0077b5;
   color: white;
   text-decoration: none;
   border-radius: 50%;
-
   font-size: 1.2rem;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 0px #00466b;
 }
 .buttonteam:hover {
   background-color: #005582;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 0px #00466b;
-}
-.buttonteam:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 .buttonteam i {
   line-height: 1;
 }
-/*================
-    Video Wrapper
+/*==================
+YouTube Video Wrapper
 =================== */
-
+/* This adds a nice frame and centers the YouTube Embed */
 .video-wrapper {
   position: relative;
   width: 100%;
@@ -268,10 +265,8 @@ header p {
   background: var(--panel-bg);
   border: 4px solid var(--border-dark);
   border-radius: 18px;
-  box-shadow: var(--soft-shadow);
   overflow: hidden;
 }
-
 .video-wrapper iframe {
   position: absolute;
   top: 0;
@@ -280,8 +275,9 @@ header p {
   height: 100%;
 }
 /* =====================
-    Image Gallery
-    ===================== */
+    Image Carousel
+===================== */
+/* Adds a frame, and gives indicators and buttons for the carousel itself */
 .carousel {
   background: var(--panel-bg);
   border: 4px solid #1f1a14;
@@ -303,7 +299,6 @@ header p {
   width: 48px;
   height: 48px;
   top: 50%;
-  transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -318,8 +313,8 @@ header p {
   border: 2px solid var(--border-dark);
 }
 /*=====================
-      Footer
-      ===================== */
+        Footer
+===================== */
 .footer_block {
   background-color: var(--dark);
   padding: 24px 16px;
@@ -333,8 +328,9 @@ header p {
   margin-bottom: 6px;
 }
 /*=====================
-      Mobile Adjustments
-      ===================== */
+  Mobile Adjustments
+===================== */
+/* Just a few minor adjustments that don't require it's own section in each "section" */
 @media screen and (max-width: 700px) {
   .padd {
     padding: 22px 14px;
@@ -347,23 +343,20 @@ header p {
   }
 }
 /*=====================
-      Health Tracker - Setup Panel
-      ===================== */
-
+Health Tracker - Setup Panel
+===================== */
 /* This centers the choose-player area */
 .setup-panel {
   min-height: 42vh;
   max-width: 760px;
   margin: 0 auto;
   padding: 34px 22px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   gap: 18px;
-
   background-color: var(--panel-bg);
   border: 4px solid var(--border-dark);
   border-radius: 18px;
@@ -376,13 +369,14 @@ header p {
   font-weight: 800;
   color: var(--dark);
 }
-/* Groups the name input, dropdown and buttons neatly */
+/* Groups the name input, dropdown and buttons nice and neatly */
 .setup-controls {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 14px;
 }
+/* Input styling for player name */
 .setup-controls input {
   padding: 12px 15px;
   font-size: 18px;
@@ -393,10 +387,6 @@ header p {
   background-color: #fffdf6;
   color: var(--ink);
 }
-.setup-controls input:focus {
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(4, 109, 170, 0.25);
-}
 .button-group {
   margin-top: 10px;
   display: flex;
@@ -404,6 +394,7 @@ header p {
   gap: 10px;
   flex-wrap: wrap;
 }
+/* Common styling for the other buttons */
 #add-player,
 #clear-all,
 #ar {
@@ -419,16 +410,13 @@ header p {
   width: 220px;
   transition:
     transform 0.15s ease,
-    box-shadow 0.15s ease,
     background-color 0.2s ease;
 }
 #add-player {
-  background-color: var(--accent);
+  background-color: #03be7a;
 }
 #add-player:hover {
   background-color: #038957;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
 }
 #clear-all {
   background-color: var(--danger);
@@ -436,8 +424,6 @@ header p {
 }
 #clear-all:hover {
   background-color: #912121;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
 }
 .dropdown {
   position: relative;
@@ -446,8 +432,8 @@ header p {
 .dropbtn {
   padding: 12px 24px;
   font-size: 18px;
-  background-color: var(--dark);
-  color: #fff9ea;
+  background-color: var(--accent-blue);
+  color: #ffffff;
   border: 3px solid var(--border-dark);
   cursor: pointer;
   border-radius: 10px;
@@ -456,13 +442,12 @@ header p {
   margin: 0;
   width: 250px;
   max-width: 90vw;
-  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.35);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease;
 }
 .dropdown:hover .dropbtn {
-  background-color: #120d09;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+  background-color: #06718a;
 }
 .dropdown-content {
   display: none;
@@ -473,7 +458,6 @@ header p {
   border: 3px solid var(--border-dark);
   border-top: none;
   border-radius: 0 0 10px 10px;
-  box-shadow: var(--soft-shadow);
   z-index: 10;
   text-align: left;
   overflow: hidden;
@@ -491,26 +475,18 @@ header p {
 .dropdown:hover {
   display: block;
 }
-
 .dropdown-content {
   display: none;
 }
-
 .dropdown.open .dropdown-content {
   display: block;
 }
-
 #ar {
   background-color: rgb(4, 175, 188);
 }
 #ar:hover {
   background-color: rgb(3, 140, 158);
 }
-
-/* =====================
-Health Tracker - Dropdown
-=======================*/
-
 /* =======================
 Health Tracker - Hero Area 
 ==========================*/
@@ -521,26 +497,25 @@ Health Tracker - Hero Area
   max-width: 1000px;
   margin: 0 auto 50px auto;
   /* Keep the hero area from shrinking/growing when firebase updates */
+  /* This was a big issue for mobile */
   min-height: 420px;
 }
 .hero-card {
+  /* Styling for the whole card */
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 30px;
   align-items: center;
   padding: 25px;
-
   background-color: var(--card-bg, var(--panel-bg));
   color: var(--card-text, var(--ink));
-
   border: 5px solid var(--card-border, var(--border-dark));
   border-left: 18px solid var(--card-border, #ccc);
   border-radius: 10px;
-
   min-height: 360px;
-  box-shadow: var(--soft-shadow);
   overflow: hidden;
 }
+/* Styling for the image specifically */
 .hero-card img {
   width: 100%;
   max-width: 280px;
@@ -574,15 +549,12 @@ Health Tracker - Hero Area
   border: 3px solid var(--card-border, #333);
   border-radius: 10px;
   font-weight: 800;
-  transition:
-    transform 0.15s ease,
-    background-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 .hero-control button:hover,
 .toggle-button:hover {
   background-color: var(--card-border, #333);
   color: var(--card-bg, white);
-  transform: translateY(-2px);
 }
 .hero-value {
   min-width: 48px;
@@ -595,7 +567,6 @@ Health Tracker - Hero Area
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.25);
 }
-
 /* =======================
 Health Tracker - Grid Area 
 ==========================*/
@@ -615,14 +586,11 @@ Health Tracker - Grid Area
 }
 .other-player-card {
   padding: 20px;
-
   background-color: var(--card-bg, var(--panel-bg));
   color: var(--card-text, var(--ink));
-
   border: 5px solid var(--card-border, var(--border-dark));
   border-left: 18px solid var(--card-border, var(--border-dark));
   border-radius: 16px;
-
   min-height: 150px;
   box-shadow: var(--soft-shadow);
   transition:
@@ -651,17 +619,16 @@ Health Tracker - Grid Area
   height: auto;
   padding: 10px 16px;
   margin-top: 12px;
-  background-color: #dc3545;
+  background-color: var(--danger);
   color: white;
-  border: none;
+  border: 3px solid var(--card-border, #333);
   border-radius: 4px;
   font-size: 16px;
   font-weight: 700;
 }
 .remove-player-button:hover {
-  background-color: #c82333;
+  background-color: #912121;
 }
-
 .toggle-button {
   padding: 5px 15px;
   min-width: 100px;
@@ -669,6 +636,7 @@ Health Tracker - Grid Area
 /*=====================
 Health Tracker - Mobile
 ===================== */
+/* This essentially just changes all the sizes of the buttons and panels etc to fit on mobile, and to stack on each other instead of stretching and squeezing */
 @media screen and (max-width: 480px) {
   .players-grid {
     grid-template-columns: 1fr;
@@ -726,13 +694,12 @@ Health Tracker - Mobile
     min-height: 180px;
   }
 }
-
 /*=====================
-      Characters Page
-      ===================== */
+    Characters Page
+===================== */
 .character-layout {
   display: grid;
-  grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
+  grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr); /*The minmax defines a size range for the grid columns*/
   gap: 1.5rem;
   align-items: stretch;
   margin-top: 1.5rem;
@@ -746,9 +713,7 @@ Health Tracker - Mobile
   border: 4px solid var(--border-dark);
   border-radius: 18px;
   padding: 12px;
-  box-shadow: var(--soft-shadow);
 }
-
 .model-panel iframe {
   width: 100%;
   aspect-ratio: 3 / 4;
@@ -774,11 +739,6 @@ Health Tracker - Mobile
   border: 3px solid var(--char-border, #ccc);
   border-radius: 14px;
   line-height: 1.4;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
-  transition: transform 0.2s ease;
-}
-.char-stats li:hover {
-  transform: translateY(-3px);
 }
 .char-stats li strong {
   display: block;
@@ -805,7 +765,6 @@ Health Tracker - Mobile
   max-width: 100%;
   max-height: 280px;
   object-fit: contain;
-  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
 }
 .ar-note {
   padding: 14px 16px;
@@ -837,17 +796,12 @@ Health Tracker - Mobile
   border: 3px solid var(--border-dark);
   border-radius: 12px;
   font-weight: 800;
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
-    background-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 .ar-btn:hover {
   background-color: rgb(3, 140, 158);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 0 #1c5960;
 }
+/* The colour setup adjusts itself depending on what character you choose, hence all the variables */
 .bio-panel {
   height: 100%;
   display: flex;
@@ -871,7 +825,7 @@ Health Tracker - Mobile
   font-size: 1.05rem;
   line-height: 1.65;
 }
-/* Gallery Nav */
+/* Gallery Nav for Characters */
 .gallery-nav {
   display: flex;
   align-items: center;
@@ -890,10 +844,6 @@ Health Tracker - Mobile
   border-radius: 12px;
   font-size: 18px;
   cursor: pointer;
-  box-shadow: 0 4px 0 #000;
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
 }
 #dot-nav {
   display: flex;
@@ -905,17 +855,12 @@ Health Tracker - Mobile
   border-radius: 50%;
   background-color: #b8a98f;
   cursor: pointer;
-  transition:
-    background-color 0.15s,
-    transform 0.15s;
-}
-.dov:hover {
-  transform: scale(1.15);
+  transition: background-color 0.15s;
 }
 .dot.active {
   background: var(--accent);
 }
-/* stack on mobile */
+/* Stacks everything on mobile */
 @media screen and (max-width: 700px) {
   .character-layout {
     grid-template-columns: 1fr;
@@ -944,7 +889,7 @@ Health Tracker - Mobile
   opacity: 0.3;
   cursor: default;
 }
-
+/* This is the steam link styling for the index page */
 .steam-link {
   color: black;
   text-decoration: none;
@@ -960,8 +905,8 @@ Health Tracker - Mobile
   display: none;
 }
 /* =====================
-    IBM Plex Serif Variants
-    ===================== */
+  IBM Plex Serif Variants
+===================== */
 .ibm-plex-serif-light {
   font-family: "IBM Plex Serif", serif;
   font-weight: 300;
@@ -987,7 +932,6 @@ Health Tracker - Mobile
   font-weight: 700;
   font-style: normal;
 }
-
 .ibm-plex-serif-thin-italic {
   font-family: "IBM Plex Serif", serif;
   font-weight: 100;

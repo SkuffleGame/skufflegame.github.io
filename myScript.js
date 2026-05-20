@@ -20,7 +20,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
 // Confirguration object for our specific Firebase project
-// These values come from the Firebase console and identity which project we want to connect to
+// These values come from the Firebase console and identity which project we want to connect to. In this case "SkuffleTest"
 const firebaseConfig = {
   apiKey: "AIzaSyAXUdeglgszb0WflC5o8VuXBuO1V3OzHWQ", // This is a public api key, it's not a secret and is safe to include. Ignore Githubs warning about this.
   authDomain: "skuffletest.firebaseapp.com",
@@ -32,13 +32,13 @@ const firebaseConfig = {
   appId: "1:656546117071:web:25437409b3c2e155fa8eba",
   measurementId: "G-E5H5Q8STFE",
 };
-// Const are variables that we can't reassign
+// Const are variables that we can't and don't want to reassign
 // Creates a Firebase app instance using the config from above
-// From this, we can get analytics and a connection to our Realtime Database
+// From this, we can connect to our Realtime Database
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app); // Main handle to interact with the Realtime Database
 
-// Create a reference to the "players" node in our database
+// Create a reference to the "players" node in our realtime database
 // All player data will be stored under this path: /players
 const playersRef = ref(database, "players");
 
@@ -50,12 +50,13 @@ let currentUID = null;
 
 // --- ANONYMOUS SIGN-IN --- \\
 // signInAnonymously returns a Promise - meaning it goes off and does its work and calls the .then() function when it's done, without freezing the page
+// a promise is just a placeholder for a value that will be available in the future
 signInAnonymously(auth)
   .then((userCredential) => {
     // Sign-in succeeded - userCredential contains info about this "ghost account"
     // We pull out just the uid (unique ID) and store it in our currentUID variable
     currentUID = userCredential.user.uid;
-    console.log("Signed in anonymously, UID:", currentUID); // Useful for debugging
+    console.log("Signed in anonymously, UID:", currentUID); // Useful for debugging, shows the UID in the console
 
     // Re-check the players once after sign-in
     // This matters because the database listener may have loaded before currentUID was ready
@@ -69,13 +70,12 @@ signInAnonymously(auth)
     );
   })
   .catch((error) => {
-    // Something went wrong - log it so you can see it in the browser console
-    console.error("Anonymous sign-in failed:", error);
+    console.error("Anonymous sign-in failed:", error); // catches the error
   });
 
 // --- CHARACTER SOUND LOGIC --- \\
 // Plays specific sound for each character
-// soundType is either "increase", "decrease", or "ability" depending on the action being taken
+// soundType is either "increase", "decrease", or "ability" depending on the action being taken. We create an array later on containing all the different effect
 window.playCharacterSound = function (characterName, soundType) {
   const characterSound = characterSounds[characterName];
 
@@ -90,7 +90,7 @@ window.playCharacterSound = function (characterName, soundType) {
     return;
   }
 
-  sound.currentTime = 0;
+  sound.currentTime = 0; // starts sound at begining
 
   sound.play().catch((error) => {
     console.error("Could not play sound:", error);
@@ -98,7 +98,7 @@ window.playCharacterSound = function (characterName, soundType) {
 };
 // --- HEALTH CHANGE LOGIC --- \\
 
-// Change a player's health by a certain amount (positive or negative), can be rehashed for the special abilites later on
+// Change a player's health by a certain amount (positive or negative)
 // playerId is the database key for that player
 window.changeHealth = function (playerId, change) {
   // Get a reference to the specific player in the database using their unique ID: /players/<playerId>
@@ -112,7 +112,7 @@ window.changeHealth = function (playerId, change) {
 
       if (!player) return;
 
-      // Calculate the new health by adding the change
+      // Calculate the new health by adding the change. ex. 20 + (-1) = 19
       let newHealth = player.health + change;
 
       // Constrain the health so it can't go below 0 or above 20
@@ -127,11 +127,11 @@ window.changeHealth = function (playerId, change) {
 
 // --- SPECIAL ABILITY BANK --- \\
 const characterData = {
-  // This stores the special ability info for each character to be called upon later
+  // This stores the special ability info for each character to be called upon later, so type of ability, name and the numbers
   Cowboy: {
     specialName: "Bullets",
     specialType: "number",
-    specialValue: 6, // Change to match the number of players in game
+    specialValue: 6,
     specialMin: 0,
     specialMax: 6,
   },
@@ -146,21 +146,21 @@ const characterData = {
     specialType: "number",
     specialValue: 0,
     specialMin: 0,
-    specialMax: 10, // Arbitrary max for steals
+    specialMax: 10,
   },
   "Salary Man": {
     specialName: "Money",
     specialType: "number",
     specialValue: 4,
     specialMin: 0,
-    specialMax: 100, // Arbitrary max for money
+    specialMax: 100,
   },
   Alien: {
     specialName: "Dodge",
     specialType: "number",
     specialValue: 3,
     specialMin: 0,
-    specialMax: 3, //  max for dodges
+    specialMax: 3,
   },
   Margritte: {
     // Doesn't have special ability so everthing is null
@@ -172,6 +172,7 @@ const characterData = {
   },
 };
 // --- CHARACTER IMAGE BANK --- \\
+// This is for the "Hero" section of the health tracker
 const characterImages = {
   Cowboy: "img/character/Cabarello (Medium).png",
   "Were-Lobster": "img/character/Lawrence (Medium).png",
@@ -181,7 +182,7 @@ const characterImages = {
   Margritte: "img/character/Margritte (Medium).png",
 };
 // --- CHARACTER COLOUR BANK --- \\
-// Will update the colours in the future, this is just for testing purposes
+// This is for the health tracker and the character bios
 const characterThemes = {
   Cowboy: {
     border: "#561300",
@@ -216,6 +217,7 @@ const characterThemes = {
 };
 
 // --- CHARACTER SOUND BANK --- \\
+// For health tracker, when taking damage, using ability and healing
 const characterSounds = {
   Cowboy: {
     increase: new Audio("audio/cowboy_health_up.wav"),
@@ -249,11 +251,10 @@ const characterSounds = {
   },
 };
 // --- SPECIAL ABILITY LOGIC --- \\
-
+// This is essentially the same as the health change logic, just switched up a bit
 // Change a player's special value by a certain amount (positive or negative)
-// playerId is the database key for that player
+// This is for the "number" abilities
 window.changeSpecial = function (playerId, change) {
-  // Get a reference to the specific player in the database using their unique ID: /players/<playerId>
   const playerRef = ref(database, "players/" + playerId);
 
   // Read the current player data once from the database
@@ -278,9 +279,8 @@ window.changeSpecial = function (playerId, change) {
     { onlyOnce: true },
   ); // onlyOnce: true means this listener will run once and then stop
 };
-
+// This is for the toggle ability (Were-Lobster)
 window.toggleSpecial = function (playerId) {
-  // Get a reference to the specific player in the database using their unique ID: /players/<playerId>
   const playerRef = ref(database, "players/" + playerId);
 
   // Read the current player data once from the database
@@ -306,7 +306,7 @@ window.toggleSpecial = function (playerId) {
 };
 
 // --- REMOVE SINGLE PLAYER --- \\
-// Allows user to remove their character
+// Allows user to remove their own character
 window.removePlayer = function (playerId) {
   if (
     confirm(
@@ -335,7 +335,7 @@ let selectedCharacter = null;
 // When a link is clicked, we remember the chosen character and update the button text
 document.querySelectorAll(".character-option").forEach((a) => {
   a.addEventListener("click", (e) => {
-    e.preventDefault(); // Stop the link from navigating anywhere since it's just a dropdown option
+    e.preventDefault(); // Stop the link from navigating anywhere since it's just a dropdown option, we don't want to move or change pages
 
     // Read the character name from the element's data-character attribute, and assign it to the char variable (constant)
     const char = a.dataset.character;
@@ -357,7 +357,7 @@ onValue(playersRef, (snapshot) => {
 });
 
 // --- RENDER PLAYERS ON THE PAGE --- \\
-// This function decides how the tracker page should look based on who owns which character
+// This function decides how the tracker page should look based on who owns what character
 // The current user's character becomes the hero card
 // Everyone else appears in the smaller grid
 function displayPlayers(players) {
@@ -404,11 +404,11 @@ function displayPlayers(players) {
   }
 
   // If this browser/user does have player
-  // hide the setup panel andn show the game area
+  // hide the setup panel and show the game area
   setupPanel.classList.add("hidden");
   gameArea.classList.remove("hidden");
 
-  //Render the current user's character as the big hero
+  //Render the current user's character as the hero
   renderHeroPlayer(myPlayerId, myPlayer);
 
   // Render all other players as small cards in the grid
@@ -422,25 +422,28 @@ function displayPlayers(players) {
   // Update dropdown options so already-taken characters are faded/disbaled
   updateCharacterDropdown(players);
 }
-
+// This makes it so each individual sees themselves as the hero
 // --- RENDER CURRENT USER'S HERO ID --- \\
 // This creates the large hero card for the player owned by the browser/user
 function renderHeroPlayer(playerId, player) {
   const heroPanel = document.getElementById("hero-panel");
 
   // Get characters image
-  const imagePath = characterImages[player.character] || "img/default.png"; // Fallback to default image if character not found
+  const imagePath =
+    characterImages[player.character] || "img/character/Group.png"; // Fallback to group image if character not found
 
   const theme = characterThemes[player.character] || {
     border: "#ccc",
     background: "#ffffff",
     text: "#000000",
   };
+  // This builds the hero section using the themes created earlier on
   // Build special ability controls
   let specialHTML = "";
 
   if (player.specialName && player.specialType) {
     if (player.specialType === "number") {
+      // This is for the number abilties
       specialHTML = `
       <div class="hero-control">
         <strong>${player.specialName}:</strong>
@@ -450,6 +453,7 @@ function renderHeroPlayer(playerId, player) {
         </div>
         `;
     } else if (player.specialType === "toggle") {
+      // This is for the toggle abilities
       specialHTML = `
       <div class="hero-control">
         <strong>${player.specialName}:</strong>
@@ -459,7 +463,7 @@ function renderHeroPlayer(playerId, player) {
     }
   }
 
-  // Create the full hero card
+  // Create the full hero card using the theme colours, image, buttons, HP/Abilities and audio
   heroPanel.innerHTML = `
 <div class="hero-card" style="
   --card-border: ${theme.border};
@@ -491,7 +495,7 @@ Remove Player
 }
 
 // --- RENDER OTHER PLAYERS --- \\
-// This creates smaller cards for everyone who is not the current user
+// This creates smaller cards for everyone in a grid who is not the current user
 function renderOtherPlayer(playerId, player) {
   const playersGrid = document.getElementById("players-grid");
 
@@ -507,7 +511,7 @@ function renderOtherPlayer(playerId, player) {
   playerCard.style.setProperty("--card-border", theme.border);
   playerCard.style.setProperty("--card-bg", theme.background);
   playerCard.style.setProperty("--card-text", theme.text);
-
+  //again using the theme colours set earlier on
   let specialText = "";
 
   if (player.specialName && player.specialValue !== null) {
@@ -542,10 +546,10 @@ function updateCharacterDropdown(players) {
 
     if (takenCharacters.has(char)) {
       a.style.pointerEvents = "none";
-      a.style.opacity = "0.4";
+      a.style.opacity = "0.4"; // not selectable
     } else {
       a.style.pointerEvents = "auto";
-      a.style.opacity = "1";
+      a.style.opacity = "1"; // means they're selectable
     }
   });
 }
@@ -556,7 +560,7 @@ document.getElementById("add-player").addEventListener("click", () => {
   const nameInput = document.getElementById("player-name");
   const name = nameInput.value.trim(); // Remove any extra spaces from start/end of name
 
-  // Do not add is the name field is empty, and show an alert
+  // Do not add if the name field is empty, and show an alert
   if (!name) {
     alert("Please enter a name.");
     return;
@@ -591,7 +595,7 @@ document.getElementById("add-player").addEventListener("click", () => {
         );
         return; // Stops it here and doesn't add the new player
       }
-
+      // This isn't neccessarily needed as we only have 6 selectable characters, this is from when I first created the database without any characters, but there's probably no harm keeping it in as people may find workaround
       // If there are existing players, ensure the chosen character is still free
       if (players) {
         for (let id in players) {
@@ -655,6 +659,7 @@ document.getElementById("add-player").addEventListener("click", () => {
 
 // --- CLEAR ALL PLAYERS --- \\
 // When the "Clear All Players" is clicked, remove every player from the database
+// This is needed for debugging and exhibition purposes
 document.getElementById("clear-all").addEventListener("click", () => {
   // Ask for confirmation before deleting everything
   if (
@@ -681,6 +686,7 @@ document.getElementById("clear-all").addEventListener("click", () => {
   }
 });
 // --- Select Character Dropdown --- \\
+// This is useful for mobile, so when a character is selected it'll close the dropdown without needing extra inputs
 const dropdown = document.querySelector(".dropdown");
 const characterButton = document.getElementById("character-chosen");
 const characterOptions = document.querySelectorAll(".character-option");

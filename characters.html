@@ -88,8 +88,8 @@
             allowfullscreen>
           </iframe>
           <div class="ar-note">
-            <p><strong>AR note:</strong> AR works for both Android and iOS, but is best on iOS.</p>
-            <p>Image tracking is natively supported for iOS, Android users will need to enable WebXR incubations in Chrome for image tracking. <a href="https://engine.needle.tools/docs/how-to-guides/xr/image-tracking.html#android-webxr-image-tracking">View setup guide</a></p>
+            <p><strong>AR note:</strong> AR works for both Android and iOS, but is best on iOS (Use Quick Look).</p>
+            <p>Image tracking is natively supported for iOS, Android users will need to enable WebXR incubations (experimental) in Chrome for image tracking. <a href="https://engine.needle.tools/docs/how-to-guides/xr/image-tracking.html#android-webxr-image-tracking">View setup guide</a></p>
           </div>
           <a
             id="ar-btn"
@@ -287,10 +287,10 @@
         document.getElementById("char-name").textContent = c.name;
         document.getElementById("char-bio").textContent = c.bio;
         document.getElementById("char-stats").innerHTML = `
-                <li><strong>Playstyle <i class="fa fa-gamepad"></i></strong> ${c.playstyle}</li>
-                <li><strong>Ability <i class="fa fa-magic"></i></strong> ${c.ability}</li>
-                <li><strong>Aggression <i class="fa fa-fire"></i></strong> ${c.aggression}</li>
-                <li><strong>Complexity <i class="fa fa-puzzle-piece"></i></strong> ${c.complexity}</li>
+                <li><strong>Playstyle</strong> ${c.playstyle}</li>
+                <li><strong>Ability</strong> ${c.ability}</li>
+                <li><strong>Aggression</strong> ${c.aggression}</li>
+                <li><strong>Complexity</strong> ${c.complexity}</li>
             `;
             document.getElementById("char-extra-img").src = c.extraImage || "img/cardbacks/cabarello.png";
 
